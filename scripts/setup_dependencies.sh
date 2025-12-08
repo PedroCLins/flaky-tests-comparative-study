@@ -11,9 +11,18 @@ echo "===================================="
 
 echo "[*] Checking Java..."
 if ! command -v java >/dev/null 2>&1; then
-    echo "Java not found. Please install Java 8 or 11 manually."
+    echo "Java not found. Installing OpenJDK 21..."
+    sudo apt-get update && sudo apt-get install -y openjdk-21-jdk
 else
     echo "Java found: $(java -version 2>&1 | head -n 1)"
+fi
+
+echo "[*] Checking Java compiler (javac)..."
+if ! command -v javac >/dev/null 2>&1; then
+    echo "Java compiler not found. Installing OpenJDK 21 JDK..."
+    sudo apt-get update && sudo apt-get install -y openjdk-21-jdk
+else
+    echo "Java compiler found: $(javac -version 2>&1)"
 fi
 
 echo "[*] Checking Maven..."
@@ -30,8 +39,16 @@ fi
 
 echo "[*] Checking Python3..."
 if ! command -v python3 >/dev/null 2>&1; then
-    echo "Python3 not found. Please install Python 3.8+ manually."
-    exit 1
+    echo "Python3 not found. Installing Python3..."
+    sudo apt-get update && sudo apt-get install -y python3 python3-pip python3-venv
+else
+    echo "Python3 found: $(python3 --version)"
+fi
+
+echo "[*] Checking python3-venv..."
+if ! dpkg -l | grep -q python3-venv; then
+    echo "python3-venv not found. Installing..."
+    sudo apt-get install -y python3-venv
 fi
 
 echo "[*] Setting up Python virtual environment..."
