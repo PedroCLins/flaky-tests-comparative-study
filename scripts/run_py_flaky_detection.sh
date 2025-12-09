@@ -46,3 +46,53 @@ echo "=========================================="
 echo "✓ All $ROUNDS rounds complete!"
 echo "Results in $OUTDIR (summary CSV: $RESULT_CSV)"
 echo "=========================================="
+
+# Generate a compact summary to make terminal inspection easier
+SUMMARY_FILE="$OUTDIR/summary.txt"
+{
+  echo "project: $(basename "$PROJECT_DIR")"
+  echo "rounds: $ROUNDS"
+  echo "summary_csv: $RESULT_CSV"
+  echo
+  # aggregate failure counts per test nodeid
+  declare -A counts
+  while IFS=, read -r run fail_count fail_list; do
+    # remove surrounding quotes from fail_list
+    fail_list=$(echo "$fail_list" | sed 's/^"//; s/"$//')
+    IFS=';' read -ra items <<< "$fail_list"
+    for t in "${items[@]}"; do
+      t=$(echo "$t" | sed 's/^\s*//; s/\s*$//')
+      if [ -n "$t" ]; then
+        counts["$t"]=$(( ${counts["$t"]:-0} + 1 ))
+      fi
+    done
+  done < <(tail -n +2 "$RESULT_CSV")
+
+  total_failed_tests=0
+  flaky_count=0
+  tmp_counts="$OUTDIR/_py_counts.tmp"
+  : > "$tmp_counts"
+  for t in "${!counts[@]}"; do
+    echo "${counts[$t]}|$t" >> "$tmp_counts"
+    total_failed_tests=$((total_failed_tests+1))
+    if [ ${counts[$t]} -gt 0 ] && [ ${counts[$t]} -lt $ROUNDS ]; then
+      flaky_count=$((flaky_count+1))
+    fi
+  done
+
+  echo "distinct_failed_tests: $total_failed_tests"
+  echo "flaky_tests (failed in some but not all runs): $flaky_count"
+  echo
+  if [ -s "$tmp_counts" ]; then
+    echo "top flaky / failing tests (count | test)"
+    sort -t'|' -nr -k1 "$tmp_counts" | head -n 10 | sed 's/|/ | /g'
+  else
+    echo "no failing tests recorded in CSV"
+  fi
+} > "$SUMMARY_FILE"
+
+# Print a short terminal-friendly summary (5 lines max + location)
+echo "---- Short summary ----"
+sed -n '1,20p' "$SUMMARY_FILE" | sed -n '1,8p'
+echo "(Full summary file: $SUMMARY_FILE)"
+echo "-----------------------"

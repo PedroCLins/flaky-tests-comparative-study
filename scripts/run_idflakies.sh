@@ -40,3 +40,25 @@ echo "{\"project\":\"$(basename "$PROJECT_DIR")\",\"date\":\"$(date --iso-8601=s
 
 popd >/dev/null
 echo "Results in $OUTDIR"
+
+# Create compact summary of idflakies output
+SUMMARY="$OUTDIR/summary.txt"
+{
+  echo "project: $(basename "$PROJECT_DIR")"
+  echo "tool: iDFlakies"
+  echo "log: $OUTDIR/idflakies.log"
+  echo
+  # heuristic counts for occurrences of 'flaky' or 'detected' lines
+  flaky_lines=$(grep -i "flaky" "$OUTDIR/idflakies.log" | wc -l || true)
+  detected_lines=$(grep -i "detected" "$OUTDIR/idflakies.log" | wc -l || true)
+  echo "lines_with_flaky_word: $flaky_lines"
+  echo "lines_with_detected_word: $detected_lines"
+  echo
+  echo "last 10 relevant lines from log:"
+  grep -Ei "flaky|detected|FAILED|ERROR|WARN|WARNING" "$OUTDIR/idflakies.log" | tail -n 10 || true
+} > "$SUMMARY"
+
+echo "---- Short summary ----"
+sed -n '1,20p' "$SUMMARY" | sed -n '1,8p'
+echo "(Full summary file: $SUMMARY)"
+echo "-----------------------"

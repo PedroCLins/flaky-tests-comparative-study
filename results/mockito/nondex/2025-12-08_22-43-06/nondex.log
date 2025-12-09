@@ -1,0 +1,131 @@
+> Task :buildSrc:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :buildSrc:generateExternalPluginSpecBuilders UP-TO-DATE
+> Task :buildSrc:extractPrecompiledScriptPluginPlugins UP-TO-DATE
+> Task :buildSrc:compilePluginsBlocks UP-TO-DATE
+> Task :buildSrc:generatePrecompiledScriptPluginAccessors UP-TO-DATE
+> Task :buildSrc:generateScriptPluginAdapters UP-TO-DATE
+> Task :buildSrc:compileKotlin UP-TO-DATE
+> Task :buildSrc:compileJava NO-SOURCE
+> Task :buildSrc:compileGroovy NO-SOURCE
+> Task :buildSrc:pluginDescriptors UP-TO-DATE
+> Task :buildSrc:processResources UP-TO-DATE
+> Task :buildSrc:classes UP-TO-DATE
+> Task :buildSrc:jar UP-TO-DATE
+
+> Configure project :
+Building version '5.20.1-SNAPSHOT'
+  - reason: shipkit-auto-version deduced snapshot based on tag: 'v5.20.0'
+
+> Task :mockito-integration-tests:graalvm-tests:processResources NO-SOURCE
+> Task :mockito-extensions:mockito-errorprone:processResources NO-SOURCE
+> Task :mockito-integration-tests:groovy-tests:compileJava NO-SOURCE
+> Task :mockito-integration-tests:extensions-tests:compileJava NO-SOURCE
+> Task :mockito-extensions:mockito-junit-jupiter:processResources NO-SOURCE
+> Task :mockito-integration-tests:groovy-inline-tests:compileJava NO-SOURCE
+> Task :mockito-integration-tests:graalvm-tests:processTestResources NO-SOURCE
+> Task :mockito-integration-tests:extensions-tests:processResources NO-SOURCE
+> Task :mockito-integration-tests:extensions-tests:classes UP-TO-DATE
+> Task :mockito-integration-tests:groovy-tests:compileGroovy NO-SOURCE
+> Task :mockito-extensions:mockito-junit-jupiter:processTestResources NO-SOURCE
+> Task :mockito-extensions:mockito-errorprone:processTestResources NO-SOURCE
+> Task :mockito-integration-tests:groovy-tests:processResources NO-SOURCE
+> Task :mockito-integration-tests:groovy-inline-tests:compileGroovy NO-SOURCE
+> Task :mockito-integration-tests:inline-mocks-tests:processResources NO-SOURCE
+> Task :mockito-integration-tests:groovy-tests:classes UP-TO-DATE
+> Task :mockito-integration-tests:java-21-tests:processResources NO-SOURCE
+> Task :mockito-integration-tests:groovy-tests:processTestResources NO-SOURCE
+> Task :mockito-integration-tests:inline-mocks-tests:processTestResources NO-SOURCE
+> Task :mockito-integration-tests:java-21-tests:processTestResources NO-SOURCE
+> Task :mockito-integration-tests:groovy-inline-tests:processResources NO-SOURCE
+> Task :mockito-integration-tests:groovy-inline-tests:classes UP-TO-DATE
+> Task :mockito-integration-tests:kotlin-release-coroutines-tests:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :mockito-integration-tests:junit-jupiter-extension-tests:compileJava NO-SOURCE
+> Task :mockito-integration-tests:groovy-inline-tests:processTestResources NO-SOURCE
+> Task :mockito-integration-tests:junit-jupiter-extension-tests:processResources NO-SOURCE
+> Task :mockito-integration-tests:kotlin-tests:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :mockito-integration-tests:junit-jupiter-extension-tests:classes UP-TO-DATE
+> Task :mockito-integration-tests:junit-jupiter-parallel-tests:compileJava NO-SOURCE
+> Task :mockito-integration-tests:kotlin-release-coroutines-tests:compileKotlin NO-SOURCE
+> Task :mockito-extensions:mockito-proxy:processResources
+> Task :mockito-integration-tests:kotlin-tests:compileKotlin NO-SOURCE
+> Task :mockito-integration-tests:junit-jupiter-inline-mock-maker-extension-tests:compileJava NO-SOURCE
+> Task :mockito-extensions:mockito-android:processResources
+> Task :mockito-extensions:mockito-subclass:processResources
+> Task :mockito-integration-tests:junit-jupiter-extension-tests:processTestResources
+> Task :mockito-extensions:mockito-proxy:processTestResources NO-SOURCE
+> Task :mockito-extensions:mockito-subclass:processTestResources NO-SOURCE
+> Task :mockito-integration-tests:junit-jupiter-parallel-tests:processResources NO-SOURCE
+> Task :mockito-integration-tests:junit-jupiter-inline-mock-maker-extension-tests:processResources NO-SOURCE
+> Task :mockito-extensions:mockito-android:processTestResources NO-SOURCE
+> Task :mockito-integration-tests:module-named-tests:processResources NO-SOURCE
+> Task :mockito-integration-tests:extensions-tests:processTestResources
+> Task :mockito-integration-tests:junit-jupiter-inline-mock-maker-extension-tests:classes UP-TO-DATE
+> Task :mockito-integration-tests:junit-jupiter-parallel-tests:classes UP-TO-DATE
+> Task :mockito-integration-tests:memory-tests:processResources NO-SOURCE
+> Task :mockito-integration-tests:module-tests:processResources NO-SOURCE
+> Task :mockito-integration-tests:kotlin-release-coroutines-tests:compileJava NO-SOURCE
+> Task :mockito-integration-tests:kotlin-tests:compileJava NO-SOURCE
+> Task :mockito-integration-tests:memory-tests:processTestResources NO-SOURCE
+> Task :mockito-integration-tests:programmatic-tests:processResources NO-SOURCE
+> Task :mockito-integration-tests:module-tests:processTestResources NO-SOURCE
+> Task :mockito-integration-tests:kotlin-release-coroutines-tests:processResources NO-SOURCE
+> Task :mockito-integration-tests:kotlin-release-coroutines-tests:classes UP-TO-DATE
+> Task :mockito-integration-tests:kotlin-tests:processResources NO-SOURCE
+> Task :mockito-integration-tests:kotlin-tests:classes UP-TO-DATE
+> Task :mockito-integration-tests:programmatic-tests:processTestResources NO-SOURCE
+> Task :mockito-integration-tests:junit-jupiter-parallel-tests:processTestResources
+> Task :mockito-integration-tests:module-named-tests:processTestResources NO-SOURCE
+> Task :mockito-integration-tests:junit-jupiter-inline-mock-maker-extension-tests:processTestResources
+> Task :mockito-integration-tests:kotlin-tests:jar
+> Task :mockito-integration-tests:kotlin-tests:processTestResources
+> Task :mockito-integration-tests:kotlin-release-coroutines-tests:jar
+> Task :mockito-integration-tests:kotlin-release-coroutines-tests:processTestResources
+> Task :mockito-integration-tests:osgi-tests:compileOtherBundleJava
+> Task :mockito-integration-tests:osgi-tests:processOtherBundleResources NO-SOURCE
+> Task :mockito-integration-tests:osgi-tests:otherBundleClasses
+> Task :mockito-integration-tests:osgi-tests:otherBundle
+> Task :mockito-integration-tests:osgi-tests:processTestBundleResources NO-SOURCE
+> Task :mockito-integration-tests:osgi-tests:compileJava NO-SOURCE
+> Task :mockito-integration-tests:osgi-tests:processResources NO-SOURCE
+> Task :mockito-integration-tests:osgi-tests:classes UP-TO-DATE
+> Task :mockito-integration-tests:osgi-tests:processTestResources NO-SOURCE
+
+> Task :mockito-core:compileJava
+
+> Task :mockito-integration-tests:inline-mocks-tests:compileJava NO-SOURCE
+> Task :mockito-integration-tests:java-21-tests:compileJava NO-SOURCE
+> Task :mockito-integration-tests:memory-tests:compileJava NO-SOURCE
+> Task :mockito-integration-tests:memory-tests:classes UP-TO-DATE
+> Task :mockito-integration-tests:java-21-tests:classes UP-TO-DATE
+> Task :mockito-integration-tests:inline-mocks-tests:classes UP-TO-DATE
+> Task :mockito-extensions:mockito-subclass:compileJava NO-SOURCE
+> Task :mockito-extensions:mockito-proxy:compileJava NO-SOURCE
+> Task :mockito-core:copyMockMethodDispatcher
+> Task :mockito-extensions:mockito-proxy:classes
+> Task :mockito-extensions:mockito-subclass:classes
+> Task :mockito-core:processResources NO-SOURCE
+> Task :mockito-integration-tests:graalvm-tests:compileJava NO-SOURCE
+> Task :mockito-integration-tests:graalvm-tests:classes UP-TO-DATE
+> Task :mockito-integration-tests:java-21-tests:compileTestJava FAILED
+> Task :mockito-core:removeInjectionPackageFromModuleInfo
+> Task :mockito-extensions:mockito-android:compileJava
+> Task :mockito-integration-tests:graalvm-tests:compileTestJava
+> Task :mockito-integration-tests:inline-mocks-tests:compileTestJava
+> Task :mockito-extensions:mockito-proxy:compileTestJava
+> Task :mockito-extensions:mockito-subclass:compileTestJava
+> Task :mockito-extensions:mockito-errorprone:compileJava
+> Task :mockito-integration-tests:kotlin-tests:compileTestKotlin
+> Task :mockito-integration-tests:kotlin-release-coroutines-tests:compileTestKotlin
+
+[Incubating] Problems report is available at: file:///Users/fabrielyluana/Projects/CIn/flaky-tests-comparative-study/flaky-tests-experiments/mockito/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/8.14.2/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+34 actionable tasks: 25 executed, 9 up-to-date
+
+Publishing Build Scan to Develocity...
+https://gradle.com/s/ttiqjrudufike
+

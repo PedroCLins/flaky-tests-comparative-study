@@ -1,0 +1,29 @@
+Starting a Gradle Daemon, 1 incompatible Daemon could not be reused, use --status for details
+> Task :buildSrc:checkKotlinGradlePluginConfigurationErrors SKIPPED
+> Task :buildSrc:generateExternalPluginSpecBuilders
+> Task :buildSrc:extractPrecompiledScriptPluginPlugins
+> Task :buildSrc:generateScriptPluginAdapters
+> Task :buildSrc:pluginDescriptors
+> Task :buildSrc:processResources
+> Task :buildSrc:compilePluginsBlocks
+
+> Task :buildSrc:generatePrecompiledScriptPluginAccessors
+Building version '5.20.1-SNAPSHOT'
+  - reason: shipkit-auto-version deduced snapshot based on tag: 'v5.20.0'
+
+> Task :buildSrc:compileKotlin
+> Task :buildSrc:compileJava NO-SOURCE
+> Task :buildSrc:compileGroovy NO-SOURCE
+> Task :buildSrc:classes
+> Task :buildSrc:jar
+
+> Configure project :
+Building version '5.20.1-SNAPSHOT'
+  - reason: shipkit-auto-version deduced snapshot based on tag: 'v5.20.0'
+
+[Incubating] Problems report is available at: file:///Users/fabrielyluana/Projects/CIn/flaky-tests-comparative-study/flaky-tests-experiments/mockito/build/reports/problems/problems-report.html
+9 actionable tasks: 9 executed
+
+Publishing Build Scan to Develocity...
+https://gradle.com/s/7fvmanlqmnulq
+

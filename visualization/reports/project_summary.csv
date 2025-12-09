@@ -1,0 +1,3 @@
+project,total_runs,total_flaky_tests,avg_errors,avg_warnings,last_run
+commons-lang,4,1063.0,1169.25,274.0,2025-12-08_22-20-37
+mockito,8,0.0,2.25,0.5,2025-12-08_22-47-17
