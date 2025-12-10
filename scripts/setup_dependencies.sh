@@ -124,7 +124,6 @@ fi
 
 echo "[*] Installing Python test related packages..."
 pip install --upgrade pip
-pip install pytest>=8.3.4 pytest-rerunfailures pytest-randomly
 
 echo "[*] Installing visualization and analysis packages..."
 pip install pandas streamlit scipy

@@ -1,0 +1,20 @@
+project: commons-codec
+tool: NonDex
+log: /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/results/commons-codec/nondex/2025-12-10_01-22-57/nondex.log
+
+error_lines: 280
+warning_lines: 22
+failed_lines: 275
+
+
+last 10 relevant lines from log:
+[INFO] Tests run: 22, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.027 s -- in org.apache.commons.codec.binary.StringUtilsTest
+[INFO] Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.017 s -- in org.apache.commons.codec.binary.BinaryCodecTest
+[INFO] Tests run: 236, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.932 s -- in org.apache.commons.codec.binary.AllocateDirectHexTest
+[INFO] Tests run: 32, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.043 s -- in org.apache.commons.codec.binary.Base32Test
+[INFO] Running org.apache.commons.codec.DecoderExceptionTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in org.apache.commons.codec.DecoderExceptionTest
+[WARNING] Tests run: 18549, Failures: 0, Errors: 0, Skipped: 20
+[INFO] No Test Failed with this configuration.
+[INFO] No Test Failed with this configuration.
+[INFO] No Test Failed with this configuration.

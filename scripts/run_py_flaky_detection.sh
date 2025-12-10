@@ -6,57 +6,116 @@ PROJECT_DIR="$1"   # e.g. ../flaky-tests-experiments/pandas
 # Get absolute path for results directory before changing directories
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(dirname "$SCRIPT_DIR")"
-OUTDIR="$REPO_ROOT/results/$(basename "$PROJECT_DIR")/pytest-rerun/$(date +%F_%H-%M-%S)"
+PROJECT_NAME=$(basename "$PROJECT_DIR")
+OUTDIR="$REPO_ROOT/results/$PROJECT_NAME/pytest-rerun/$(date +%F_%H-%M-%S)"
 mkdir -p "$OUTDIR"
 
-# Activate virtual environment
-if [ ! -d "$REPO_ROOT/.venv" ]; then
-    echo "❌ Virtual environment not found. Run 'make setup' first."
-    exit 1
+# Create isolated virtual environment for this project
+PROJECT_VENV="$REPO_ROOT/.venv-$PROJECT_NAME"
+echo "🔧 Setting up isolated environment for $PROJECT_NAME..."
+
+if [ ! -d "$PROJECT_VENV" ]; then
+    echo "   Creating new virtual environment: $PROJECT_VENV"
+    python3 -m venv "$PROJECT_VENV"
 fi
 
-source "$REPO_ROOT/.venv/bin/activate"
+# Activate project-specific virtual environment
+source "$PROJECT_VENV/bin/activate"
+
+# Install pytest and plugins in this isolated venv
+echo "   Installing pytest and plugins..."
+pip install -q pytest>=8.3.4 pytest-rerunfailures pytest-randomly
+
+# Verify pytest is from the venv
+PYTEST_PATH=$(which pytest)
+if [[ "$PYTEST_PATH" != "$PROJECT_VENV"* ]]; then
+    echo "⚠️  Warning: pytest not from project venv ($PYTEST_PATH)"
+fi
 
 pushd "$PROJECT_DIR" >/dev/null
 
 # record commit
 git rev-parse HEAD > "$OUTDIR/commit.txt" || true
 
-# Install project dependencies if requirements.txt or setup.py exists
-echo "Checking for project dependencies..."
-PROJECT_NAME=$(basename "$PROJECT_DIR")
+# Install project dependencies
+echo "Installing project dependencies..."
+# Install project dependencies
+echo "Installing project dependencies..."
 
-# Special handling: Don't install pandas/requests in editable mode if we're testing them
-# (they're already installed in venv for visualization)
-if [[ "$PROJECT_NAME" == "pandas" || "$PROJECT_NAME" == "requests" ]]; then
-    echo "⚠️  Skipping editable install for $PROJECT_NAME (using venv version for testing)"
-    # Just install test dependencies if they exist
-    if [ -f "requirements-dev.txt" ]; then
-        pip install -q -r requirements-dev.txt 2>/dev/null || true
+# Try to install test dependencies first (common patterns)
+for test_reqs in requirements-dev.txt test-requirements.txt test_requirements.txt requirements/dev.txt; do
+    if [ -f "$test_reqs" ]; then
+        echo "   Installing test dependencies from $test_reqs..."
+        pip install -q -r "$test_reqs" 2>&1 | grep -v "Requirement already satisfied" || true
     fi
-else
-    # Try to install test dependencies first (common patterns)
-    for test_reqs in requirements-dev.txt test-requirements.txt test_requirements.txt requirements/dev.txt; do
-        if [ -f "$test_reqs" ]; then
-            echo "Installing test dependencies from $test_reqs..."
-            pip install -q -r "$test_reqs" 2>/dev/null || true
+done
+
+# Then install the project itself with smart extras detection
+INSTALL_SUCCESS=false
+
+# Project-specific extras and dependencies needed for testing
+declare -A PROJECT_EXTRAS
+PROJECT_EXTRAS["black"]="d,test,dev"
+PROJECT_EXTRAS["httpx"]="http2,brotli"
+PROJECT_EXTRAS["celery"]=""  # Uses requirements/dev.txt instead
+
+# Additional packages to install after project setup
+declare -A EXTRA_PACKAGES
+EXTRA_PACKAGES["httpx"]="trio anyio"
+EXTRA_PACKAGES["celery"]="pytest-celery pytest-sugar case"
+
+# Get extras for current project
+EXTRAS="${PROJECT_EXTRAS[$PROJECT_NAME]:-dev,test}"
+
+if [ -f "pyproject.toml" ]; then
+    echo "   Installing project from pyproject.toml..."
+    # Try with project-specific extras first, then fallback
+    for extra_combo in "$EXTRAS" "dev,test" "test" ""; do
+        if [ -z "$extra_combo" ]; then
+            cmd="pip install -q -e ."
+        else
+            cmd="pip install -q -e .[$extra_combo]"
+        fi
+        
+        if $cmd 2>&1 | tee /tmp/pip_install.log | grep -v "Requirement already satisfied" | grep -v "does not provide the extra"; then
+            INSTALL_SUCCESS=true
+            break
         fi
     done
-    
-    # Then install the project itself
-    if [ -f "pyproject.toml" ]; then
-        echo "Installing project from pyproject.toml..."
-        pip install -q -e ".[dev,test]" 2>/dev/null || pip install -q -e . || echo "⚠️  Project installation failed"
-    elif [ -f "setup.py" ]; then
-        echo "Installing project in development mode..."
-        pip install -q -e ".[dev,test]" 2>/dev/null || pip install -q -e . || echo "⚠️  Project installation failed"
-    elif [ -f "requirements.txt" ]; then
-        echo "Installing dependencies from requirements.txt..."
-        pip install -q -r requirements.txt || echo "⚠️  Some dependencies failed to install"
+elif [ -f "setup.py" ]; then
+    echo "   Installing project in development mode..."
+    for extra_combo in "$EXTRAS" "dev,test" "test" ""; do
+        if [ -z "$extra_combo" ]; then
+            cmd="pip install -q -e ."
+        else
+            cmd="pip install -q -e .[$extra_combo]"
+        fi
+        
+        if $cmd 2>&1 | tee /tmp/pip_install.log | grep -v "Requirement already satisfied" | grep -v "does not provide the extra"; then
+            INSTALL_SUCCESS=true
+            break
+        fi
+    done
+elif [ -f "requirements.txt" ]; then
+    echo "   Installing dependencies from requirements.txt..."
+    if pip install -q -r requirements.txt 2>&1 | tee /tmp/pip_install.log | grep -v "Requirement already satisfied"; then
+        INSTALL_SUCCESS=true
     fi
 fi
 
-# Ensure venv activated or python from PATH has pytest and plugins
+if [ "$INSTALL_SUCCESS" = false ]; then
+    echo "⚠️  Project installation had issues, but continuing with tests..."
+    # Show last few lines of install log for debugging
+    tail -5 /tmp/pip_install.log 2>/dev/null || true
+fi
+
+# Install additional packages if needed
+if [ -n "${EXTRA_PACKAGES[$PROJECT_NAME]:-}" ]; then
+    echo "   Installing additional dependencies: ${EXTRA_PACKAGES[$PROJECT_NAME]}..."
+    pip install -q ${EXTRA_PACKAGES[$PROJECT_NAME]} 2>&1 | grep -v "Requirement already satisfied" || true
+fi
+
+echo "✅ Environment ready for $PROJECT_NAME"
 # We'll run the whole test-suite N times and capture per-test failures.
 ROUNDS=${2:-${PYTHON_TEST_ROUNDS:-50}}   # number of full test-suite runs (default 50, configurable via .env)
 RESULT_CSV="$OUTDIR/runs.csv"
@@ -73,9 +132,9 @@ for i in $(seq 1 $ROUNDS); do
   pytest -q --maxfail=0 2>&1 | tee "$LOG" || true
 
   # extract failed test ids from junit or pytest output (simple parse below)
-  FAILS=$(grep -Po '(?<=FAILED\s)([^ ]+::[^ ]+)' "$LOG" | tr '\n' ';' | sed 's/;$//')
+  FAILS=$(grep -Po '(?<=FAILED\s)([^ ]+::[^ ]+)' "$LOG" 2>/dev/null | tr '\n' ';' | sed 's/;$//' || echo "")
   # Fallback: count 'failed' line in summary:
-  FAIL_COUNT=$(grep -Eo '==.*failed' "$LOG" | grep -Po '\d+' || echo 0)
+  FAIL_COUNT=$(grep -Eo '[0-9]+ failed' "$LOG" 2>/dev/null | grep -Po '^\d+' || echo 0)
 
   echo "${i},${FAIL_COUNT},\"${FAILS}\"" >> "$RESULT_CSV"
   echo "Run $i complete. Failed tests: $FAIL_COUNT"
@@ -138,3 +197,10 @@ echo "---- Short summary ----"
 sed -n '1,20p' "$SUMMARY_FILE" | sed -n '1,8p'
 echo "(Full summary file: $SUMMARY_FILE)"
 echo "-----------------------"
+
+popd >/dev/null
+
+# Deactivate the project-specific venv
+deactivate
+
+echo "✅ $PROJECT_NAME testing complete (isolated environment: $PROJECT_VENV)"

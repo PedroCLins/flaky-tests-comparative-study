@@ -44,6 +44,16 @@ python:
 		bash $(SCRIPTS_DIR)/run_py_flaky_detection.sh $(EXPERIMENT_DIR)/$$proj $(PYTHON_TEST_ROUNDS); \
 	done
 
+# Run only failed/incomplete projects
+retry-failed:
+	bash $(SCRIPTS_DIR)/run_failed_only.sh all
+
+retry-python:
+	bash $(SCRIPTS_DIR)/run_failed_only.sh python
+
+retry-java:
+	bash $(SCRIPTS_DIR)/run_failed_only.sh java
+
 #############################
 # VISUALIZATION
 #############################
