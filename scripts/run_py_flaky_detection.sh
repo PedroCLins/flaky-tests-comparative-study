@@ -56,13 +56,11 @@ INSTALL_SUCCESS=false
 # Project-specific extras and dependencies needed for testing
 declare -A PROJECT_EXTRAS
 PROJECT_EXTRAS["black"]="d,test,dev"
-PROJECT_EXTRAS["httpx"]="http2,brotli"
-PROJECT_EXTRAS["celery"]=""  # Uses requirements/dev.txt instead
+PROJECT_EXTRAS["httpx"]="brotli,cli,http2,socks,zstd"  # Install ALL httpx extras
 
 # Additional packages to install after project setup
 declare -A EXTRA_PACKAGES
-EXTRA_PACKAGES["httpx"]="trio anyio"
-EXTRA_PACKAGES["celery"]="pytest-celery pytest-sugar case"
+EXTRA_PACKAGES["httpx"]="chardet trio anyio trustme uvicorn httpcore h11 h2 sniffio"
 
 # Get extras for current project
 EXTRAS="${PROJECT_EXTRAS[$PROJECT_NAME]:-dev,test}"

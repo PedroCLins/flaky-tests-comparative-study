@@ -1,9 +1,0 @@
-project: flask
-rounds: 20
-summary_csv: /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/results/flask/pytest-rerun/2025-12-10_01-18-28/runs.csv
-
-distinct_failed_tests: 1
-flaky_tests (failed in some but not all runs): 0
-
-top flaky / failing tests (count | test)
-20 | tests/test_helpers.py::TestStreaming::test_async_view

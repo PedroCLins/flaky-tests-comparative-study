@@ -94,9 +94,10 @@ echo "=========================================="
 
 if [ "$BUILD_SYSTEM" = "maven" ]; then
   echo "Running NonDex (mvn edu.illinois:nondex-maven-plugin:2.1.7:nondex) on $(pwd)"
+  # Allow NonDex to fail - test failures are expected when flaky tests are found
   mvn edu.illinois:nondex-maven-plugin:2.1.7:nondex \
     -DskipTests=false \
-    | tee "$OUTDIR/nondex.log"
+    | tee "$OUTDIR/nondex.log" || true
 else
   # Gradle
   echo "Running NonDex (Gradle plugin) on $(pwd)"

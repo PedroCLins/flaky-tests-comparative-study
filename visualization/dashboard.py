@@ -138,8 +138,50 @@ def main():
         with col1:
             # Gráfico de testes flaky por projeto
             st.subheader("Testes Flaky por Projeto")
-            flaky_by_project = filtered_df.groupby('project')['total_flaky'].sum().sort_values(ascending=False)
-            st.bar_chart(flaky_by_project)
+            
+            # Build flaky counts from both project_metrics and DataFrame
+            flaky_counts = {}
+            
+            if analyzer.project_metrics:
+                # Use advanced metrics which properly count flaky tests
+                for project, metrics in analyzer.project_metrics.items():
+                    if metrics['flaky_tests'] > 0:
+                        flaky_counts[project] = metrics['flaky_tests']
+            
+            # Also add any projects from DataFrame that aren't in project_metrics
+            # (e.g., older runs or projects without detailed metrics)
+            df_flaky_by_project = filtered_df.groupby('project')['total_flaky'].sum()
+            for project, count in df_flaky_by_project.items():
+                if count > 0 and project not in flaky_counts:
+                    # Only add if not already in flaky_counts from metrics
+                    flaky_counts[project] = int(count)
+            
+            if flaky_counts:
+                flaky_df = pd.DataFrame({
+                    'Projeto': list(flaky_counts.keys()),
+                    'Testes Flaky': list(flaky_counts.values())
+                }).set_index('Projeto')
+                
+                # Check if we need log scale (big difference in values)
+                max_val = max(flaky_counts.values())
+                min_val = min(flaky_counts.values())
+                
+                if max_val / min_val > 100:  # If difference > 100x, use log scale
+                    st.markdown("*Escala logarítmica devido à grande variação nos valores*")
+                    import plotly.express as px
+                    fig = px.bar(
+                        flaky_df.reset_index(),
+                        x='Projeto',
+                        y='Testes Flaky',
+                        log_y=True,
+                        title="Testes Flaky Detectados (escala log)"
+                    )
+                    fig.update_layout(height=400)
+                    st.plotly_chart(fig, use_container_width=True)
+                else:
+                    st.bar_chart(flaky_df)
+            else:
+                st.info("Nenhum teste flaky detectado nos projetos filtrados")
         
         with col2:
             # Média de erros por ferramenta
@@ -159,7 +201,67 @@ def main():
                 aggfunc='sum'
             ).fillna(0)
             
-            st.line_chart(timeline_pivot)
+            # Check if there's a large variance in values
+            max_vals = timeline_pivot.max()
+            max_overall = max_vals.max()
+            min_overall = max_vals[max_vals > 0].min() if any(max_vals > 0) else 0
+            
+            if max_overall > 0 and min_overall > 0 and (max_overall / min_overall > 50):
+                # Large variance - offer visualization options
+                st.markdown("⚠️ *Detectada grande variação nos valores entre projetos*")
+                
+                viz_option = st.radio(
+                    "Modo de visualização:",
+                    options=["Separado por Projeto", "Escala Logarítmica", "Todos Juntos (Linear)"],
+                    horizontal=True,
+                    help="Escolha como visualizar os dados com grande diferença de escala"
+                )
+                
+                if viz_option == "Separado por Projeto":
+                    # Create individual charts for each project with flaky tests
+                    projects_with_data = [col for col in timeline_pivot.columns if timeline_pivot[col].sum() > 0]
+                    
+                    if projects_with_data:
+                        # Sort projects by total flaky tests (descending)
+                        sorted_projects = sorted(projects_with_data, 
+                                               key=lambda p: timeline_pivot[p].sum(), 
+                                               reverse=True)
+                        
+                        for project in sorted_projects:
+                            with st.expander(f"📊 {project} ({int(timeline_pivot[project].sum())} testes flaky total)", expanded=(project == sorted_projects[0])):
+                                project_data = timeline_pivot[[project]].rename(columns={project: 'Testes Flaky'})
+                                st.line_chart(project_data, height=250)
+                    else:
+                        st.info("Nenhum teste flaky detectado no período selecionado")
+                
+                elif viz_option == "Escala Logarítmica":
+                    # Use plotly for log scale
+                    import plotly.graph_objects as go
+                    
+                    fig = go.Figure()
+                    for col in timeline_pivot.columns:
+                        if timeline_pivot[col].sum() > 0:
+                            fig.add_trace(go.Scatter(
+                                x=timeline_pivot.index,
+                                y=timeline_pivot[col],
+                                mode='lines+markers',
+                                name=col
+                            ))
+                    
+                    fig.update_layout(
+                        yaxis_type="log",
+                        yaxis_title="Testes Flaky (escala log)",
+                        xaxis_title="Data",
+                        height=500,
+                        hovermode='x unified'
+                    )
+                    st.plotly_chart(fig, use_container_width=True)
+                
+                else:  # Todos Juntos (Linear)
+                    st.line_chart(timeline_pivot, height=400)
+            else:
+                # No large variance - show normal chart
+                st.line_chart(timeline_pivot, height=400)
         
         # ========================================
         # METRICS SECTION - Advanced Analysis

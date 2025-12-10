@@ -1,2 +1,0 @@
-run,failed_tests_count,failed_tests_list
-1,0,"tests/test_helpers.py::TestStreaming::test_async_view"

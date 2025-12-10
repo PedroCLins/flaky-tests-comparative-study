@@ -74,6 +74,11 @@ class FlakyTestAnalyzer:
             pytest_dir = project_dir / "pytest-rerun"
             if pytest_dir.exists():
                 self._calculate_pytest_metrics(project_name, pytest_dir)
+            
+            # Look for nondex results (Java projects)
+            nondex_dir = project_dir / "nondex"
+            if nondex_dir.exists():
+                self._calculate_nondex_metrics(project_name, nondex_dir)
     
     def _calculate_pytest_metrics(self, project_name: str, pytest_dir: Path) -> None:
         """Calculate metrics for pytest results."""
@@ -111,6 +116,56 @@ class FlakyTestAnalyzer:
             
         except Exception as e:
             print(f"  ⚠️ Erro ao calcular métricas para {project_name}: {e}")
+    
+    def _calculate_nondex_metrics(self, project_name: str, nondex_dir: Path) -> None:
+        """Calculate aggregate metrics for NonDex results (Java projects)."""
+        try:
+            # Collect all flaky tests detected across all NonDex runs
+            all_flaky_tests = set()
+            total_tests_run = 0
+            
+            # Find all run directories
+            run_dirs = sorted(nondex_dir.glob("*/"))
+            if not run_dirs:
+                return
+            
+            for run_dir in run_dirs:
+                log_file = run_dir / "nondex.log"
+                if not log_file.exists():
+                    continue
+                
+                # Extract flaky tests from this run
+                flaky_tests = self._extract_flaky_tests(log_file, 'nondex')
+                all_flaky_tests.update(flaky_tests)
+                
+                # Try to get total tests count from the log
+                tests_count = self._extract_total_tests(log_file, 'nondex')
+                if tests_count and tests_count > total_tests_run:
+                    total_tests_run = tests_count
+            
+            if not all_flaky_tests and total_tests_run == 0:
+                return
+            
+            # For NonDex, we don't have per-run failure data for each test,
+            # so we can't calculate detailed statistical metrics like pytest.
+            # Instead, we provide aggregate project-level metrics.
+            flaky_count = len(all_flaky_tests)
+            
+            self.project_metrics[project_name] = {
+                'total_tests': total_tests_run,
+                'flaky_tests': flaky_count,
+                'flaky_percentage': 100 * flaky_count / total_tests_run if total_tests_run > 0 else 0.0,
+                'avg_failure_rate': 0.0,  # Not available for NonDex without per-run data
+                'median_failure_rate': 0.0,  # Not available
+                'severity_distribution': {'nondex_detected': flaky_count},  # Simple count
+                'tool': 'nondex',
+                'note': 'NonDex metrics are based on nondeterminism detection, not multiple reruns'
+            }
+            
+            print(f"  ✓ {project_name}: {flaky_count} flaky tests detected (NonDex)")
+            
+        except Exception as e:
+            print(f"  ⚠️ Erro ao calcular métricas NonDex para {project_name}: {e}")
     
     def _parse_run_results(self, project: str, tool: str, run_dir: Path) -> Dict:
         """Extrai dados de uma execução específica."""
@@ -182,14 +237,15 @@ class FlakyTestAnalyzer:
                 
             if tool == 'nondex':
                 # Para NonDex, procura por padrões de testes que falharam inconsistentemente
-                # Padrão típico: [WARNING] nome.do.teste#metodo
-                warning_pattern = r'\[WARNING\]\s+([^\s]+)#?([^\s]*)'
-                matches = re.findall(warning_pattern, content)
+                # Padrão típico: [WARNING] org.package.ClassName#testMethod
+                # O padrão deve começar na linha e capturar o formato completo
+                warning_pattern = r'^\[WARNING\]\s+([^\s]+)#([^\s]+)'
+                matches = re.findall(warning_pattern, content, re.MULTILINE)
                 
                 for match in matches:
                     test_class = match[0]
-                    test_method = match[1] if match[1] else ""
-                    test_name = f"{test_class}#{test_method}" if test_method else test_class
+                    test_method = match[1]
+                    test_name = f"{test_class}#{test_method}"
                     if test_name not in flaky_tests:
                         flaky_tests.append(test_name)
             
@@ -356,7 +412,7 @@ class FlakyTestAnalyzer:
                 'last_run': project_data['timestamp'].max()
             }
             
-            # Add metrics if available
+            # Add metrics if available (or zeros if no flaky tests detected)
             if project in self.project_metrics:
                 pm = self.project_metrics[project]
                 base_summary.update({
@@ -368,6 +424,18 @@ class FlakyTestAnalyzer:
                     'severity_high': pm['severity_distribution'].get('high', 0),
                     'severity_medium': pm['severity_distribution'].get('medium', 0),
                     'severity_low': pm['severity_distribution'].get('low', 0)
+                })
+            else:
+                # No flaky tests detected - fill with zeros
+                base_summary.update({
+                    'total_tests_analyzed': 0,
+                    'flaky_tests_detected': 0,
+                    'flaky_percentage': 0.0,
+                    'avg_failure_rate': 0.0,
+                    'median_failure_rate': 0.0,
+                    'severity_high': 0,
+                    'severity_medium': 0,
+                    'severity_low': 0
                 })
             
             summary_data.append(base_summary)
