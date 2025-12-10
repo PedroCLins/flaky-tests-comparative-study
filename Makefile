@@ -12,10 +12,11 @@ endif
 # GENERAL TARGETS
 #############################
 
-.PHONY: all setup java python clean
+.PHONY: all setup java python clean visualize dashboard cleanup auto-visualize monitor
 
-# Run ALL experiments (setup + java + python)
-all: setup java python
+# Run ALL experiments (setup + java + python in tmux)
+all: setup
+	bash $(SCRIPTS_DIR)/run_all.sh
 
 # Install dependencies (Java, Maven, Python libs)
 setup:
@@ -25,18 +26,12 @@ setup:
 # JAVA PROJECTS
 #############################
 
-java: nondex idflakies
+java: nondex
 
 nondex:
 	@for proj in $(JAVA_PROJECTS); do \
 		echo "=== Running NonDex on $$proj ==="; \
 		bash $(SCRIPTS_DIR)/run_nondex.sh $(EXPERIMENT_DIR)/$$proj; \
-	done
-
-idflakies:
-	@for proj in $(JAVA_PROJECTS); do \
-		echo "=== Running iDFlakies on $$proj ==="; \
-		bash $(SCRIPTS_DIR)/run_idflakies.sh $(EXPERIMENT_DIR)/$$proj; \
 	done
 
 #############################
@@ -46,8 +41,31 @@ idflakies:
 python:
 	@for proj in $(PYTHON_PROJECTS); do \
 		echo "=== Running pytest flaky detection on $$proj ==="; \
-		bash $(SCRIPTS_DIR)/run_py_flaky_detection.sh $(EXPERIMENT_DIR)/$$proj 20; \
+		bash $(SCRIPTS_DIR)/run_py_flaky_detection.sh $(EXPERIMENT_DIR)/$$proj $(PYTHON_TEST_ROUNDS); \
 	done
+
+# Run only failed/incomplete projects
+retry-failed:
+	bash $(SCRIPTS_DIR)/run_failed_only.sh all
+
+retry-python:
+	bash $(SCRIPTS_DIR)/run_failed_only.sh python
+
+retry-java:
+	bash $(SCRIPTS_DIR)/run_failed_only.sh java
+
+#############################
+# VISUALIZATION
+#############################
+
+visualize:
+	bash $(SCRIPTS_DIR)/run_visualization.sh results visualization/reports all
+
+auto-visualize:
+	bash $(SCRIPTS_DIR)/run_visualization.sh results visualization/reports all true
+
+dashboard:
+	bash $(SCRIPTS_DIR)/run_visualization.sh results visualization/reports dashboard
 
 #############################
 # CLEAN
@@ -55,3 +73,9 @@ python:
 
 clean:
 	rm -rf results/*
+
+cleanup:
+	bash $(SCRIPTS_DIR)/cleanup.sh
+
+monitor:
+	bash $(SCRIPTS_DIR)/monitor_tests.sh

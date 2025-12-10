@@ -9,18 +9,51 @@ echo "===================================="
 # JAVA + MAVEN
 #############################
 
+OS=$(uname -s)
+
+echo "[*] Detected OS: $OS"
+
+install_linux_pkg() {
+    # $@ packages
+    sudo apt-get update && sudo apt-get install -y "$@"
+}
+
+install_macos_pkg() {
+    # $@ packages via Homebrew
+    if ! command -v brew >/dev/null 2>&1; then
+        echo "Homebrew not found. Please install Homebrew first:"
+        echo "/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\""
+        exit 1
+    fi
+    brew install "$@"
+}
+
 echo "[*] Checking Java..."
 if ! command -v java >/dev/null 2>&1; then
-    echo "Java not found. Installing OpenJDK 21..."
-    sudo apt-get update && sudo apt-get install -y openjdk-21-jdk
+    echo "Java not found. Installing OpenJDK..."
+    if [ "$OS" = "Linux" ]; then
+        install_linux_pkg openjdk-21-jdk || install_linux_pkg openjdk-11-jdk
+    elif [ "$OS" = "Darwin" ]; then
+        install_macos_pkg openjdk
+    else
+        echo "Unsupported OS: $OS. Please install Java manually."
+        exit 1
+    fi
 else
     echo "Java found: $(java -version 2>&1 | head -n 1)"
 fi
 
 echo "[*] Checking Java compiler (javac)..."
 if ! command -v javac >/dev/null 2>&1; then
-    echo "Java compiler not found. Installing OpenJDK 21 JDK..."
-    sudo apt-get update && sudo apt-get install -y openjdk-21-jdk
+    echo "Java compiler not found. Installing JDK..."
+    if [ "$OS" = "Linux" ]; then
+        install_linux_pkg openjdk-21-jdk || install_linux_pkg openjdk-11-jdk
+    elif [ "$OS" = "Darwin" ]; then
+        install_macos_pkg openjdk
+    else
+        echo "Unsupported OS: $OS. Please install a JDK manually."
+        exit 1
+    fi
 else
     echo "Java compiler found: $(javac -version 2>&1)"
 fi
@@ -28,7 +61,14 @@ fi
 echo "[*] Checking Maven..."
 if ! command -v mvn >/dev/null 2>&1; then
     echo "Maven not found. Installing Maven..."
-    sudo apt-get update && sudo apt-get install -y maven
+    if [ "$OS" = "Linux" ]; then
+        install_linux_pkg maven
+    elif [ "$OS" = "Darwin" ]; then
+        install_macos_pkg maven
+    else
+        echo "Unsupported OS: $OS. Please install Maven manually."
+        exit 1
+    fi
 else
     echo "Maven found: $(mvn -v | head -n 1)"
 fi
@@ -45,10 +85,18 @@ else
     echo "Python3 found: $(python3 --version)"
 fi
 
-echo "[*] Checking python3-venv..."
-if ! dpkg -l | grep -q python3-venv; then
-    echo "python3-venv not found. Installing..."
-    sudo apt-get install -y python3-venv
+echo "[*] Checking python3-venv (venv module)..."
+if ! python3 -c "import venv" >/dev/null 2>&1; then
+    echo "python3 venv module not available. Installing..."
+    if [ "$OS" = "Linux" ]; then
+        install_linux_pkg python3-venv
+    elif [ "$OS" = "Darwin" ]; then
+        # Homebrew's python includes venv by default
+        install_macos_pkg python
+    else
+        echo "Unsupported OS: $OS. Please ensure python3 venv is available."
+        exit 1
+    fi
 fi
 
 echo "[*] Setting up Python virtual environment..."
@@ -76,23 +124,32 @@ fi
 
 echo "[*] Installing Python test related packages..."
 pip install --upgrade pip
-pip install pytest pytest-rerunfailures pytest-randomly
+
+echo "[*] Installing visualization and analysis packages..."
+pip install pandas streamlit scipy
 
 #############################
-# IDFLAKIES
+# VISUALIZATION SETUP
 #############################
-echo "[*] Checking iDFlakies clone..."
-IFL=./tools/iDFlakies
 
-if [ ! -d "$IFL" ]; then
-    echo "iDFlakies not found in tools/. Cloning repo..."
-    git clone https://github.com/iDFlakies/iDFlakies.git "$IFL"
-    cd "$IFL"
-    mvn install -DskipTests
-    cd - >/dev/null
-else
-    echo "iDFlakies already present."
-fi
+echo "[*] Setting up visualization directories..."
+mkdir -p ./visualization/reports
+mkdir -p ./visualization/exports
+mkdir -p ./visualization/templates
+
+echo "[*] Creating visualization activation script..."
+cat > ./visualization/activate.sh << 'EOF'
+#!/bin/bash
+# Script para ativar o ambiente de visualização
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
+source "$PROJECT_ROOT/.venv/bin/activate"
+echo "✅ Ambiente de visualização ativo!"
+echo "Para executar o dashboard: streamlit run visualization/dashboard.py"
+echo "Para gerar relatórios: python visualization/analyze_results.py --help"
+EOF
+
+chmod +x ./visualization/activate.sh
 
 echo "===================================="
 echo " Dependency setup complete!"

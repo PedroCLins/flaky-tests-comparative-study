@@ -1,0 +1,8 @@
+project: black
+rounds: 20
+summary_csv: /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/results/black/pytest-rerun/2025-12-10_16-03-00/runs.csv
+
+distinct_failed_tests: 0
+flaky_tests (failed in some but not all runs): 0
+
+no failing tests recorded in CSV

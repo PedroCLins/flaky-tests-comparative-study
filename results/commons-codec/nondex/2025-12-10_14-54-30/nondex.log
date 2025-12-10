@@ -1,0 +1,728 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------< commons-codec:commons-codec >---------------------
+[INFO] Building Apache Commons Codec 1.20.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> nondex:2.1.7:nondex (default-cli) > test-compile @ commons-codec >>>
+[INFO] 
+[INFO] --- enforcer:3.5.0:enforce (enforce-maven-version) @ commons-codec ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.version.RequireMavenVersion passed
+[INFO] 
+[INFO] --- enforcer:3.5.0:enforce (enforce-java-version) @ commons-codec ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.version.RequireJavaVersion passed
+[INFO] 
+[INFO] --- apache-rat:0.17:check (rat-check) @ commons-codec ---
+[WARNING] Basedir is : /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/commons-codec
+[INFO] Excluding patterns: site-content/**, .checkstyle, .fbprefs, .pmd, .asf.yaml, .gitattributes, src/site/resources/download_*.cgi, maven-eclipse.xml, .externalToolBuilders/**, .vscode/**, .project, .classpath, .settings/**, **/*.svg, **/*.xcf, src/test/resources/org/apache/commons/codec/bla.tar, src/test/resources/org/apache/commons/codec/bla.tar.xz, src/test/resources/org/apache/commons/codec/empty.bin, src/test/resources/org/apache/commons/codec/small.bin
+[INFO] Excluding MAVEN collection.
+[INFO] Excluding ECLIPSE collection.
+[INFO] Excluding IDEA collection.
+[INFO] Processing exclude file from STANDARD_SCMS.
+[INFO] Excluding STANDARD_SCMS collection.
+[INFO] Excluding MISC collection.
+[INFO] Excluding HIDDEN_DIR collection.
+[INFO] RAT summary:
+[INFO]   Approved:  315
+[INFO]   Archives:  0
+[INFO]   Binaries:  3
+[INFO]   Document types:  4
+[INFO]   Ignored:  16
+[INFO]   License categories:  1
+[INFO]   License names:  1
+[INFO]   Notices:  3
+[INFO]   Standards:  315
+[INFO]   Unapproved:  0
+[INFO]   Unknown:  0
+[INFO] 
+[INFO] --- artifact:3.6.1:check-buildplan (check-buildplan) @ commons-codec ---
+[INFO] No known issue in 20 plugins
+[INFO] 
+[INFO] --- build-helper:3.6.1:parse-version (parse-version) @ commons-codec ---
+[INFO] 
+[INFO] --- antrun:3.1.0:run (javadoc.resources) @ commons-codec ---
+[INFO] Executing tasks
+[INFO] Executed tasks
+[INFO] 
+[INFO] --- remote-resources:3.3.0:process (process-resource-bundles) @ commons-codec ---
+[INFO] Skipping remote resources execution.
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ commons-codec ---
+[INFO] Copying 128 resources from src/main/resources to target/classes
+[INFO] Copying 2 resources from  to target/classes/META-INF
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ commons-codec ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- bundle:6.0.0:manifest (bundle-manifest) @ commons-codec ---
+[INFO] Writing manifest: /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/commons-codec/target/osgi/MANIFEST.MF
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ commons-codec ---
+[INFO] Copying 4 resources from src/test/resources to target/test-classes
+[INFO] Copying 2 resources from  to target/test-classes/META-INF
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ commons-codec ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] <<< nondex:2.1.7:nondex (default-cli) < test-compile @ commons-codec <<<
+[INFO] 
+[INFO] 
+[INFO] --- nondex:2.1.7:nondex (default-cli) @ commons-codec ---
+INFO: The original argline is: 
+INFO: Creating new argline for Surefire
+CONFIG: nondexFilter=.*
+nondexMode=FULL
+nondexSeed=933178
+nondexStart=0
+nondexEnd=9223372036854775807
+nondexPrintstack=false
+nondexDir=/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/commons-codec/.nondex
+nondexJarDir=.nondex
+nondexExecid=clean_s84r8HsEOCcW8QyOJZyY9xX7vo9POlvzJ08Z2qSWdTY=
+nondexLogging=CONFIG
+test=
+[WARNING]  Parameter 'disableXmlReport' (user property 'disableXmlReport') is deprecated: Instead use disable within statelessTestsetReporter since of 3.0.0-M6.
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running org.apache.commons.codec.CharsetsTest
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.103 s -- in org.apache.commons.codec.CharsetsTest
+[INFO] Running org.apache.commons.codec.EncoderExceptionTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 s -- in org.apache.commons.codec.EncoderExceptionTest
+[INFO] Running org.apache.commons.codec.StringEncoderComparatorTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.012 s -- in org.apache.commons.codec.StringEncoderComparatorTest
+[INFO] Running org.apache.commons.codec.CharEncodingTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.014 s -- in org.apache.commons.codec.CharEncodingTest
+[INFO] Running org.apache.commons.codec.cli.DigestTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 s -- in org.apache.commons.codec.cli.DigestTest
+[INFO] Running org.apache.commons.codec.digest.HmacUtilsTest
+[INFO] Tests run: 23, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.097 s -- in org.apache.commons.codec.digest.HmacUtilsTest
+[INFO] Running org.apache.commons.codec.digest.Apr1CryptTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.063 s -- in org.apache.commons.codec.digest.Apr1CryptTest
+[INFO] Running org.apache.commons.codec.digest.Blake3Test
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s -- in org.apache.commons.codec.digest.Blake3Test
+[INFO] Running org.apache.commons.codec.digest.PureJavaCrc32CTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in org.apache.commons.codec.digest.PureJavaCrc32CTest
+[INFO] Running org.apache.commons.codec.digest.MurmurHash3Test
+[INFO] Tests run: 27, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.884 s -- in org.apache.commons.codec.digest.MurmurHash3Test
+[INFO] Running org.apache.commons.codec.digest.XXHash32Test
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.065 s -- in org.apache.commons.codec.digest.XXHash32Test
+[INFO] Running org.apache.commons.codec.digest.Blake3TestVectorsTest
+[INFO] Tests run: 175, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.269 s -- in org.apache.commons.codec.digest.Blake3TestVectorsTest
+[INFO] Running org.apache.commons.codec.digest.Sha512CryptTest
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.157 s -- in org.apache.commons.codec.digest.Sha512CryptTest
+[INFO] Running org.apache.commons.codec.digest.MessageDigestAlgorithmsTest
+[WARNING] Tests run: 135, Failures: 0, Errors: 0, Skipped: 18, Time elapsed: 4.952 s -- in org.apache.commons.codec.digest.MessageDigestAlgorithmsTest
+[INFO] Running org.apache.commons.codec.digest.UnixCryptTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in org.apache.commons.codec.digest.UnixCryptTest
+[INFO] Running org.apache.commons.codec.digest.PureJavaCrc32Test
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.102 s -- in org.apache.commons.codec.digest.PureJavaCrc32Test
+[INFO] Running org.apache.commons.codec.digest.MurmurHash2Test
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 s -- in org.apache.commons.codec.digest.MurmurHash2Test
+[INFO] Running org.apache.commons.codec.digest.CryptTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.024 s -- in org.apache.commons.codec.digest.CryptTest
+[INFO] Running org.apache.commons.codec.digest.Crc16Test
+[INFO] Tests run: 112, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.096 s -- in org.apache.commons.codec.digest.Crc16Test
+[INFO] Running org.apache.commons.codec.digest.XXHash32OverflowTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.105 s -- in org.apache.commons.codec.digest.XXHash32OverflowTest
+[INFO] Running org.apache.commons.codec.digest.B64Test
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s -- in org.apache.commons.codec.digest.B64Test
+[INFO] Running org.apache.commons.codec.digest.Sha256CryptTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.063 s -- in org.apache.commons.codec.digest.Sha256CryptTest
+[INFO] Running org.apache.commons.codec.digest.DigestUtilsTest
+[INFO] Tests run: 46, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.658 s -- in org.apache.commons.codec.digest.DigestUtilsTest
+[INFO] Running org.apache.commons.codec.digest.HmacAlgorithmsTest
+[INFO] Tests run: 108, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.811 s -- in org.apache.commons.codec.digest.HmacAlgorithmsTest
+[INFO] Running org.apache.commons.codec.digest.Sha2CryptTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 s -- in org.apache.commons.codec.digest.Sha2CryptTest
+[INFO] Running org.apache.commons.codec.digest.Md5CryptTest
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.018 s -- in org.apache.commons.codec.digest.Md5CryptTest
+[INFO] Running org.apache.commons.codec.language.bm.PhoneticEngineTest
+[INFO] Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.167 s -- in org.apache.commons.codec.language.bm.PhoneticEngineTest
+[INFO] Running org.apache.commons.codec.language.bm.RuleTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s -- in org.apache.commons.codec.language.bm.RuleTest
+[INFO] Running org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.017 s -- in org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest
+[INFO] Running org.apache.commons.codec.language.bm.BeiderMorseEncoderTest
+[INFO] Tests run: 22, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.629 s -- in org.apache.commons.codec.language.bm.BeiderMorseEncoderTest
+[INFO] Running org.apache.commons.codec.language.bm.LanguageGuessingTest
+[INFO] Tests run: 18, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.015 s -- in org.apache.commons.codec.language.bm.LanguageGuessingTest
+[INFO] Running org.apache.commons.codec.language.MetaphoneTest
+[INFO] Tests run: 34, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 s -- in org.apache.commons.codec.language.MetaphoneTest
+[INFO] Running org.apache.commons.codec.language.RefinedSoundexTest
+[INFO] Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s -- in org.apache.commons.codec.language.RefinedSoundexTest
+[INFO] Running org.apache.commons.codec.language.Caverphone1Test
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 s -- in org.apache.commons.codec.language.Caverphone1Test
+[INFO] Running org.apache.commons.codec.language.Caverphone2Test
+[INFO] Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.014 s -- in org.apache.commons.codec.language.Caverphone2Test
+[INFO] Running org.apache.commons.codec.language.NysiisTest
+[INFO] Tests run: 23, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 s -- in org.apache.commons.codec.language.NysiisTest
+[INFO] Running org.apache.commons.codec.language.DoubleMetaphone2Test
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 s -- in org.apache.commons.codec.language.DoubleMetaphone2Test
+[INFO] Running org.apache.commons.codec.language.ColognePhoneticTest
+[INFO] Tests run: 15, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 s -- in org.apache.commons.codec.language.ColognePhoneticTest
+[INFO] Running org.apache.commons.codec.language.MatchRatingApproachEncoderTest
+[INFO] Tests run: 100, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.042 s -- in org.apache.commons.codec.language.MatchRatingApproachEncoderTest
+[INFO] Running org.apache.commons.codec.language.SoundexTest
+[INFO] Tests run: 31, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 s -- in org.apache.commons.codec.language.SoundexTest
+[INFO] Running org.apache.commons.codec.language.DaitchMokotoffSoundexTest
+[INFO] Tests run: 16641, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.341 s -- in org.apache.commons.codec.language.DaitchMokotoffSoundexTest
+[INFO] Running org.apache.commons.codec.language.DoubleMetaphoneTest
+[INFO] Tests run: 17, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 s -- in org.apache.commons.codec.language.DoubleMetaphoneTest
+[INFO] Running org.apache.commons.codec.net.PercentCodecTest
+[WARNING] Tests run: 13, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 0.004 s -- in org.apache.commons.codec.net.PercentCodecTest
+[INFO] Running org.apache.commons.codec.net.URLCodecTest
+[INFO] Tests run: 16, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 s -- in org.apache.commons.codec.net.URLCodecTest
+[INFO] Running org.apache.commons.codec.net.QCodecTest
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 s -- in org.apache.commons.codec.net.QCodecTest
+[INFO] Running org.apache.commons.codec.net.QuotedPrintableCodecTest
+[INFO] Tests run: 22, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 s -- in org.apache.commons.codec.net.QuotedPrintableCodecTest
+[INFO] Running org.apache.commons.codec.net.RFC1522CodecTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 s -- in org.apache.commons.codec.net.RFC1522CodecTest
+[INFO] Running org.apache.commons.codec.net.UtilsTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s -- in org.apache.commons.codec.net.UtilsTest
+[INFO] Running org.apache.commons.codec.net.BCodecTest
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in org.apache.commons.codec.net.BCodecTest
+[INFO] Running org.apache.commons.codec.ResourcesTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s -- in org.apache.commons.codec.ResourcesTest
+[INFO] Running org.apache.commons.codec.binary.Base16Test
+[INFO] Tests run: 31, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.027 s -- in org.apache.commons.codec.binary.Base16Test
+[INFO] Running org.apache.commons.codec.binary.Base32OutputStreamTest
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.038 s -- in org.apache.commons.codec.binary.Base32OutputStreamTest
+[INFO] Running org.apache.commons.codec.binary.CharSequenceUtilsTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s -- in org.apache.commons.codec.binary.CharSequenceUtilsTest
+[INFO] Running org.apache.commons.codec.binary.BaseNCodecTest
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.001 s -- in org.apache.commons.codec.binary.BaseNCodecTest
+[INFO] Running org.apache.commons.codec.binary.Base64Codec13Test
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.012 s -- in org.apache.commons.codec.binary.Base64Codec13Test
+[INFO] Running org.apache.commons.codec.binary.Base16OutputStreamTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.028 s -- in org.apache.commons.codec.binary.Base16OutputStreamTest
+[INFO] Running org.apache.commons.codec.binary.Base64InputStreamTest
+[INFO] Tests run: 22, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.038 s -- in org.apache.commons.codec.binary.Base64InputStreamTest
+[INFO] Running org.apache.commons.codec.binary.Base32InputStreamTest
+[INFO] Tests run: 18, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.031 s -- in org.apache.commons.codec.binary.Base32InputStreamTest
+[INFO] Running org.apache.commons.codec.binary.HexTest
+[INFO] Tests run: 236, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.157 s -- in org.apache.commons.codec.binary.HexTest
+[INFO] Running org.apache.commons.codec.binary.Base16InputStreamTest
+[INFO] Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.014 s -- in org.apache.commons.codec.binary.Base16InputStreamTest
+[INFO] Running org.apache.commons.codec.binary.Base64Test
+[WARNING] Tests run: 103, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 0.064 s -- in org.apache.commons.codec.binary.Base64Test
+[INFO] Running org.apache.commons.codec.binary.Base64OutputStreamTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.025 s -- in org.apache.commons.codec.binary.Base64OutputStreamTest
+[INFO] Running org.apache.commons.codec.binary.StringUtilsTest
+[INFO] Tests run: 22, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in org.apache.commons.codec.binary.StringUtilsTest
+[INFO] Running org.apache.commons.codec.binary.BinaryCodecTest
+[INFO] Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s -- in org.apache.commons.codec.binary.BinaryCodecTest
+[INFO] Running org.apache.commons.codec.binary.AllocateDirectHexTest
+[INFO] Tests run: 236, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.079 s -- in org.apache.commons.codec.binary.AllocateDirectHexTest
+[INFO] Running org.apache.commons.codec.binary.Base32Test
+[INFO] Tests run: 32, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 s -- in org.apache.commons.codec.binary.Base32Test
+[INFO] Running org.apache.commons.codec.DecoderExceptionTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 s -- in org.apache.commons.codec.DecoderExceptionTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[WARNING] Tests run: 18549, Failures: 0, Errors: 0, Skipped: 20
+[INFO] 
+INFO: Adding excluded groups to newly created one
+INFO: Creating new argline for Surefire
+CONFIG: nondexFilter=.*
+nondexMode=FULL
+nondexSeed=933178
+nondexStart=0
+nondexEnd=9223372036854775807
+nondexPrintstack=false
+nondexDir=/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/commons-codec/.nondex
+nondexJarDir=/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/commons-codec/.nondex
+nondexExecid=DsWuJa9BfZ42c0tyaieAVx7OlbjnqqohX7c8jkFLvC0=
+nondexLogging=CONFIG
+test=
+[WARNING]  Parameter 'disableXmlReport' (user property 'disableXmlReport') is deprecated: Instead use disable within statelessTestsetReporter since of 3.0.0-M6.
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running org.apache.commons.codec.CharsetsTest
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.088 s -- in org.apache.commons.codec.CharsetsTest
+[INFO] Running org.apache.commons.codec.EncoderExceptionTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 s -- in org.apache.commons.codec.EncoderExceptionTest
+[INFO] Running org.apache.commons.codec.StringEncoderComparatorTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.012 s -- in org.apache.commons.codec.StringEncoderComparatorTest
+[INFO] Running org.apache.commons.codec.CharEncodingTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 s -- in org.apache.commons.codec.CharEncodingTest
+[INFO] Running org.apache.commons.codec.cli.DigestTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.010 s -- in org.apache.commons.codec.cli.DigestTest
+[INFO] Running org.apache.commons.codec.digest.HmacUtilsTest
+[INFO] Tests run: 23, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.119 s -- in org.apache.commons.codec.digest.HmacUtilsTest
+[INFO] Running org.apache.commons.codec.digest.Apr1CryptTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.074 s -- in org.apache.commons.codec.digest.Apr1CryptTest
+[INFO] Running org.apache.commons.codec.digest.Blake3Test
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 s -- in org.apache.commons.codec.digest.Blake3Test
+[INFO] Running org.apache.commons.codec.digest.PureJavaCrc32CTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 s -- in org.apache.commons.codec.digest.PureJavaCrc32CTest
+[INFO] Running org.apache.commons.codec.digest.MurmurHash3Test
+[INFO] Tests run: 27, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.742 s -- in org.apache.commons.codec.digest.MurmurHash3Test
+[INFO] Running org.apache.commons.codec.digest.XXHash32Test
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.100 s -- in org.apache.commons.codec.digest.XXHash32Test
+[INFO] Running org.apache.commons.codec.digest.Blake3TestVectorsTest
+[INFO] Tests run: 175, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.153 s -- in org.apache.commons.codec.digest.Blake3TestVectorsTest
+[INFO] Running org.apache.commons.codec.digest.Sha512CryptTest
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.157 s -- in org.apache.commons.codec.digest.Sha512CryptTest
+[INFO] Running org.apache.commons.codec.digest.MessageDigestAlgorithmsTest
+[WARNING] Tests run: 135, Failures: 0, Errors: 0, Skipped: 18, Time elapsed: 5.775 s -- in org.apache.commons.codec.digest.MessageDigestAlgorithmsTest
+[INFO] Running org.apache.commons.codec.digest.UnixCryptTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 s -- in org.apache.commons.codec.digest.UnixCryptTest
+[INFO] Running org.apache.commons.codec.digest.PureJavaCrc32Test
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.086 s -- in org.apache.commons.codec.digest.PureJavaCrc32Test
+[INFO] Running org.apache.commons.codec.digest.MurmurHash2Test
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.012 s -- in org.apache.commons.codec.digest.MurmurHash2Test
+[INFO] Running org.apache.commons.codec.digest.CryptTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.031 s -- in org.apache.commons.codec.digest.CryptTest
+[INFO] Running org.apache.commons.codec.digest.Crc16Test
+[INFO] Tests run: 112, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.821 s -- in org.apache.commons.codec.digest.Crc16Test
+[INFO] Running org.apache.commons.codec.digest.XXHash32OverflowTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.199 s -- in org.apache.commons.codec.digest.XXHash32OverflowTest
+[INFO] Running org.apache.commons.codec.digest.B64Test
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s -- in org.apache.commons.codec.digest.B64Test
+[INFO] Running org.apache.commons.codec.digest.Sha256CryptTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.131 s -- in org.apache.commons.codec.digest.Sha256CryptTest
+[INFO] Running org.apache.commons.codec.digest.DigestUtilsTest
+[INFO] Tests run: 46, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.707 s -- in org.apache.commons.codec.digest.DigestUtilsTest
+[INFO] Running org.apache.commons.codec.digest.HmacAlgorithmsTest
+[INFO] Tests run: 108, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.450 s -- in org.apache.commons.codec.digest.HmacAlgorithmsTest
+[INFO] Running org.apache.commons.codec.digest.Sha2CryptTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s -- in org.apache.commons.codec.digest.Sha2CryptTest
+[INFO] Running org.apache.commons.codec.digest.Md5CryptTest
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.028 s -- in org.apache.commons.codec.digest.Md5CryptTest
+[INFO] Running org.apache.commons.codec.language.bm.PhoneticEngineTest
+[INFO] Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.246 s -- in org.apache.commons.codec.language.bm.PhoneticEngineTest
+[INFO] Running org.apache.commons.codec.language.bm.RuleTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 s -- in org.apache.commons.codec.language.bm.RuleTest
+[INFO] Running org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.045 s -- in org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest
+[INFO] Running org.apache.commons.codec.language.bm.BeiderMorseEncoderTest
+[INFO] Tests run: 22, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.379 s -- in org.apache.commons.codec.language.bm.BeiderMorseEncoderTest
+[INFO] Running org.apache.commons.codec.language.bm.LanguageGuessingTest
+[INFO] Tests run: 18, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.173 s -- in org.apache.commons.codec.language.bm.LanguageGuessingTest
+[INFO] Running org.apache.commons.codec.language.MetaphoneTest
+[INFO] Tests run: 34, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.058 s -- in org.apache.commons.codec.language.MetaphoneTest
+[INFO] Running org.apache.commons.codec.language.RefinedSoundexTest
+[INFO] Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 s -- in org.apache.commons.codec.language.RefinedSoundexTest
+[INFO] Running org.apache.commons.codec.language.Caverphone1Test
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.020 s -- in org.apache.commons.codec.language.Caverphone1Test
+[INFO] Running org.apache.commons.codec.language.Caverphone2Test
+[INFO] Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.034 s -- in org.apache.commons.codec.language.Caverphone2Test
+[INFO] Running org.apache.commons.codec.language.NysiisTest
+[INFO] Tests run: 23, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.033 s -- in org.apache.commons.codec.language.NysiisTest
+[INFO] Running org.apache.commons.codec.language.DoubleMetaphone2Test
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.020 s -- in org.apache.commons.codec.language.DoubleMetaphone2Test
+[INFO] Running org.apache.commons.codec.language.ColognePhoneticTest
+[INFO] Tests run: 15, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.030 s -- in org.apache.commons.codec.language.ColognePhoneticTest
+[INFO] Running org.apache.commons.codec.language.MatchRatingApproachEncoderTest
+[INFO] Tests run: 100, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.143 s -- in org.apache.commons.codec.language.MatchRatingApproachEncoderTest
+[INFO] Running org.apache.commons.codec.language.SoundexTest
+[INFO] Tests run: 31, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.042 s -- in org.apache.commons.codec.language.SoundexTest
+[INFO] Running org.apache.commons.codec.language.DaitchMokotoffSoundexTest
+[INFO] Tests run: 16641, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 81.69 s -- in org.apache.commons.codec.language.DaitchMokotoffSoundexTest
+[INFO] Running org.apache.commons.codec.language.DoubleMetaphoneTest
+[INFO] Tests run: 17, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.034 s -- in org.apache.commons.codec.language.DoubleMetaphoneTest
+[INFO] Running org.apache.commons.codec.net.PercentCodecTest
+[WARNING] Tests run: 13, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 0.021 s -- in org.apache.commons.codec.net.PercentCodecTest
+[INFO] Running org.apache.commons.codec.net.URLCodecTest
+[INFO] Tests run: 16, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.034 s -- in org.apache.commons.codec.net.URLCodecTest
+[INFO] Running org.apache.commons.codec.net.QCodecTest
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.021 s -- in org.apache.commons.codec.net.QCodecTest
+[INFO] Running org.apache.commons.codec.net.QuotedPrintableCodecTest
+[INFO] Tests run: 22, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.050 s -- in org.apache.commons.codec.net.QuotedPrintableCodecTest
+[INFO] Running org.apache.commons.codec.net.RFC1522CodecTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in org.apache.commons.codec.net.RFC1522CodecTest
+[INFO] Running org.apache.commons.codec.net.UtilsTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s -- in org.apache.commons.codec.net.UtilsTest
+[INFO] Running org.apache.commons.codec.net.BCodecTest
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.029 s -- in org.apache.commons.codec.net.BCodecTest
+[INFO] Running org.apache.commons.codec.ResourcesTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.020 s -- in org.apache.commons.codec.ResourcesTest
+[INFO] Running org.apache.commons.codec.binary.Base16Test
+[INFO] Tests run: 31, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.050 s -- in org.apache.commons.codec.binary.Base16Test
+[INFO] Running org.apache.commons.codec.binary.Base32OutputStreamTest
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.060 s -- in org.apache.commons.codec.binary.Base32OutputStreamTest
+[INFO] Running org.apache.commons.codec.binary.CharSequenceUtilsTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s -- in org.apache.commons.codec.binary.CharSequenceUtilsTest
+[INFO] Running org.apache.commons.codec.binary.BaseNCodecTest
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.667 s -- in org.apache.commons.codec.binary.BaseNCodecTest
+[INFO] Running org.apache.commons.codec.binary.Base64Codec13Test
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.015 s -- in org.apache.commons.codec.binary.Base64Codec13Test
+[INFO] Running org.apache.commons.codec.binary.Base16OutputStreamTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.033 s -- in org.apache.commons.codec.binary.Base16OutputStreamTest
+[INFO] Running org.apache.commons.codec.binary.Base64InputStreamTest
+[INFO] Tests run: 22, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.059 s -- in org.apache.commons.codec.binary.Base64InputStreamTest
+[INFO] Running org.apache.commons.codec.binary.Base32InputStreamTest
+[INFO] Tests run: 18, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.060 s -- in org.apache.commons.codec.binary.Base32InputStreamTest
+[INFO] Running org.apache.commons.codec.binary.HexTest
+[INFO] Tests run: 236, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.152 s -- in org.apache.commons.codec.binary.HexTest
+[INFO] Running org.apache.commons.codec.binary.Base16InputStreamTest
+[INFO] Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.033 s -- in org.apache.commons.codec.binary.Base16InputStreamTest
+[INFO] Running org.apache.commons.codec.binary.Base64Test
+[WARNING] Tests run: 103, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 0.381 s -- in org.apache.commons.codec.binary.Base64Test
+[INFO] Running org.apache.commons.codec.binary.Base64OutputStreamTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.045 s -- in org.apache.commons.codec.binary.Base64OutputStreamTest
+[INFO] Running org.apache.commons.codec.binary.StringUtilsTest
+[INFO] Tests run: 22, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.035 s -- in org.apache.commons.codec.binary.StringUtilsTest
+[INFO] Running org.apache.commons.codec.binary.BinaryCodecTest
+[INFO] Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 s -- in org.apache.commons.codec.binary.BinaryCodecTest
+[INFO] Running org.apache.commons.codec.binary.AllocateDirectHexTest
+[INFO] Tests run: 236, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.936 s -- in org.apache.commons.codec.binary.AllocateDirectHexTest
+[INFO] Running org.apache.commons.codec.binary.Base32Test
+[INFO] Tests run: 32, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.041 s -- in org.apache.commons.codec.binary.Base32Test
+[INFO] Running org.apache.commons.codec.DecoderExceptionTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in org.apache.commons.codec.DecoderExceptionTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[WARNING] Tests run: 18549, Failures: 0, Errors: 0, Skipped: 20
+[INFO] 
+INFO: Adding excluded groups to newly created one
+INFO: Creating new argline for Surefire
+CONFIG: nondexFilter=.*
+nondexMode=FULL
+nondexSeed=974622
+nondexStart=0
+nondexEnd=9223372036854775807
+nondexPrintstack=false
+nondexDir=/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/commons-codec/.nondex
+nondexJarDir=/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/commons-codec/.nondex
+nondexExecid=XGIf+irVvdwrA4VJzAAmeXy2s6i39JqxEr+OLsVZWcg=
+nondexLogging=CONFIG
+test=
+[WARNING]  Parameter 'disableXmlReport' (user property 'disableXmlReport') is deprecated: Instead use disable within statelessTestsetReporter since of 3.0.0-M6.
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running org.apache.commons.codec.CharsetsTest
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.096 s -- in org.apache.commons.codec.CharsetsTest
+[INFO] Running org.apache.commons.codec.EncoderExceptionTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.014 s -- in org.apache.commons.codec.EncoderExceptionTest
+[INFO] Running org.apache.commons.codec.StringEncoderComparatorTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.012 s -- in org.apache.commons.codec.StringEncoderComparatorTest
+[INFO] Running org.apache.commons.codec.CharEncodingTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.018 s -- in org.apache.commons.codec.CharEncodingTest
+[INFO] Running org.apache.commons.codec.cli.DigestTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in org.apache.commons.codec.cli.DigestTest
+[INFO] Running org.apache.commons.codec.digest.HmacUtilsTest
+[INFO] Tests run: 23, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.105 s -- in org.apache.commons.codec.digest.HmacUtilsTest
+[INFO] Running org.apache.commons.codec.digest.Apr1CryptTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.075 s -- in org.apache.commons.codec.digest.Apr1CryptTest
+[INFO] Running org.apache.commons.codec.digest.Blake3Test
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 s -- in org.apache.commons.codec.digest.Blake3Test
+[INFO] Running org.apache.commons.codec.digest.PureJavaCrc32CTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 s -- in org.apache.commons.codec.digest.PureJavaCrc32CTest
+[INFO] Running org.apache.commons.codec.digest.MurmurHash3Test
+[INFO] Tests run: 27, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.416 s -- in org.apache.commons.codec.digest.MurmurHash3Test
+[INFO] Running org.apache.commons.codec.digest.XXHash32Test
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.091 s -- in org.apache.commons.codec.digest.XXHash32Test
+[INFO] Running org.apache.commons.codec.digest.Blake3TestVectorsTest
+[INFO] Tests run: 175, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.114 s -- in org.apache.commons.codec.digest.Blake3TestVectorsTest
+[INFO] Running org.apache.commons.codec.digest.Sha512CryptTest
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.109 s -- in org.apache.commons.codec.digest.Sha512CryptTest
+[INFO] Running org.apache.commons.codec.digest.MessageDigestAlgorithmsTest
+[WARNING] Tests run: 135, Failures: 0, Errors: 0, Skipped: 18, Time elapsed: 5.700 s -- in org.apache.commons.codec.digest.MessageDigestAlgorithmsTest
+[INFO] Running org.apache.commons.codec.digest.UnixCryptTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 s -- in org.apache.commons.codec.digest.UnixCryptTest
+[INFO] Running org.apache.commons.codec.digest.PureJavaCrc32Test
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.081 s -- in org.apache.commons.codec.digest.PureJavaCrc32Test
+[INFO] Running org.apache.commons.codec.digest.MurmurHash2Test
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 s -- in org.apache.commons.codec.digest.MurmurHash2Test
+[INFO] Running org.apache.commons.codec.digest.CryptTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.031 s -- in org.apache.commons.codec.digest.CryptTest
+[INFO] Running org.apache.commons.codec.digest.Crc16Test
+[INFO] Tests run: 112, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.715 s -- in org.apache.commons.codec.digest.Crc16Test
+[INFO] Running org.apache.commons.codec.digest.XXHash32OverflowTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.462 s -- in org.apache.commons.codec.digest.XXHash32OverflowTest
+[INFO] Running org.apache.commons.codec.digest.B64Test
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s -- in org.apache.commons.codec.digest.B64Test
+[INFO] Running org.apache.commons.codec.digest.Sha256CryptTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.069 s -- in org.apache.commons.codec.digest.Sha256CryptTest
+[INFO] Running org.apache.commons.codec.digest.DigestUtilsTest
+[INFO] Tests run: 46, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.710 s -- in org.apache.commons.codec.digest.DigestUtilsTest
+[INFO] Running org.apache.commons.codec.digest.HmacAlgorithmsTest
+[INFO] Tests run: 108, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.440 s -- in org.apache.commons.codec.digest.HmacAlgorithmsTest
+[INFO] Running org.apache.commons.codec.digest.Sha2CryptTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 s -- in org.apache.commons.codec.digest.Sha2CryptTest
+[INFO] Running org.apache.commons.codec.digest.Md5CryptTest
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.025 s -- in org.apache.commons.codec.digest.Md5CryptTest
+[INFO] Running org.apache.commons.codec.language.bm.PhoneticEngineTest
+[INFO] Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.239 s -- in org.apache.commons.codec.language.bm.PhoneticEngineTest
+[INFO] Running org.apache.commons.codec.language.bm.RuleTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in org.apache.commons.codec.language.bm.RuleTest
+[INFO] Running org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.029 s -- in org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest
+[INFO] Running org.apache.commons.codec.language.bm.BeiderMorseEncoderTest
+[INFO] Tests run: 22, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.604 s -- in org.apache.commons.codec.language.bm.BeiderMorseEncoderTest
+[INFO] Running org.apache.commons.codec.language.bm.LanguageGuessingTest
+[INFO] Tests run: 18, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.097 s -- in org.apache.commons.codec.language.bm.LanguageGuessingTest
+[INFO] Running org.apache.commons.codec.language.MetaphoneTest
+[INFO] Tests run: 34, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.054 s -- in org.apache.commons.codec.language.MetaphoneTest
+[INFO] Running org.apache.commons.codec.language.RefinedSoundexTest
+[INFO] Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.014 s -- in org.apache.commons.codec.language.RefinedSoundexTest
+[INFO] Running org.apache.commons.codec.language.Caverphone1Test
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.015 s -- in org.apache.commons.codec.language.Caverphone1Test
+[INFO] Running org.apache.commons.codec.language.Caverphone2Test
+[INFO] Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.027 s -- in org.apache.commons.codec.language.Caverphone2Test
+[INFO] Running org.apache.commons.codec.language.NysiisTest
+[INFO] Tests run: 23, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.048 s -- in org.apache.commons.codec.language.NysiisTest
+[INFO] Running org.apache.commons.codec.language.DoubleMetaphone2Test
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.025 s -- in org.apache.commons.codec.language.DoubleMetaphone2Test
+[INFO] Running org.apache.commons.codec.language.ColognePhoneticTest
+[INFO] Tests run: 15, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.046 s -- in org.apache.commons.codec.language.ColognePhoneticTest
+[INFO] Running org.apache.commons.codec.language.MatchRatingApproachEncoderTest
+[INFO] Tests run: 100, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.159 s -- in org.apache.commons.codec.language.MatchRatingApproachEncoderTest
+[INFO] Running org.apache.commons.codec.language.SoundexTest
+[INFO] Tests run: 31, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.041 s -- in org.apache.commons.codec.language.SoundexTest
+[INFO] Running org.apache.commons.codec.language.DaitchMokotoffSoundexTest
+[INFO] Tests run: 16641, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 86.23 s -- in org.apache.commons.codec.language.DaitchMokotoffSoundexTest
+[INFO] Running org.apache.commons.codec.language.DoubleMetaphoneTest
+[INFO] Tests run: 17, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.033 s -- in org.apache.commons.codec.language.DoubleMetaphoneTest
+[INFO] Running org.apache.commons.codec.net.PercentCodecTest
+[WARNING] Tests run: 13, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 0.021 s -- in org.apache.commons.codec.net.PercentCodecTest
+[INFO] Running org.apache.commons.codec.net.URLCodecTest
+[INFO] Tests run: 16, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.042 s -- in org.apache.commons.codec.net.URLCodecTest
+[INFO] Running org.apache.commons.codec.net.QCodecTest
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.031 s -- in org.apache.commons.codec.net.QCodecTest
+[INFO] Running org.apache.commons.codec.net.QuotedPrintableCodecTest
+[INFO] Tests run: 22, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.103 s -- in org.apache.commons.codec.net.QuotedPrintableCodecTest
+[INFO] Running org.apache.commons.codec.net.RFC1522CodecTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 s -- in org.apache.commons.codec.net.RFC1522CodecTest
+[INFO] Running org.apache.commons.codec.net.UtilsTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s -- in org.apache.commons.codec.net.UtilsTest
+[INFO] Running org.apache.commons.codec.net.BCodecTest
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.032 s -- in org.apache.commons.codec.net.BCodecTest
+[INFO] Running org.apache.commons.codec.ResourcesTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.022 s -- in org.apache.commons.codec.ResourcesTest
+[INFO] Running org.apache.commons.codec.binary.Base16Test
+[INFO] Tests run: 31, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.051 s -- in org.apache.commons.codec.binary.Base16Test
+[INFO] Running org.apache.commons.codec.binary.Base32OutputStreamTest
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.056 s -- in org.apache.commons.codec.binary.Base32OutputStreamTest
+[INFO] Running org.apache.commons.codec.binary.CharSequenceUtilsTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 s -- in org.apache.commons.codec.binary.CharSequenceUtilsTest
+[INFO] Running org.apache.commons.codec.binary.BaseNCodecTest
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.055 s -- in org.apache.commons.codec.binary.BaseNCodecTest
+[INFO] Running org.apache.commons.codec.binary.Base64Codec13Test
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.015 s -- in org.apache.commons.codec.binary.Base64Codec13Test
+[INFO] Running org.apache.commons.codec.binary.Base16OutputStreamTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.032 s -- in org.apache.commons.codec.binary.Base16OutputStreamTest
+[INFO] Running org.apache.commons.codec.binary.Base64InputStreamTest
+[INFO] Tests run: 22, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.060 s -- in org.apache.commons.codec.binary.Base64InputStreamTest
+[INFO] Running org.apache.commons.codec.binary.Base32InputStreamTest
+[INFO] Tests run: 18, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.054 s -- in org.apache.commons.codec.binary.Base32InputStreamTest
+[INFO] Running org.apache.commons.codec.binary.HexTest
+[INFO] Tests run: 236, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.118 s -- in org.apache.commons.codec.binary.HexTest
+[INFO] Running org.apache.commons.codec.binary.Base16InputStreamTest
+[INFO] Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.028 s -- in org.apache.commons.codec.binary.Base16InputStreamTest
+[INFO] Running org.apache.commons.codec.binary.Base64Test
+[WARNING] Tests run: 103, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 0.353 s -- in org.apache.commons.codec.binary.Base64Test
+[INFO] Running org.apache.commons.codec.binary.Base64OutputStreamTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.048 s -- in org.apache.commons.codec.binary.Base64OutputStreamTest
+[INFO] Running org.apache.commons.codec.binary.StringUtilsTest
+[INFO] Tests run: 22, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.030 s -- in org.apache.commons.codec.binary.StringUtilsTest
+[INFO] Running org.apache.commons.codec.binary.BinaryCodecTest
+[INFO] Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.021 s -- in org.apache.commons.codec.binary.BinaryCodecTest
+[INFO] Running org.apache.commons.codec.binary.AllocateDirectHexTest
+[INFO] Tests run: 236, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.017 s -- in org.apache.commons.codec.binary.AllocateDirectHexTest
+[INFO] Running org.apache.commons.codec.binary.Base32Test
+[INFO] Tests run: 32, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.060 s -- in org.apache.commons.codec.binary.Base32Test
+[INFO] Running org.apache.commons.codec.DecoderExceptionTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 s -- in org.apache.commons.codec.DecoderExceptionTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[WARNING] Tests run: 18549, Failures: 0, Errors: 0, Skipped: 20
+[INFO] 
+INFO: Adding excluded groups to newly created one
+INFO: Creating new argline for Surefire
+CONFIG: nondexFilter=.*
+nondexMode=FULL
+nondexSeed=1016066
+nondexStart=0
+nondexEnd=9223372036854775807
+nondexPrintstack=false
+nondexDir=/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/commons-codec/.nondex
+nondexJarDir=/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/commons-codec/.nondex
+nondexExecid=IWO6TJZuifXRuwKQsIosMDiF39umHh8t+bH9rSD7IME=
+nondexLogging=CONFIG
+test=
+[WARNING]  Parameter 'disableXmlReport' (user property 'disableXmlReport') is deprecated: Instead use disable within statelessTestsetReporter since of 3.0.0-M6.
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running org.apache.commons.codec.CharsetsTest
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.085 s -- in org.apache.commons.codec.CharsetsTest
+[INFO] Running org.apache.commons.codec.EncoderExceptionTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.010 s -- in org.apache.commons.codec.EncoderExceptionTest
+[INFO] Running org.apache.commons.codec.StringEncoderComparatorTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 s -- in org.apache.commons.codec.StringEncoderComparatorTest
+[INFO] Running org.apache.commons.codec.CharEncodingTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.024 s -- in org.apache.commons.codec.CharEncodingTest
+[INFO] Running org.apache.commons.codec.cli.DigestTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 s -- in org.apache.commons.codec.cli.DigestTest
+[INFO] Running org.apache.commons.codec.digest.HmacUtilsTest
+[INFO] Tests run: 23, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.102 s -- in org.apache.commons.codec.digest.HmacUtilsTest
+[INFO] Running org.apache.commons.codec.digest.Apr1CryptTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.066 s -- in org.apache.commons.codec.digest.Apr1CryptTest
+[INFO] Running org.apache.commons.codec.digest.Blake3Test
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s -- in org.apache.commons.codec.digest.Blake3Test
+[INFO] Running org.apache.commons.codec.digest.PureJavaCrc32CTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 s -- in org.apache.commons.codec.digest.PureJavaCrc32CTest
+[INFO] Running org.apache.commons.codec.digest.MurmurHash3Test
+[INFO] Tests run: 27, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.684 s -- in org.apache.commons.codec.digest.MurmurHash3Test
+[INFO] Running org.apache.commons.codec.digest.XXHash32Test
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.096 s -- in org.apache.commons.codec.digest.XXHash32Test
+[INFO] Running org.apache.commons.codec.digest.Blake3TestVectorsTest
+[INFO] Tests run: 175, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.153 s -- in org.apache.commons.codec.digest.Blake3TestVectorsTest
+[INFO] Running org.apache.commons.codec.digest.Sha512CryptTest
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.127 s -- in org.apache.commons.codec.digest.Sha512CryptTest
+[INFO] Running org.apache.commons.codec.digest.MessageDigestAlgorithmsTest
+[WARNING] Tests run: 135, Failures: 0, Errors: 0, Skipped: 18, Time elapsed: 4.250 s -- in org.apache.commons.codec.digest.MessageDigestAlgorithmsTest
+[INFO] Running org.apache.commons.codec.digest.UnixCryptTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.015 s -- in org.apache.commons.codec.digest.UnixCryptTest
+[INFO] Running org.apache.commons.codec.digest.PureJavaCrc32Test
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.083 s -- in org.apache.commons.codec.digest.PureJavaCrc32Test
+[INFO] Running org.apache.commons.codec.digest.MurmurHash2Test
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.013 s -- in org.apache.commons.codec.digest.MurmurHash2Test
+[INFO] Running org.apache.commons.codec.digest.CryptTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.032 s -- in org.apache.commons.codec.digest.CryptTest
+[INFO] Running org.apache.commons.codec.digest.Crc16Test
+[INFO] Tests run: 112, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.718 s -- in org.apache.commons.codec.digest.Crc16Test
+[INFO] Running org.apache.commons.codec.digest.XXHash32OverflowTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.469 s -- in org.apache.commons.codec.digest.XXHash32OverflowTest
+[INFO] Running org.apache.commons.codec.digest.B64Test
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 s -- in org.apache.commons.codec.digest.B64Test
+[INFO] Running org.apache.commons.codec.digest.Sha256CryptTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.088 s -- in org.apache.commons.codec.digest.Sha256CryptTest
+[INFO] Running org.apache.commons.codec.digest.DigestUtilsTest
+[INFO] Tests run: 46, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.741 s -- in org.apache.commons.codec.digest.DigestUtilsTest
+[INFO] Running org.apache.commons.codec.digest.HmacAlgorithmsTest
+[INFO] Tests run: 108, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.431 s -- in org.apache.commons.codec.digest.HmacAlgorithmsTest
+[INFO] Running org.apache.commons.codec.digest.Sha2CryptTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s -- in org.apache.commons.codec.digest.Sha2CryptTest
+[INFO] Running org.apache.commons.codec.digest.Md5CryptTest
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.037 s -- in org.apache.commons.codec.digest.Md5CryptTest
+[INFO] Running org.apache.commons.codec.language.bm.PhoneticEngineTest
+[INFO] Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.272 s -- in org.apache.commons.codec.language.bm.PhoneticEngineTest
+[INFO] Running org.apache.commons.codec.language.bm.RuleTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in org.apache.commons.codec.language.bm.RuleTest
+[INFO] Running org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.031 s -- in org.apache.commons.codec.language.bm.PhoneticEngineRegressionTest
+[INFO] Running org.apache.commons.codec.language.bm.BeiderMorseEncoderTest
+[INFO] Tests run: 22, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.689 s -- in org.apache.commons.codec.language.bm.BeiderMorseEncoderTest
+[INFO] Running org.apache.commons.codec.language.bm.LanguageGuessingTest
+[INFO] Tests run: 18, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.100 s -- in org.apache.commons.codec.language.bm.LanguageGuessingTest
+[INFO] Running org.apache.commons.codec.language.MetaphoneTest
+[INFO] Tests run: 34, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.051 s -- in org.apache.commons.codec.language.MetaphoneTest
+[INFO] Running org.apache.commons.codec.language.RefinedSoundexTest
+[INFO] Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 s -- in org.apache.commons.codec.language.RefinedSoundexTest
+[INFO] Running org.apache.commons.codec.language.Caverphone1Test
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.014 s -- in org.apache.commons.codec.language.Caverphone1Test
+[INFO] Running org.apache.commons.codec.language.Caverphone2Test
+[INFO] Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.024 s -- in org.apache.commons.codec.language.Caverphone2Test
+[INFO] Running org.apache.commons.codec.language.NysiisTest
+[INFO] Tests run: 23, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.034 s -- in org.apache.commons.codec.language.NysiisTest
+[INFO] Running org.apache.commons.codec.language.DoubleMetaphone2Test
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 s -- in org.apache.commons.codec.language.DoubleMetaphone2Test
+[INFO] Running org.apache.commons.codec.language.ColognePhoneticTest
+[INFO] Tests run: 15, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.035 s -- in org.apache.commons.codec.language.ColognePhoneticTest
+[INFO] Running org.apache.commons.codec.language.MatchRatingApproachEncoderTest
+[INFO] Tests run: 100, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.130 s -- in org.apache.commons.codec.language.MatchRatingApproachEncoderTest
+[INFO] Running org.apache.commons.codec.language.SoundexTest
+[INFO] Tests run: 31, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.039 s -- in org.apache.commons.codec.language.SoundexTest
+[INFO] Running org.apache.commons.codec.language.DaitchMokotoffSoundexTest
+[INFO] Tests run: 16641, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 82.65 s -- in org.apache.commons.codec.language.DaitchMokotoffSoundexTest
+[INFO] Running org.apache.commons.codec.language.DoubleMetaphoneTest
+[INFO] Tests run: 17, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.029 s -- in org.apache.commons.codec.language.DoubleMetaphoneTest
+[INFO] Running org.apache.commons.codec.net.PercentCodecTest
+[WARNING] Tests run: 13, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 0.017 s -- in org.apache.commons.codec.net.PercentCodecTest
+[INFO] Running org.apache.commons.codec.net.URLCodecTest
+[INFO] Tests run: 16, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.041 s -- in org.apache.commons.codec.net.URLCodecTest
+[INFO] Running org.apache.commons.codec.net.QCodecTest
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.018 s -- in org.apache.commons.codec.net.QCodecTest
+[INFO] Running org.apache.commons.codec.net.QuotedPrintableCodecTest
+[INFO] Tests run: 22, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.034 s -- in org.apache.commons.codec.net.QuotedPrintableCodecTest
+[INFO] Running org.apache.commons.codec.net.RFC1522CodecTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s -- in org.apache.commons.codec.net.RFC1522CodecTest
+[INFO] Running org.apache.commons.codec.net.UtilsTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.001 s -- in org.apache.commons.codec.net.UtilsTest
+[INFO] Running org.apache.commons.codec.net.BCodecTest
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 s -- in org.apache.commons.codec.net.BCodecTest
+[INFO] Running org.apache.commons.codec.ResourcesTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.014 s -- in org.apache.commons.codec.ResourcesTest
+[INFO] Running org.apache.commons.codec.binary.Base16Test
+[INFO] Tests run: 31, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.056 s -- in org.apache.commons.codec.binary.Base16Test
+[INFO] Running org.apache.commons.codec.binary.Base32OutputStreamTest
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.062 s -- in org.apache.commons.codec.binary.Base32OutputStreamTest
+[INFO] Running org.apache.commons.codec.binary.CharSequenceUtilsTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in org.apache.commons.codec.binary.CharSequenceUtilsTest
+[INFO] Running org.apache.commons.codec.binary.BaseNCodecTest
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.991 s -- in org.apache.commons.codec.binary.BaseNCodecTest
+[INFO] Running org.apache.commons.codec.binary.Base64Codec13Test
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 s -- in org.apache.commons.codec.binary.Base64Codec13Test
+[INFO] Running org.apache.commons.codec.binary.Base16OutputStreamTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.031 s -- in org.apache.commons.codec.binary.Base16OutputStreamTest
+[INFO] Running org.apache.commons.codec.binary.Base64InputStreamTest
+[INFO] Tests run: 22, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.069 s -- in org.apache.commons.codec.binary.Base64InputStreamTest
+[INFO] Running org.apache.commons.codec.binary.Base32InputStreamTest
+[INFO] Tests run: 18, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.048 s -- in org.apache.commons.codec.binary.Base32InputStreamTest
+[INFO] Running org.apache.commons.codec.binary.HexTest
+[INFO] Tests run: 236, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.083 s -- in org.apache.commons.codec.binary.HexTest
+[INFO] Running org.apache.commons.codec.binary.Base16InputStreamTest
+[INFO] Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.029 s -- in org.apache.commons.codec.binary.Base16InputStreamTest
+[INFO] Running org.apache.commons.codec.binary.Base64Test
+[WARNING] Tests run: 103, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 0.365 s -- in org.apache.commons.codec.binary.Base64Test
+[INFO] Running org.apache.commons.codec.binary.Base64OutputStreamTest
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.040 s -- in org.apache.commons.codec.binary.Base64OutputStreamTest
+[INFO] Running org.apache.commons.codec.binary.StringUtilsTest
+[INFO] Tests run: 22, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.027 s -- in org.apache.commons.codec.binary.StringUtilsTest
+[INFO] Running org.apache.commons.codec.binary.BinaryCodecTest
+[INFO] Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 s -- in org.apache.commons.codec.binary.BinaryCodecTest
+[INFO] Running org.apache.commons.codec.binary.AllocateDirectHexTest
+[INFO] Tests run: 236, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.948 s -- in org.apache.commons.codec.binary.AllocateDirectHexTest
+[INFO] Running org.apache.commons.codec.binary.Base32Test
+[INFO] Tests run: 32, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.041 s -- in org.apache.commons.codec.binary.Base32Test
+[INFO] Running org.apache.commons.codec.DecoderExceptionTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in org.apache.commons.codec.DecoderExceptionTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[WARNING] Tests run: 18549, Failures: 0, Errors: 0, Skipped: 20
+[INFO] 
+[INFO] NonDex SUMMARY:
+[INFO] *********
+[INFO] mvn nondex:nondex  -DnondexFilter='.*' -DnondexMode=FULL -DnondexSeed=933178 -DnondexStart=0 -DnondexEnd=9223372036854775807 -DnondexPrintstack=false -DnondexDir="/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/commons-codec/.nondex" -DnondexJarDir="/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/commons-codec/.nondex" -DnondexExecid=DsWuJa9BfZ42c0tyaieAVx7OlbjnqqohX7c8jkFLvC0= -DnondexLogging=CONFIG
+[INFO] No Test Failed with this configuration.
+[INFO] *********
+[INFO] *********
+[INFO] mvn nondex:nondex  -DnondexFilter='.*' -DnondexMode=FULL -DnondexSeed=974622 -DnondexStart=0 -DnondexEnd=9223372036854775807 -DnondexPrintstack=false -DnondexDir="/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/commons-codec/.nondex" -DnondexJarDir="/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/commons-codec/.nondex" -DnondexExecid=XGIf+irVvdwrA4VJzAAmeXy2s6i39JqxEr+OLsVZWcg= -DnondexLogging=CONFIG
+[INFO] No Test Failed with this configuration.
+[INFO] *********
+[INFO] *********
+[INFO] mvn nondex:nondex  -DnondexFilter='.*' -DnondexMode=FULL -DnondexSeed=1016066 -DnondexStart=0 -DnondexEnd=9223372036854775807 -DnondexPrintstack=false -DnondexDir="/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/commons-codec/.nondex" -DnondexJarDir="/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/commons-codec/.nondex" -DnondexExecid=IWO6TJZuifXRuwKQsIosMDiF39umHh8t+bH9rSD7IME= -DnondexLogging=CONFIG
+[INFO] No Test Failed with this configuration.
+[INFO] *********
+[INFO] All tests pass without NonDex shuffling
+[INFO] ####################
+[INFO] Across all seeds:
+[INFO] Test results can be found at: 
+[INFO] file:///home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/commons-codec/.nondex/DsWuJa9BfZ42c0tyaieAVx7OlbjnqqohX7c8jkFLvC0=/test_results.html
+[INFO] [NonDex] The id of this run is: DsWuJa9BfZ42c0tyaieAVx7OlbjnqqohX7c8jkFLvC0=
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  06:20 min
+[INFO] Finished at: 2025-12-10T15:00:53-03:00
+[INFO] ------------------------------------------------------------------------

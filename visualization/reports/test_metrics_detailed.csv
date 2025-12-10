@@ -1,0 +1,5 @@
+project,test_name,total_runs,failures,failure_rate,is_flaky,severity,variance,std_dev,ci_lower,ci_upper,p_value
+httpie,tests/test_meta.py::test_meta_elapsed_time,20,1,0.05,True,low,0.0475,0.21794494717703367,0.008881448800795402,0.23613119344674205,0.0
+httpie,tests/test_encoding.py::test_terminal_output_request_charset_detection[big5-\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996],20,20,1.0,False,stable_fail,0.0,0.0,0.8388748419471806,1.0,1.0
+httpie,tests/test_encoding.py::test_terminal_output_response_charset_detection[big5-\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996],20,20,1.0,False,stable_fail,0.0,0.0,0.8388748419471806,1.0,1.0
+flask,tests/test_helpers.py::TestStreaming::test_async_view,20,20,1.0,False,stable_fail,0.0,0.0,0.8388748419471806,1.0,1.0

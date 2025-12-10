@@ -1,0 +1,96 @@
+........................................................................ [ 14%]
+...............................................................F........ [ 29%]
+........................................................................ [ 44%]
+.......................................................................s [ 59%]
+...s.s.................................................................. [ 74%]
+........................................................................ [ 89%]
+...............................................ss.                       [100%]
+=================================== FAILURES ===================================
+________________________ TestStreaming.test_async_view _________________________
+
+self = <test_helpers.TestStreaming object at 0x7b41e28c4200>
+app = <Flask 'flask_test'>, client = <FlaskClient <Flask 'flask_test'>>
+
+    def test_async_view(self, app, client):
+        @app.route("/")
+        async def index():
+            flask.session["test"] = "flask"
+    
+            @flask.stream_with_context
+            def gen():
+                yield flask.session["test"]
+    
+            return flask.Response(gen())
+    
+        # response is closed without reading stream
+>       client.get().close()
+        ^^^^^^^^^^^^
+
+tests/test_helpers.py:321: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../../flaky-tests-comparative-study/.venv-flask/lib/python3.12/site-packages/werkzeug/test.py:1162: in get
+    return self.open(*args, **kw)
+           ^^^^^^^^^^^^^^^^^^^^^^
+src/flask/testing.py:235: in open
+    response = super().open(
+../../flaky-tests-comparative-study/.venv-flask/lib/python3.12/site-packages/werkzeug/test.py:1116: in open
+    response_parts = self.run_wsgi_app(request.environ, buffered=buffered)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../flaky-tests-comparative-study/.venv-flask/lib/python3.12/site-packages/werkzeug/test.py:988: in run_wsgi_app
+    rv = run_wsgi_app(self.application, environ, buffered=buffered)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+../../flaky-tests-comparative-study/.venv-flask/lib/python3.12/site-packages/werkzeug/test.py:1264: in run_wsgi_app
+    app_rv = app(environ, start_response)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/flask/app.py:1591: in __call__
+    return self.wsgi_app(environ, start_response)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/flask/app.py:1570: in wsgi_app
+    response = self.handle_exception(ctx, e)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/flask/app.py:1567: in wsgi_app
+    response = self.full_dispatch_request(ctx)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/flask/app.py:1006: in full_dispatch_request
+    rv = self.handle_user_exception(ctx, e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/flask/app.py:1004: in full_dispatch_request
+    rv = self.dispatch_request(ctx)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/flask/app.py:989: in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src/flask/app.py:1063: in ensure_sync
+    return self.async_to_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Flask 'flask_test'>
+func = <function TestStreaming.test_async_view.<locals>.index at 0x7b41e2678360>
+
+    def async_to_sync(
+        self, func: t.Callable[..., t.Coroutine[t.Any, t.Any, t.Any]]
+    ) -> t.Callable[..., t.Any]:
+        """Return a sync function that will run the coroutine function.
+    
+        .. code-block:: python
+    
+            result = app.async_to_sync(func)(*args, **kwargs)
+    
+        Override this method to change how the app converts async code
+        to be synchronously callable.
+    
+        .. versionadded:: 2.0
+        """
+        try:
+            from asgiref.sync import async_to_sync as asgiref_async_to_sync
+        except ImportError:
+>           raise RuntimeError(
+                "Install Flask with the 'async' extra in order to use async views."
+            ) from None
+E           RuntimeError: Install Flask with the 'async' extra in order to use async views.
+
+src/flask/app.py:1084: RuntimeError
+=========================== short test summary info ============================
+FAILED tests/test_helpers.py::TestStreaming::test_async_view - RuntimeError: ...
+1 failed, 476 passed, 6 skipped in 1.46s

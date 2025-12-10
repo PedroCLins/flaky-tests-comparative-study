@@ -1,0 +1,519 @@
+..........s......x...................................................... [  7%]
+....................x.............x.x................................... [ 14%]
+........................................................................ [ 21%]
+..........................s............................................. [ 28%]
+.s...................................................................... [ 35%]
+........................................................................ [ 42%]
+..................................127.0.0.1 - - [10/Dec/2025 15:45:20] "GET /get HTTP/1.1" 200 269
+......F............................... [ 49%]
+............F........................................................... [ 56%]
+........................................................................ [ 63%]
+........................................................................ [ 70%]
+........................................................................ [ 77%]
+........................................................................ [ 84%]
+..................................................................s..... [ 91%]
+..........................pytest-httpbin server hit an exception serving request: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1000)
+attempting to ignore so the rest of the tests can run
+......s....................................... [ 98%]
+....................                                                     [100%]
+=================================== FAILURES ===================================
+_ test_terminal_output_response_charset_detection[big5-\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996] _
+
+text = '卷首卷首卷首卷首卷卷首卷首卷首卷首卷首卷首卷首卷首卷首卷首卷首卷首卷首', charset = 'big5'
+
+    @pytest.mark.parametrize('charset, text', CHARSET_TEXT_PAIRS)
+    @responses.activate
+    def test_terminal_output_response_charset_detection(text, charset):
+        responses.add(
+            method=responses.POST,
+            url=DUMMY_URL,
+            body=text.encode(charset),
+            content_type='text/plain',
+        )
+        r = http('--form', 'POST', DUMMY_URL)
+>       assert text in r
+E       AssertionError: assert '卷首卷首卷首卷首卷卷首卷首卷首卷首卷首卷首卷首卷首卷首卷首卷首卷首卷首' in 'HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\n\r\n뻥솤뻥솤뻥솤뻥솤뻥뻥솤뻥솤뻥솤뻥솤뻥솤뻥솤뻥솤뻥솤뻥솤뻥솤뻥솤뻥솤뻥솤\n\n'
+
+tests/test_encoding.py:147: AssertionError
+_ test_terminal_output_request_charset_detection[big5-\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996] _
+
+charset = 'big5', text = '卷首卷首卷首卷首卷卷首卷首卷首卷首卷首卷首卷首卷首卷首卷首卷首卷首卷首'
+
+    @pytest.mark.parametrize('charset, text', CHARSET_TEXT_PAIRS)
+    def test_terminal_output_request_charset_detection(charset, text):
+        r = http(
+            '--offline',
+            DUMMY_URL,
+            'Content-Type: text/plain',
+            env=MockEnvironment(
+                stdin=text.encode(charset),
+                stdin_isatty=False,
+            ),
+        )
+>       assert text in r
+E       AssertionError: assert '卷首卷首卷首卷首卷卷首卷首卷首卷首卷首卷首卷首卷首卷首卷首卷首卷首卷首' in 'POST / HTTP/1.1\r\nAccept: application/json, */*;q=0.5\r\nAccept-Encoding: gzip, deflate, br\r\nConnection: keep-aliv...xt/plain\r\nHost: this-should.never-resolve\r\nUser-Agent: HTTPie/3.2.4\r\n\r\n뻥솤뻥솤뻥솤뻥솤뻥뻥솤뻥솤뻥솤뻥솤뻥솤뻥솤뻥솤뻥솤뻥솤뻥솤뻥솤뻥솤뻥솤\n\n'
+
+tests/test_encoding.py:222: AssertionError
+=============================== warnings summary ===============================
+tests/test_redirects.py::test_follow_redirect_with_repost[308]
+  /usr/lib/python3.12/collections/__init__.py:449: ResourceWarning: unclosed file <_io.BufferedReader name='/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/httpie/tests/fixtures/test.txt'>
+    result = tuple_new(cls, iterable)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_binary.py::TestBinaryResponseData::test_binary_suppresses_when_terminal
+tests/test_compress.py::test_compress_stdin[http]
+tests/test_uploads.py::TestMultipartFormDataFileUpload::test_multipart_custom_content_type_boundary_added
+tests/test_httpie.py::test_raw_POST_key_values_supplied
+tests/test_httpie.py::test_raw_POST_key_values_supplied
+  /usr/lib/python3.12/collections/__init__.py:458: ResourceWarning: unclosed file <_io.BufferedReader name='/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/httpie/tests/fixtures/test.txt'>
+    result = self._make(_map(kwds.pop, field_names, self))
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_binary.py::TestBinaryResponseData::test_binary_suppresses_when_terminal
+tests/test_binary.py::TestBinaryResponseData::test_binary_suppresses_when_terminal
+  /usr/lib/python3.12/collections/__init__.py:458: ResourceWarning: unclosed file <_io.BufferedReader name='/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/httpie/tests/fixtures/test.bin'>
+    result = self._make(_map(kwds.pop, field_names, self))
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_output.py::TestQuietFlag::test_quiet_with_explicit_output_options[-p=hH-quiet_flags2]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/httpie/httpie/cli/argparser.py:157: ResourceWarning: unclosed file <_io.TextIOWrapper name=13 mode='w+t' encoding='utf-8'>
+    self.env = env
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_output.py::TestQuietFlag::test_quiet_with_output_redirection[False-quiet_flags0]
+tests/test_output.py::TestQuietFlag::test_quiet_with_explicit_output_options[-b-quiet_flags0]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/httpie/httpie/cli/argparser.py:157: ResourceWarning: unclosed file <_io.TextIOWrapper name=17 mode='w+t' encoding='utf-8'>
+    self.env = env
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_output.py::TestQuietFlag::test_quiet_with_output_redirection[False-quiet_flags1]
+tests/test_output.py::TestQuietFlag::test_quiet_with_explicit_output_options[-v-quiet_flags3]
+tests/test_output.py::TestQuietFlag::test_quiet[quiet_flags2]
+tests/test_output.py::TestQuietFlag::test_quiet_with_check_status_non_zero
+tests/test_output.py::TestQuietFlag::test_quiet_with_explicit_output_options[-h-quiet_flags3]
+tests/test_output.py::TestQuietFlag::test_quiet_with_explicit_output_options[-h-quiet_flags0]
+tests/test_output.py::TestQuietFlag::test_quiet_with_output_redirection[True-quiet_flags0]
+tests/test_output.py::TestQuietFlag::test_quiet_with_password_prompt[quiet_flags2]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/httpie/httpie/cli/argparser.py:157: ResourceWarning: unclosed file <_io.TextIOWrapper name=18 mode='w+t' encoding='utf-8'>
+    self.env = env
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_output.py::TestQuietFlag::test_quiet_with_explicit_output_options[-p=hH-quiet_flags3]
+tests/test_output.py::TestQuietFlag::test_quiet_with_output_redirection[False-quiet_flags3]
+tests/test_output.py::TestQuietFlag::test_quiet_with_explicit_output_options[-v-quiet_flags2]
+tests/test_output.py::TestQuietFlag::test_quiet_with_password_prompt[quiet_flags3]
+tests/test_output.py::TestQuietFlag::test_quiet_quiet_with_check_status_non_zero
+tests/test_output.py::TestQuietFlag::test_quiet_with_output_redirection[True-quiet_flags3]
+tests/test_output.py::TestQuietFlag::test_quiet_with_explicit_output_options[-b-quiet_flags2]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/httpie/httpie/cli/argparser.py:157: ResourceWarning: unclosed file <_io.TextIOWrapper name=19 mode='w+t' encoding='utf-8'>
+    self.env = env
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_output.py::TestQuietFlag::test_quiet_with_explicit_output_options[-v-quiet_flags1]
+tests/test_output.py::TestQuietFlag::test_quiet_with_explicit_output_options[-h-quiet_flags1]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/httpie/httpie/cli/argparser.py:157: ResourceWarning: unclosed file <_io.TextIOWrapper name=14 mode='w+t' encoding='utf-8'>
+    self.env = env
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_output.py::TestQuietFlag::test_quiet_with_explicit_output_options[-p=hH-quiet_flags1]
+tests/test_output.py::TestQuietFlag::test_quiet_with_explicit_output_options[-p=hH-quiet_flags0]
+tests/test_output.py::TestQuietFlag::test_quiet_with_explicit_output_options[-b-quiet_flags1]
+tests/test_output.py::TestQuietFlag::test_quiet_with_output_redirection[True-quiet_flags1]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/httpie/httpie/cli/argparser.py:157: ResourceWarning: unclosed file <_io.TextIOWrapper name=20 mode='w+t' encoding='utf-8'>
+    self.env = env
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_output.py::TestQuietFlag::test_quiet_with_output_redirection[False-quiet_flags2]
+tests/test_output.py::TestQuietFlag::test_quiet_quiet_with_check_status_non_zero_pipe
+tests/test_output.py::TestQuietFlag::test_quiet_with_explicit_output_options[-b-quiet_flags3]
+tests/test_output.py::TestQuietFlag::test_quiet_with_password_prompt[quiet_flags0]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/httpie/httpie/cli/argparser.py:157: ResourceWarning: unclosed file <_io.TextIOWrapper name=21 mode='w+t' encoding='utf-8'>
+    self.env = env
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_output.py::TestQuietFlag::test_quiet[quiet_flags3]
+tests/test_output.py::TestQuietFlag::test_quiet[quiet_flags0]
+tests/test_output.py::TestQuietFlag::test_quiet_with_password_prompt[quiet_flags1]
+tests/test_output.py::test_output_option[False]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/httpie/httpie/cli/argparser.py:157: ResourceWarning: unclosed file <_io.TextIOWrapper name=22 mode='w+t' encoding='utf-8'>
+    self.env = env
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_output.py::TestQuietFlag::test_quiet[quiet_flags1]
+tests/test_output.py::TestQuietFlag::test_double_quiet_on_error
+tests/test_output.py::TestQuietFlag::test_quiet_with_explicit_output_options[-h-quiet_flags2]
+tests/test_output.py::TestQuietFlag::test_quiet_with_output_redirection[True-quiet_flags2]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/httpie/httpie/cli/argparser.py:157: ResourceWarning: unclosed file <_io.TextIOWrapper name=23 mode='w+t' encoding='utf-8'>
+    self.env = env
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_output.py::TestQuietFlag::test_quiet_with_explicit_output_options[-h-quiet_flags3]
+  /usr/lib/python3.12/collections/__init__.py:458: ResourceWarning: unclosed file <_io.TextIOWrapper name=24 mode='w+t' encoding='utf-8'>
+    result = self._make(_map(kwds.pop, field_names, self))
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_output.py::test_ensure_status_code_is_shown_on_all_themes[ -solarized]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/.venv-httpie/lib/python3.12/site-packages/_pytest/fixtures.py:924: ResourceWarning: unclosed <socket.socket fd=13, family=2, type=1, proto=0, laddr=('127.0.0.1', 40101)>
+    next(it)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_output.py::test_ensure_status_code_is_shown_on_all_themes[-pie-light]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/.venv-httpie/lib/python3.12/site-packages/_pytest/fixtures.py:924: ResourceWarning: unclosed <socket.socket fd=13, family=2, type=1, proto=0, laddr=('127.0.0.1', 35885)>
+    next(it)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_output.py::test_ensure_status_code_is_shown_on_all_themes[ -auto]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/.venv-httpie/lib/python3.12/site-packages/_pytest/fixtures.py:924: ResourceWarning: unclosed <socket.socket fd=13, family=2, type=1, proto=0, laddr=('127.0.0.1', 35851)>
+    next(it)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_output.py::test_ensure_status_code_is_shown_on_all_themes[ OK-solarized]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/.venv-httpie/lib/python3.12/site-packages/_pytest/fixtures.py:924: ResourceWarning: unclosed <socket.socket fd=13, family=2, type=1, proto=0, laddr=('127.0.0.1', 41607)>
+    next(it)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_output.py::test_ensure_status_code_is_shown_on_all_themes[ CUSTOM -pie-dark]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/.venv-httpie/lib/python3.12/site-packages/_pytest/fixtures.py:924: ResourceWarning: unclosed <socket.socket fd=13, family=2, type=1, proto=0, laddr=('127.0.0.1', 37103)>
+    next(it)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_output.py::test_ensure_status_code_is_shown_on_all_themes[ OK -pie]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/.venv-httpie/lib/python3.12/site-packages/_pytest/fixtures.py:924: ResourceWarning: unclosed <socket.socket fd=13, family=2, type=1, proto=0, laddr=('127.0.0.1', 39603)>
+    next(it)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_output.py::test_ensure_status_code_is_shown_on_all_themes[ OK-pie-dark]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/.venv-httpie/lib/python3.12/site-packages/_pytest/fixtures.py:924: ResourceWarning: unclosed <socket.socket fd=13, family=2, type=1, proto=0, laddr=('127.0.0.1', 44265)>
+    next(it)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_output.py::test_ensure_status_code_is_shown_on_all_themes[ CUSTOM -auto]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/.venv-httpie/lib/python3.12/site-packages/_pytest/fixtures.py:924: ResourceWarning: unclosed <socket.socket fd=13, family=2, type=1, proto=0, laddr=('127.0.0.1', 37353)>
+    next(it)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_output.py::test_ensure_status_code_is_shown_on_all_themes[ OK -solarized]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/.venv-httpie/lib/python3.12/site-packages/_pytest/fixtures.py:924: ResourceWarning: unclosed <socket.socket fd=13, family=2, type=1, proto=0, laddr=('127.0.0.1', 36721)>
+    next(it)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_output.py::test_ensure_status_code_is_shown_on_all_themes[ CUSTOM -solarized]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/.venv-httpie/lib/python3.12/site-packages/_pytest/fixtures.py:924: ResourceWarning: unclosed <socket.socket fd=13, family=2, type=1, proto=0, laddr=('127.0.0.1', 44415)>
+    next(it)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_output.py::test_ensure_status_code_is_shown_on_all_themes[-auto]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/.venv-httpie/lib/python3.12/site-packages/_pytest/fixtures.py:924: ResourceWarning: unclosed <socket.socket fd=13, family=2, type=1, proto=0, laddr=('127.0.0.1', 46163)>
+    next(it)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_output.py::test_ensure_status_code_is_shown_on_all_themes[ -pie-dark]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/.venv-httpie/lib/python3.12/site-packages/_pytest/fixtures.py:924: ResourceWarning: unclosed <socket.socket fd=13, family=2, type=1, proto=0, laddr=('127.0.0.1', 37719)>
+    next(it)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_output.py::test_ensure_status_code_is_shown_on_all_themes[-pie-dark]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/.venv-httpie/lib/python3.12/site-packages/_pytest/fixtures.py:924: ResourceWarning: unclosed <socket.socket fd=13, family=2, type=1, proto=0, laddr=('127.0.0.1', 43793)>
+    next(it)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_output.py::test_ensure_status_code_is_shown_on_all_themes[-pie]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/.venv-httpie/lib/python3.12/site-packages/_pytest/fixtures.py:924: ResourceWarning: unclosed <socket.socket fd=13, family=2, type=1, proto=0, laddr=('127.0.0.1', 43791)>
+    next(it)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_output.py::test_ensure_status_code_is_shown_on_all_themes[ -pie]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/.venv-httpie/lib/python3.12/site-packages/_pytest/fixtures.py:924: ResourceWarning: unclosed <socket.socket fd=13, family=2, type=1, proto=0, laddr=('127.0.0.1', 40069)>
+    next(it)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_output.py::test_ensure_status_code_is_shown_on_all_themes[ OK -pie-dark]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/.venv-httpie/lib/python3.12/site-packages/_pytest/fixtures.py:924: ResourceWarning: unclosed <socket.socket fd=13, family=2, type=1, proto=0, laddr=('127.0.0.1', 36071)>
+    next(it)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_output.py::test_ensure_status_code_is_shown_on_all_themes[ OK -auto]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/.venv-httpie/lib/python3.12/site-packages/_pytest/fixtures.py:924: ResourceWarning: unclosed <socket.socket fd=13, family=2, type=1, proto=0, laddr=('127.0.0.1', 38939)>
+    next(it)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_output.py::test_ensure_status_code_is_shown_on_all_themes[ OK -pie-light]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/.venv-httpie/lib/python3.12/site-packages/_pytest/fixtures.py:924: ResourceWarning: unclosed <socket.socket fd=13, family=2, type=1, proto=0, laddr=('127.0.0.1', 35541)>
+    next(it)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_output.py::test_ensure_status_code_is_shown_on_all_themes[ OK-auto]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/.venv-httpie/lib/python3.12/site-packages/_pytest/fixtures.py:924: ResourceWarning: unclosed <socket.socket fd=13, family=2, type=1, proto=0, laddr=('127.0.0.1', 40365)>
+    next(it)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_output.py::test_ensure_status_code_is_shown_on_all_themes[ CUSTOM -pie-light]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/.venv-httpie/lib/python3.12/site-packages/_pytest/fixtures.py:924: ResourceWarning: unclosed <socket.socket fd=13, family=2, type=1, proto=0, laddr=('127.0.0.1', 42889)>
+    next(it)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_output.py::test_ensure_status_code_is_shown_on_all_themes[-solarized]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/.venv-httpie/lib/python3.12/site-packages/_pytest/fixtures.py:924: ResourceWarning: unclosed <socket.socket fd=13, family=2, type=1, proto=0, laddr=('127.0.0.1', 36829)>
+    next(it)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_output.py::test_ensure_status_code_is_shown_on_all_themes[ -pie-light]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/.venv-httpie/lib/python3.12/site-packages/_pytest/fixtures.py:924: ResourceWarning: unclosed <socket.socket fd=13, family=2, type=1, proto=0, laddr=('127.0.0.1', 37539)>
+    next(it)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_output.py::test_ensure_status_code_is_shown_on_all_themes[ CUSTOM -pie]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/.venv-httpie/lib/python3.12/site-packages/_pytest/fixtures.py:924: ResourceWarning: unclosed <socket.socket fd=13, family=2, type=1, proto=0, laddr=('127.0.0.1', 38787)>
+    next(it)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_output.py::test_ensure_status_code_is_shown_on_all_themes[ OK-pie]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/.venv-httpie/lib/python3.12/site-packages/_pytest/fixtures.py:924: ResourceWarning: unclosed <socket.socket fd=13, family=2, type=1, proto=0, laddr=('127.0.0.1', 39095)>
+    next(it)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_output.py::test_ensure_status_code_is_shown_on_all_themes[ OK-pie-light]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/.venv-httpie/lib/python3.12/site-packages/_pytest/fixtures.py:924: ResourceWarning: unclosed <socket.socket fd=13, family=2, type=1, proto=0, laddr=('127.0.0.1', 45371)>
+    next(it)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_stream.py::test_auto_streaming[extras2-1]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/.venv-httpie/lib/python3.12/site-packages/_pytest/fixtures.py:924: ResourceWarning: unclosed <socket.socket fd=13, family=2, type=1, proto=0, laddr=('127.0.0.1', 41547)>
+    next(it)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_stream.py::test_streaming_encoding_detection
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/.venv-httpie/lib/python3.12/site-packages/_pytest/fixtures.py:924: ResourceWarning: unclosed <socket.socket fd=13, family=2, type=1, proto=0, laddr=('127.0.0.1', 33613)>
+    next(it)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_stream.py: 8 warnings
+tests/test_encoding.py: 12 warnings
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/.venv-httpie/lib/python3.12/site-packages/responses/__init__.py:609: DeprecationWarning: stream argument is deprecated. Use stream parameter in request directly
+    warn(
+
+tests/test_stream.py::test_auto_streaming[extras1-3]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/.venv-httpie/lib/python3.12/site-packages/_pytest/fixtures.py:924: ResourceWarning: unclosed <socket.socket fd=13, family=2, type=1, proto=0, laddr=('127.0.0.1', 33191)>
+    next(it)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_stream.py::test_auto_streaming[extras0-3]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/.venv-httpie/lib/python3.12/site-packages/_pytest/fixtures.py:924: ResourceWarning: unclosed <socket.socket fd=13, family=2, type=1, proto=0, laddr=('127.0.0.1', 44067)>
+    next(it)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_compress.py: 1 warning
+tests/test_httpie.py: 2 warnings
+tests/test_uploads.py: 7 warnings
+tests/test_offline.py: 1 warning
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/httpie/httpie/cli/argparser.py:159: ResourceWarning: unclosed file <_io.BufferedReader name='/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/httpie/tests/fixtures/test.txt'>
+    self.args, no_options = super().parse_known_args(args, namespace)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_httpie.py::test_headers_unset[https]
+  /usr/lib/python3.12/collections/__init__.py:449: ResourceWarning: unclosed file <_io.FileIO name='/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/httpie/tests/fixtures/test.txt' mode='rb' closefd=True>
+    result = tuple_new(cls, iterable)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_httpie.py::test_headers_unset[http]
+  /usr/lib/python3.12/collections/__init__.py:449: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/httpie_stderrrwvsnklr' mode='w+t' encoding='utf-8'>
+    result = tuple_new(cls, iterable)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_cookie.py::TestIntegration::test_cookie_parser
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/httpie/tests/test_cookie.py:19: DeprecationWarning: setDaemon() is deprecated, set the daemon attribute instead
+    self.mock_server_thread.setDaemon(True)
+
+tests/test_update_warnings.py::test_daemon_runner
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/httpie/httpie/internal/daemons.py:67: DeprecationWarning: This process (pid=140401) is multi-threaded, use of fork() may lead to deadlocks in the child.
+    pid = os.fork()
+
+tests/test_encoding.py::test_terminal_output_response_charset_detection[big5-\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996]
+  <frozen importlib._bootstrap>:170: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/httpie_stderrwpishow1' mode='w+t' encoding='utf-8'>
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_encoding.py::test_terminal_output_response_charset_detection[big5-\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996]
+  <frozen importlib._bootstrap>:170: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/httpie_stderr99o88bju' mode='w+t' encoding='utf-8'>
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_encoding.py::test_terminal_output_response_charset_detection[big5-\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996]
+  <frozen importlib._bootstrap>:170: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/httpie_stderr68tjm_5z' mode='w+t' encoding='utf-8'>
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_encoding.py::test_terminal_output_response_charset_detection[big5-\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996]
+  <frozen importlib._bootstrap>:170: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/httpie_stderr4snfo6cn' mode='w+t' encoding='utf-8'>
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_encoding.py::test_terminal_output_response_charset_detection[big5-\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996]
+  <frozen importlib._bootstrap>:170: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/httpie_stderrzojox5dr' mode='w+t' encoding='utf-8'>
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_encoding.py::test_terminal_output_response_charset_detection[big5-\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996]
+  <frozen importlib._bootstrap>:170: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/httpie_stderrqsgbwhsr' mode='w+t' encoding='utf-8'>
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_encoding.py::test_terminal_output_response_charset_detection[big5-\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996]
+tests/test_encoding.py::test_terminal_output_response_charset_detection[big5-\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996]
+  /usr/lib/python3.12/encodings/iso8859_11.py:17: ResourceWarning: unclosed file <_io.BufferedReader name='/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/httpie/tests/fixtures/test.txt'>
+    class IncrementalEncoder(codecs.IncrementalEncoder):
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_encoding.py::test_terminal_output_response_charset_detection[big5-\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996]
+  /usr/lib/python3.12/encodings/iso8859_11.py:17: ResourceWarning: unclosed file <_io.TextIOWrapper name='/tmp/httpie_stderrn3glu1oi' mode='w+t' encoding='utf-8'>
+    class IncrementalEncoder(codecs.IncrementalEncoder):
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_sessions.py::TestSession::test_auth_type_reused_in_session[False-True]
+tests/test_uploads.py::TestRequestBodyFromFilePath::test_request_body_from_file_by_path_chunked
+  /usr/lib/python3.12/collections/__init__.py:458: ResourceWarning: unclosed file <_io.FileIO name='/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/httpie/tests/fixtures/test.txt' mode='rb' closefd=True>
+    result = self._make(_map(kwds.pop, field_names, self))
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_sessions.py::TestSession::test_auth_type_reused_in_session[False-True]
+  /usr/lib/python3.12/collections/__init__.py:458: ResourceWarning: unclosed file <_io.FileIO name='/tmp/httpie_stderrdd5olvdc' mode='rb+' closefd=True>
+    result = self._make(_map(kwds.pop, field_names, self))
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_sessions.py::test_secure_cookies_on_localhost[localhost_http_server-expected_cookies0]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/.venv-httpie/lib/python3.12/site-packages/_pytest/fixtures.py:924: ResourceWarning: unclosed <socket.socket fd=16, family=2, type=1, proto=0, laddr=('127.0.0.1', 39973)>
+    next(it)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_httpie.py::test_response_headers_multiple
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/.venv-httpie/lib/python3.12/site-packages/_pytest/fixtures.py:924: ResourceWarning: unclosed <socket.socket fd=12, family=2, type=1, proto=0, laddr=('127.0.0.1', 45843)>
+    next(it)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_httpie.py::test_response_headers_multiple_repeated
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/.venv-httpie/lib/python3.12/site-packages/_pytest/fixtures.py:924: ResourceWarning: unclosed <socket.socket fd=12, family=2, type=1, proto=0, laddr=('127.0.0.1', 34171)>
+    next(it)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_httpie.py::test_response_headers_multiple_representation[none]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/.venv-httpie/lib/python3.12/site-packages/_pytest/fixtures.py:924: ResourceWarning: unclosed <socket.socket fd=12, family=2, type=1, proto=0, laddr=('127.0.0.1', 44509)>
+    next(it)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_httpie.py::test_response_headers_multiple_representation[format]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/.venv-httpie/lib/python3.12/site-packages/_pytest/fixtures.py:924: ResourceWarning: unclosed <socket.socket fd=12, family=2, type=1, proto=0, laddr=('127.0.0.1', 33817)>
+    next(it)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_json.py::test_duplicate_keys_support_from_input_file
+tests/test_json.py::test_nested_json_syntax[input_json26-expected_json26]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/httpie/httpie/cli/argparser.py:159: ResourceWarning: unclosed file <_io.BufferedReader name='/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/httpie/tests/fixtures/test_with_dupe_keys.json'>
+    self.args, no_options = super().parse_known_args(args, namespace)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_ssl.py::test_ssl_version[tls1.2]
+tests/test_ssl.py::test_ssl_version[tls1]
+tests/test_ssl.py::test_ssl_version[tls1.1]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/httpie/httpie/ssl_.py:76: DeprecationWarning: 'ssl_version' option is deprecated and will be removed in urllib3 v2.6.0. Instead use 'ssl_minimum_version'
+    ssl_context = create_urllib3_context(
+
+tests/test_ssl.py::test_ssl_version[tls1]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/.venv-httpie/lib/python3.12/site-packages/urllib3/util/ssl_.py:301: DeprecationWarning: ssl.TLSVersion.TLSv1 is deprecated
+    context.minimum_version = ssl_minimum_version
+
+tests/test_ssl.py::test_ssl_version[tls1]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/.venv-httpie/lib/python3.12/site-packages/urllib3/util/ssl_.py:306: DeprecationWarning: ssl.TLSVersion.TLSv1 is deprecated
+    context.maximum_version = ssl_maximum_version
+
+tests/test_ssl.py::test_ssl_version[tls1.1]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/.venv-httpie/lib/python3.12/site-packages/urllib3/util/ssl_.py:301: DeprecationWarning: ssl.TLSVersion.TLSv1_1 is deprecated
+    context.minimum_version = ssl_minimum_version
+
+tests/test_ssl.py::test_ssl_version[tls1.1]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/.venv-httpie/lib/python3.12/site-packages/urllib3/util/ssl_.py:306: DeprecationWarning: ssl.TLSVersion.TLSv1_1 is deprecated
+    context.maximum_version = ssl_maximum_version
+
+tests/test_ssl.py::TestServerCert::test_verify_false_OK[fALse]
+tests/test_ssl.py::TestServerCert::test_verify_no_OK
+tests/test_ssl.py::TestServerCert::test_verify_false_OK[false]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/.venv-httpie/lib/python3.12/site-packages/urllib3/connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host '127.0.0.1'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+tests/test_cookie_on_redirects.py::test_server_set_cookie_on_redirect_different_domain[True]
+  /usr/lib/python3.12/json/encoder.py:414: ResourceWarning: unclosed file <_io.BufferedRandom name='/tmp/httpie_stderr1s7lrcfa'>
+    def _iterencode(o, _current_indent_level):
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_cookie_on_redirects.py::test_server_set_cookie_on_redirect_different_domain[True]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/.venv-httpie/lib/python3.12/site-packages/_pytest/fixtures.py:924: ResourceWarning: unclosed <socket.socket fd=15, family=2, type=1, proto=0, laddr=('127.0.0.1', 39761)>
+    next(it)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+tests/test_cookie_on_redirects.py::test_server_set_cookie_on_redirect_different_domain[False]
+  /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/.venv-httpie/lib/python3.12/site-packages/_pytest/fixtures.py:924: ResourceWarning: unclosed <socket.socket fd=12, family=2, type=1, proto=0, laddr=('127.0.0.1', 36919)>
+    next(it)
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/test_encoding.py::test_terminal_output_response_charset_detection[big5-\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996]
+FAILED tests/test_encoding.py::test_terminal_output_request_charset_detection[big5-\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996\u5377\u9996]
+2 failed, 1017 passed, 5 skipped, 4 xfailed, 141 warnings in 123.43s (0:02:03)

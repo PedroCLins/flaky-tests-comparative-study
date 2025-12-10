@@ -1,0 +1,395 @@
+[INFO] Scanning for projects...
+[INFO] Inspecting build with total of 6 modules
+[INFO] Installing Central Publishing features
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] Guava Maven Parent                                                 [pom]
+[INFO] Guava: Google Core Libraries for Java                           [bundle]
+[INFO] Guava BOM                                                          [pom]
+[INFO] Guava Testing Library                                              [jar]
+[INFO] Guava Unit Tests                                                   [jar]
+[INFO] Guava GWT compatible libs                                          [jar]
+[INFO] 
+[INFO] -------------------< com.google.guava:guava-parent >--------------------
+[INFO] Building Guava Maven Parent 999.0.0-HEAD-jre-SNAPSHOT              [1/6]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] >>> nondex:2.1.7:nondex (default-cli) > test-compile @ guava-parent >>>
+[INFO] 
+[INFO] --- enforcer:3.6.1:enforce (enforce-versions) @ guava-parent ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.version.RequireMavenVersion passed
+[INFO] Rule 1: org.apache.maven.enforcer.rules.version.RequireJavaVersion passed
+[INFO] 
+[INFO] <<< nondex:2.1.7:nondex (default-cli) < test-compile @ guava-parent <<<
+[INFO] 
+[INFO] 
+[INFO] --- nondex:2.1.7:nondex (default-cli) @ guava-parent ---
+SEVERE: Surefire is not explicitly declared in your pom.xml; we will use version 2.20, but you may want to change that.
+INFO: The original argline is: 
+INFO: Creating new argline for Surefire
+CONFIG: nondexFilter=.*
+nondexMode=FULL
+nondexSeed=933178
+nondexStart=0
+nondexEnd=9223372036854775807
+nondexPrintstack=false
+nondexDir=/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/.nondex
+nondexJarDir=.nondex
+nondexExecid=clean_1oy3u5SMcBI0BB8pcHQwMZtCFri2hjJCPbkeGsrHQmc=
+nondexLogging=CONFIG
+test=
+[INFO] No tests to run.
+INFO: Adding excluded groups to newly created one
+INFO: Creating new argline for Surefire
+CONFIG: nondexFilter=.*
+nondexMode=FULL
+nondexSeed=933178
+nondexStart=0
+nondexEnd=9223372036854775807
+nondexPrintstack=false
+nondexDir=/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/.nondex
+nondexJarDir=/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/.nondex
+nondexExecid=Rb4XVfW+vD0d7A8+8YWBOlOa5GleSPKoKihdxgnHI=
+nondexLogging=CONFIG
+test=
+[INFO] No tests to run.
+INFO: Adding excluded groups to newly created one
+INFO: Creating new argline for Surefire
+CONFIG: nondexFilter=.*
+nondexMode=FULL
+nondexSeed=974622
+nondexStart=0
+nondexEnd=9223372036854775807
+nondexPrintstack=false
+nondexDir=/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/.nondex
+nondexJarDir=/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/.nondex
+nondexExecid=F4+3Ob39I1VA6ldKy1thgWSks03aMcoTcztTqeM+nqA=
+nondexLogging=CONFIG
+test=
+[INFO] No tests to run.
+INFO: Adding excluded groups to newly created one
+INFO: Creating new argline for Surefire
+CONFIG: nondexFilter=.*
+nondexMode=FULL
+nondexSeed=1016066
+nondexStart=0
+nondexEnd=9223372036854775807
+nondexPrintstack=false
+nondexDir=/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/.nondex
+nondexJarDir=/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/.nondex
+nondexExecid=wKXIXkMkIaHelEuMar999bsWXWV9uxHSzosDSumWgOQ=
+nondexLogging=CONFIG
+test=
+[INFO] No tests to run.
+[INFO] NonDex SUMMARY:
+[INFO] *********
+[INFO] mvn nondex:nondex  -DnondexFilter='.*' -DnondexMode=FULL -DnondexSeed=933178 -DnondexStart=0 -DnondexEnd=9223372036854775807 -DnondexPrintstack=false -DnondexDir="/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/.nondex" -DnondexJarDir="/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/.nondex" -DnondexExecid=Rb4XVfW+vD0d7A8+8YWBOlOa5GleSPKoKihdxgnHI= -DnondexLogging=CONFIG
+[INFO] No Test Failed with this configuration.
+[INFO] *********
+[INFO] *********
+[INFO] mvn nondex:nondex  -DnondexFilter='.*' -DnondexMode=FULL -DnondexSeed=974622 -DnondexStart=0 -DnondexEnd=9223372036854775807 -DnondexPrintstack=false -DnondexDir="/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/.nondex" -DnondexJarDir="/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/.nondex" -DnondexExecid=F4+3Ob39I1VA6ldKy1thgWSks03aMcoTcztTqeM+nqA= -DnondexLogging=CONFIG
+[INFO] No Test Failed with this configuration.
+[INFO] *********
+[INFO] *********
+[INFO] mvn nondex:nondex  -DnondexFilter='.*' -DnondexMode=FULL -DnondexSeed=1016066 -DnondexStart=0 -DnondexEnd=9223372036854775807 -DnondexPrintstack=false -DnondexDir="/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/.nondex" -DnondexJarDir="/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/.nondex" -DnondexExecid=wKXIXkMkIaHelEuMar999bsWXWV9uxHSzosDSumWgOQ= -DnondexLogging=CONFIG
+[INFO] No Test Failed with this configuration.
+[INFO] *********
+[INFO] All tests pass without NonDex shuffling
+[INFO] ####################
+[INFO] Across all seeds:
+[INFO] Test results can be found at: 
+[INFO] file:///home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/.nondex/Rb4XVfW+vD0d7A8+8YWBOlOa5GleSPKoKihdxgnHI=/test_results.html
+[INFO] [NonDex] The id of this run is: Rb4XVfW+vD0d7A8+8YWBOlOa5GleSPKoKihdxgnHI=
+[INFO] 
+[INFO] -----------------------< com.google.guava:guava >-----------------------
+[INFO] Building Guava: Google Core Libraries for Java 999.0.0-HEAD-jre-SNAPSHOT [2/6]
+[INFO]   from guava/pom.xml
+[INFO] -------------------------------[ bundle ]-------------------------------
+[WARNING] Ignoring incompatible plugin version 4.0.0-beta-2: The plugin org.apache.maven.plugins:maven-deploy-plugin:4.0.0-beta-2 requires Maven version 4.0.0-rc-2
+[INFO] Latest version of plugin org.apache.maven.plugins:maven-deploy-plugin failed compatibility check
+[INFO] Looking for compatible RELEASE version of plugin org.apache.maven.plugins:maven-deploy-plugin
+[WARNING] Ignoring incompatible plugin version 4.0.0-beta-1: The plugin org.apache.maven.plugins:maven-deploy-plugin:4.0.0-beta-1 requires Maven version 4.0.0-beta-3
+[INFO] Selected plugin org.apache.maven.plugins:maven-deploy-plugin:3.1.4
+[INFO] 
+[INFO] >>> nondex:2.1.7:nondex (default-cli) > test-compile @ guava >>>
+[INFO] 
+[INFO] --- enforcer:3.6.1:enforce (enforce-versions) @ guava ---
+[INFO] Rule 0: org.apache.maven.enforcer.rules.version.RequireMavenVersion passed
+[INFO] Rule 1: org.apache.maven.enforcer.rules.version.RequireJavaVersion passed
+[INFO] 
+[INFO] --- toolchains:4.5.0:toolchain (download-25-and-surefire-version) @ guava ---
+[INFO] Required toolchain: jdk [ vendor='temurin' version='25' ]
+[INFO] Found matching toolchain for toolchainType jdk: JDK[/home/pedro_campelo/.m2/jdks/jdk-25.0.1+8]
+[INFO] Required toolchain: jdk [ vendor='temurin' version='17' ]
+[INFO] Found matching toolchain for toolchainType jdk: JDK[/home/pedro_campelo/.m2/jdks/jdk-17.0.17+10]
+[INFO] 
+[INFO] --- toolchains:3.2.0:toolchain (default) @ guava ---
+[INFO] Required toolchain: jdk [ version='25' ]
+[INFO] Found matching toolchain for type jdk: JDK[/home/pedro_campelo/.m2/jdks/jdk-25.0.1+8]
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ guava ---
+[INFO] Copying 7 resources from .. to target/classes/META-INF
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ guava ---
+[INFO] Toolchain in maven-compiler-plugin: JDK[/home/pedro_campelo/.m2/jdks/jdk-25.0.1+8]
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (compile-java9) @ guava ---
+[INFO] Toolchain in maven-compiler-plugin: JDK[/home/pedro_campelo/.m2/jdks/jdk-25.0.1+8]
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.3.1:copy-resources (gradle-module-metadata) @ guava ---
+[INFO] Copying 1 resource from  to target/publish
+[INFO] 
+[INFO] --- bundle:5.1.9:manifest (bundle-manifest) @ guava ---
+[INFO] Writing manifest: /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/guava/target/classes/META-INF/MANIFEST.MF
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ guava ---
+[INFO] skip non existing resourceDirectory /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/guava/test
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ guava ---
+[INFO] Toolchain in maven-compiler-plugin: JDK[/home/pedro_campelo/.m2/jdks/jdk-25.0.1+8]
+[INFO] No sources to compile
+[INFO] 
+[INFO] <<< nondex:2.1.7:nondex (default-cli) < test-compile @ guava <<<
+[INFO] 
+[INFO] 
+[INFO] --- nondex:2.1.7:nondex (default-cli) @ guava ---
+INFO: The original argline is: 
+INFO: Adding NonDex argLine to existing argLine specified by the project
+CONFIG: nondexFilter=.*
+nondexMode=FULL
+nondexSeed=933178
+nondexStart=0
+nondexEnd=9223372036854775807
+nondexPrintstack=false
+nondexDir=/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/guava/.nondex
+nondexJarDir=.nondex
+nondexExecid=clean_sMMsJ5TLRzKac5sFFnI6ThzrpfX4TfcaSJhj+14VZTo=
+nondexLogging=CONFIG
+test=
+[WARNING]  Parameter 'disableXmlReport' (user property 'disableXmlReport') is deprecated: Instead use disable within statelessTestsetReporter since of 3.0.0-M6.
+[INFO] Toolchain in maven-surefire-plugin: JDK[/home/pedro_campelo/.m2/jdks/jdk-17.0.17+10]
+[INFO] No tests to run.
+INFO: Adding excluded groups to newly created one
+INFO: Adding NonDex argLine to existing argLine specified by the project
+CONFIG: nondexFilter=.*
+nondexMode=FULL
+nondexSeed=933178
+nondexStart=0
+nondexEnd=9223372036854775807
+nondexPrintstack=false
+nondexDir=/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/guava/.nondex
+nondexJarDir=/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/guava/.nondex
+nondexExecid=eV6wAZ172+av9hAEnGjT18AQbBkuJeYHxLP5sxiErA=
+nondexLogging=CONFIG
+test=
+[WARNING]  Parameter 'disableXmlReport' (user property 'disableXmlReport') is deprecated: Instead use disable within statelessTestsetReporter since of 3.0.0-M6.
+[INFO] Toolchain in maven-surefire-plugin: JDK[/home/pedro_campelo/.m2/jdks/jdk-17.0.17+10]
+[INFO] No tests to run.
+INFO: Adding excluded groups to newly created one
+INFO: Adding NonDex argLine to existing argLine specified by the project
+CONFIG: nondexFilter=.*
+nondexMode=FULL
+nondexSeed=974622
+nondexStart=0
+nondexEnd=9223372036854775807
+nondexPrintstack=false
+nondexDir=/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/guava/.nondex
+nondexJarDir=/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/guava/.nondex
+nondexExecid=muZvia2dmjgQG7ZDdJd28FplLVrUSKMxU+osYnWHxM=
+nondexLogging=CONFIG
+test=
+[WARNING]  Parameter 'disableXmlReport' (user property 'disableXmlReport') is deprecated: Instead use disable within statelessTestsetReporter since of 3.0.0-M6.
+[INFO] Toolchain in maven-surefire-plugin: JDK[/home/pedro_campelo/.m2/jdks/jdk-17.0.17+10]
+[INFO] No tests to run.
+INFO: Adding excluded groups to newly created one
+INFO: Adding NonDex argLine to existing argLine specified by the project
+CONFIG: nondexFilter=.*
+nondexMode=FULL
+nondexSeed=1016066
+nondexStart=0
+nondexEnd=9223372036854775807
+nondexPrintstack=false
+nondexDir=/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/guava/.nondex
+nondexJarDir=/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/guava/.nondex
+nondexExecid=S86KDfE0zsuZHhhvJ6CbX9yJ5IV02eUGBvlEbO415zU=
+nondexLogging=CONFIG
+test=
+[WARNING]  Parameter 'disableXmlReport' (user property 'disableXmlReport') is deprecated: Instead use disable within statelessTestsetReporter since of 3.0.0-M6.
+[INFO] Toolchain in maven-surefire-plugin: JDK[/home/pedro_campelo/.m2/jdks/jdk-17.0.17+10]
+[INFO] No tests to run.
+[INFO] NonDex SUMMARY:
+[INFO] *********
+[INFO] mvn nondex:nondex  -DnondexFilter='.*' -DnondexMode=FULL -DnondexSeed=933178 -DnondexStart=0 -DnondexEnd=9223372036854775807 -DnondexPrintstack=false -DnondexDir="/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/guava/.nondex" -DnondexJarDir="/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/guava/.nondex" -DnondexExecid=eV6wAZ172+av9hAEnGjT18AQbBkuJeYHxLP5sxiErA= -DnondexLogging=CONFIG
+[INFO] No Test Failed with this configuration.
+[INFO] *********
+[INFO] *********
+[INFO] mvn nondex:nondex  -DnondexFilter='.*' -DnondexMode=FULL -DnondexSeed=974622 -DnondexStart=0 -DnondexEnd=9223372036854775807 -DnondexPrintstack=false -DnondexDir="/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/guava/.nondex" -DnondexJarDir="/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/guava/.nondex" -DnondexExecid=muZvia2dmjgQG7ZDdJd28FplLVrUSKMxU+osYnWHxM= -DnondexLogging=CONFIG
+[INFO] No Test Failed with this configuration.
+[INFO] *********
+[INFO] *********
+[INFO] mvn nondex:nondex  -DnondexFilter='.*' -DnondexMode=FULL -DnondexSeed=1016066 -DnondexStart=0 -DnondexEnd=9223372036854775807 -DnondexPrintstack=false -DnondexDir="/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/guava/.nondex" -DnondexJarDir="/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/guava/.nondex" -DnondexExecid=S86KDfE0zsuZHhhvJ6CbX9yJ5IV02eUGBvlEbO415zU= -DnondexLogging=CONFIG
+[INFO] No Test Failed with this configuration.
+[INFO] *********
+[INFO] All tests pass without NonDex shuffling
+[INFO] ####################
+[INFO] Across all seeds:
+[INFO] Test results can be found at: 
+[INFO] file:///home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/guava/.nondex/eV6wAZ172+av9hAEnGjT18AQbBkuJeYHxLP5sxiErA=/test_results.html
+[INFO] [NonDex] The id of this run is: eV6wAZ172+av9hAEnGjT18AQbBkuJeYHxLP5sxiErA=
+[INFO] 
+[INFO] ---------------------< com.google.guava:guava-bom >---------------------
+[INFO] Building Guava BOM 999.0.0-HEAD-jre-SNAPSHOT                       [3/6]
+[INFO]   from guava-bom/pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] >>> nondex:2.1.7:nondex (default-cli) > test-compile @ guava-bom >>>
+[INFO] 
+[INFO] <<< nondex:2.1.7:nondex (default-cli) < test-compile @ guava-bom <<<
+[INFO] 
+[INFO] 
+[INFO] --- nondex:2.1.7:nondex (default-cli) @ guava-bom ---
+SEVERE: Surefire is not explicitly declared in your pom.xml; we will use version 2.20, but you may want to change that.
+INFO: The original argline is: 
+INFO: Creating new argline for Surefire
+CONFIG: nondexFilter=.*
+nondexMode=FULL
+nondexSeed=933178
+nondexStart=0
+nondexEnd=9223372036854775807
+nondexPrintstack=false
+nondexDir=/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/guava-bom/.nondex
+nondexJarDir=.nondex
+nondexExecid=clean_J8NryIQyOz+sAboUaKeQhKogRBO+cut+VBr5gYakjcY=
+nondexLogging=CONFIG
+test=
+[INFO] No tests to run.
+INFO: Adding excluded groups to newly created one
+INFO: Creating new argline for Surefire
+CONFIG: nondexFilter=.*
+nondexMode=FULL
+nondexSeed=933178
+nondexStart=0
+nondexEnd=9223372036854775807
+nondexPrintstack=false
+nondexDir=/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/guava-bom/.nondex
+nondexJarDir=/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/guava-bom/.nondex
+nondexExecid=n6B6WVnvQjAmYPnwDvtM7iVcB5aHtY43oiU5fWVjBQ=
+nondexLogging=CONFIG
+test=
+[INFO] No tests to run.
+INFO: Adding excluded groups to newly created one
+INFO: Creating new argline for Surefire
+CONFIG: nondexFilter=.*
+nondexMode=FULL
+nondexSeed=974622
+nondexStart=0
+nondexEnd=9223372036854775807
+nondexPrintstack=false
+nondexDir=/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/guava-bom/.nondex
+nondexJarDir=/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/guava-bom/.nondex
+nondexExecid=GYpRWNUjnQw8BoEtRFYFy8z2dXvf3zko5++ugE9Ws=
+nondexLogging=CONFIG
+test=
+[INFO] No tests to run.
+INFO: Adding excluded groups to newly created one
+INFO: Creating new argline for Surefire
+CONFIG: nondexFilter=.*
+nondexMode=FULL
+nondexSeed=1016066
+nondexStart=0
+nondexEnd=9223372036854775807
+nondexPrintstack=false
+nondexDir=/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/guava-bom/.nondex
+nondexJarDir=/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/guava-bom/.nondex
+nondexExecid=hl0cDY7p+hSu5TmHmpluWoGRCoHdCdGqKSgkwe2RqJg=
+nondexLogging=CONFIG
+test=
+[INFO] No tests to run.
+[INFO] NonDex SUMMARY:
+[INFO] *********
+[INFO] mvn nondex:nondex  -DnondexFilter='.*' -DnondexMode=FULL -DnondexSeed=933178 -DnondexStart=0 -DnondexEnd=9223372036854775807 -DnondexPrintstack=false -DnondexDir="/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/guava-bom/.nondex" -DnondexJarDir="/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/guava-bom/.nondex" -DnondexExecid=n6B6WVnvQjAmYPnwDvtM7iVcB5aHtY43oiU5fWVjBQ= -DnondexLogging=CONFIG
+[INFO] No Test Failed with this configuration.
+[INFO] *********
+[INFO] *********
+[INFO] mvn nondex:nondex  -DnondexFilter='.*' -DnondexMode=FULL -DnondexSeed=974622 -DnondexStart=0 -DnondexEnd=9223372036854775807 -DnondexPrintstack=false -DnondexDir="/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/guava-bom/.nondex" -DnondexJarDir="/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/guava-bom/.nondex" -DnondexExecid=GYpRWNUjnQw8BoEtRFYFy8z2dXvf3zko5++ugE9Ws= -DnondexLogging=CONFIG
+[INFO] No Test Failed with this configuration.
+[INFO] *********
+[INFO] *********
+[INFO] mvn nondex:nondex  -DnondexFilter='.*' -DnondexMode=FULL -DnondexSeed=1016066 -DnondexStart=0 -DnondexEnd=9223372036854775807 -DnondexPrintstack=false -DnondexDir="/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/guava-bom/.nondex" -DnondexJarDir="/home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/guava-bom/.nondex" -DnondexExecid=hl0cDY7p+hSu5TmHmpluWoGRCoHdCdGqKSgkwe2RqJg= -DnondexLogging=CONFIG
+[INFO] No Test Failed with this configuration.
+[INFO] *********
+[INFO] All tests pass without NonDex shuffling
+[INFO] ####################
+[INFO] Across all seeds:
+[INFO] Test results can be found at: 
+[INFO] file:///home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/guava-bom/.nondex/n6B6WVnvQjAmYPnwDvtM7iVcB5aHtY43oiU5fWVjBQ=/test_results.html
+[INFO] [NonDex] The id of this run is: n6B6WVnvQjAmYPnwDvtM7iVcB5aHtY43oiU5fWVjBQ=
+[INFO] 
+[INFO] -------------------< com.google.guava:guava-testlib >-------------------
+[INFO] Building Guava Testing Library 999.0.0-HEAD-jre-SNAPSHOT           [4/6]
+[INFO]   from guava-testlib/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> nondex:2.1.7:nondex (default-cli) > test-compile @ guava-testlib >>>
+[INFO] 
+[INFO] --- enforcer:3.6.1:enforce (enforce-versions) @ guava-testlib ---
+[INFO] 
+[INFO] --- toolchains:4.5.0:toolchain (download-25-and-surefire-version) @ guava-testlib ---
+[INFO] Required toolchain: jdk [ vendor='temurin' version='25' ]
+[INFO] Found matching toolchain for toolchainType jdk: JDK[/home/pedro_campelo/.m2/jdks/jdk-25.0.1+8]
+[INFO] Required toolchain: jdk [ vendor='temurin' version='17' ]
+[INFO] Found matching toolchain for toolchainType jdk: JDK[/home/pedro_campelo/.m2/jdks/jdk-17.0.17+10]
+[INFO] 
+[INFO] --- toolchains:3.2.0:toolchain (default) @ guava-testlib ---
+[INFO] Required toolchain: jdk [ version='25' ]
+[INFO] Found matching toolchain for type jdk: JDK[/home/pedro_campelo/.m2/jdks/jdk-25.0.1+8]
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ guava-testlib ---
+[INFO] Copying 1 resource from .. to target/classes/META-INF
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ guava-testlib ---
+[INFO] Toolchain in maven-compiler-plugin: JDK[/home/pedro_campelo/.m2/jdks/jdk-25.0.1+8]
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (compile-java9) @ guava-testlib ---
+[INFO] Toolchain in maven-compiler-plugin: JDK[/home/pedro_campelo/.m2/jdks/jdk-25.0.1+8]
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 299 source files with javac [forked debug parameters release 9 module-path] to target/classes/META-INF/versions/9
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/guava-testlib/src/module-info.java:[18,32] error: module not found: com.google.common
+[INFO] 1 error
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for Guava Maven Parent 999.0.0-HEAD-jre-SNAPSHOT:
+[INFO] 
+[INFO] Guava Maven Parent ................................. SUCCESS [  0.937 s]
+[INFO] Guava: Google Core Libraries for Java .............. SUCCESS [  3.759 s]
+[INFO] Guava BOM .......................................... SUCCESS [  0.043 s]
+[INFO] Guava Testing Library .............................. FAILURE [  0.334 s]
+[INFO] Guava Unit Tests ................................... SKIPPED
+[INFO] Guava GWT compatible libs .......................... SKIPPED
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  6.570 s
+[INFO] Finished at: 2025-12-10T16:12:28-03:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.14.1:compile (compile-java9) on project guava-testlib: Compilation failure
+[ERROR] /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/guava/guava-testlib/src/module-info.java:[18,32] error: module not found: com.google.common
+[ERROR] 
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+[ERROR] 
+[ERROR] After correcting the problems, you can resume the build with the command
+[ERROR]   mvn <args> -rf :guava-testlib
