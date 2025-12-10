@@ -82,7 +82,7 @@ if [ "$WAIT_FOR_TESTS" = "true" ] || [ "$WAIT_FOR_TESTS" = "1" ]; then
             echo "☕ Java (NonDex): RUNNING"
             if [ -f /tmp/make_java.log ] && [ -s /tmp/make_java.log ]; then
                 started=$(grep -c "=== Running NonDex on" /tmp/make_java.log 2>/dev/null || echo "0")
-                echo "   Progress: $started / 5 projects"
+                echo "   Progress: $started / 4 projects"
             fi
             if [ -n "$current_proj" ]; then
                 echo "   Current: $current_proj"
@@ -99,7 +99,7 @@ if [ "$WAIT_FOR_TESTS" = "true" ] || [ "$WAIT_FOR_TESTS" = "1" ]; then
             if [ -f /tmp/make_python.log ] && [ -s /tmp/make_python.log ]; then
                 started=$(grep -c "=== Running pytest" /tmp/make_python.log 2>/dev/null || echo "0")
                 current_round=$(grep -oP "Run #\K\d+" /tmp/make_python.log 2>/dev/null | tail -1 || echo "0")
-                echo "   Progress: $started / 5 projects"
+                echo "   Progress: $started / 4 projects"
                 echo "   Round: $current_round / 20"
             elif tmux has-session -t flaky-python 2>/dev/null; then
                 # Extract round from tmux pane

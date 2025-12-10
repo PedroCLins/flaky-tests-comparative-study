@@ -1,0 +1,20 @@
+project: commons-lang
+tool: NonDex
+log: /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-comparative-study/results/commons-lang/nondex/2025-12-10_15-23-03/nondex.log
+
+error_lines: 3628
+warning_lines: 769
+failed_lines: 2053
+
+
+last 10 relevant lines from log:
+[ERROR] 
+[ERROR] See /home/pedro_campelo/projects/cin/testesDeValidacaoDeSoftware/flaky-tests-experiments/commons-lang/.nondex/Bj8789qC+IH0AD8JAIrPBtWBFVeNS53zDTrvwSkovA= for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException

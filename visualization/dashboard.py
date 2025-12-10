@@ -31,6 +31,64 @@ def load_data(results_dir: str) -> tuple:
     df['datetime'] = pd.to_datetime(df['timestamp'], format='%Y-%m-%d_%H-%M-%S', errors='coerce')
     return df, analyzer
 
+def show_nondex_project_tests(project: str, filtered_df: pd.DataFrame, analyzer) -> None:
+    """Display NonDex flaky tests for a specific project."""
+    metrics = analyzer.project_metrics.get(project, {})
+    
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.metric("Total de Testes", metrics.get('total_tests', 0))
+    with col2:
+        st.metric("Testes Flaky Detectados", metrics.get('flaky_tests', 0))
+    with col3:
+        st.metric("Taxa de Flakiness", f"{metrics.get('flaky_percentage', 0):.2f}%")
+    
+    # Get all flaky tests from this project
+    project_data = filtered_df[filtered_df['project'] == project]
+    all_flaky_tests = []
+    test_occurrences = {}
+    
+    for _, row in project_data.iterrows():
+        if row.get('flaky_tests'):
+            for test in row['flaky_tests']:
+                if test not in test_occurrences:
+                    test_occurrences[test] = []
+                test_occurrences[test].append(row['timestamp'])
+                if test not in all_flaky_tests:
+                    all_flaky_tests.append(test)
+    
+    if all_flaky_tests:
+        st.markdown(f"**{len(all_flaky_tests)} testes únicos com não-determinismo detectado:**")
+        
+        # Create dataframe with test names and occurrence count
+        test_data = []
+        for test in all_flaky_tests:
+            test_data.append({
+                'Teste': test,
+                'Detecções': len(test_occurrences[test]),
+                'Primeira Detecção': min(test_occurrences[test]),
+                'Última Detecção': max(test_occurrences[test])
+            })
+        
+        tests_df = pd.DataFrame(test_data)
+        tests_df = tests_df.sort_values('Detecções', ascending=False)
+        
+        # Show with expandable details
+        st.dataframe(
+            tests_df,
+            use_container_width=True,
+            height=400
+        )
+        
+        # Top 10 most frequent
+        if len(all_flaky_tests) > 10:
+            st.markdown("#### 🔝 Top 10 Testes Mais Frequentes")
+            top_10 = tests_df.head(10)
+            st.bar_chart(top_10.set_index('Teste')['Detecções'])
+    else:
+        st.warning("Nenhum teste flaky detectado neste projeto.")
+
+
 def main():
     st.set_page_config(
         page_title="Dashboard - Testes Flaky", 
@@ -343,6 +401,16 @@ def main():
                 if all_flaky_metrics:
                     flaky_metrics_df = pd.DataFrame(all_flaky_metrics)
                     
+                    st.markdown(f"""
+                    📊 **Métricas estatísticas detalhadas disponíveis para {len(set(m['Projeto'] for m in all_flaky_metrics))} projeto(s) Python.**
+                    
+                    Estas métricas incluem análise por rodada individual com:
+                    - Taxa de falha calculada de múltiplas execuções
+                    - Significância estatística (p-value)
+                    - Intervalos de confiança
+                    - Classificação de severidade baseada em comportamento
+                    """)
+                    
                     # Tabs for different views
                     tab1, tab2, tab3 = st.tabs(["📋 Todos os Testes", "⚠️ Alta Severidade", "📊 Estatísticas"])
                     
@@ -403,6 +471,41 @@ def main():
                     
                 else:
                     st.info("ℹ️ Nenhum teste flaky detectado com significância estatística.")
+            
+            # NonDex detected flaky tests (Java projects)
+            st.subheader("☕ Testes Flaky Detectados - Projetos Java (NonDex)")
+            
+            # Collect NonDex projects with flaky tests
+            nondex_projects = []
+            for project, metrics in analyzer.project_metrics.items():
+                if metrics.get('tool') == 'nondex' and metrics['flaky_tests'] > 0:
+                    nondex_projects.append(project)
+            
+            if nondex_projects:
+                st.markdown(f"""
+                📋 **{len(nondex_projects)} projeto(s) Java com testes flaky detectados pelo NonDex.**
+                
+                O NonDex detecta não-determinismo em testes Java através de múltiplas execuções com 
+                diferentes ordenações de estruturas de dados. Testes listados abaixo apresentaram 
+                comportamento inconsistente entre execuções.
+                
+                ⚠️ **Nota**: Métricas estatísticas detalhadas (taxa de falha, p-value, etc.) não estão 
+                disponíveis para NonDex pois a ferramenta não fornece dados por rodada individual.
+                """)
+                
+                # Create tabs for each NonDex project
+                if len(nondex_projects) == 1:
+                    # Single project - no tabs needed
+                    project = nondex_projects[0]
+                    show_nondex_project_tests(project, filtered_df, analyzer)
+                else:
+                    # Multiple projects - use tabs
+                    tabs = st.tabs([f"📦 {proj}" for proj in nondex_projects])
+                    for tab, project in zip(tabs, nondex_projects):
+                        with tab:
+                            show_nondex_project_tests(project, filtered_df, analyzer)
+            else:
+                st.info("ℹ️ Nenhum teste flaky detectado em projetos Java (NonDex) no período filtrado.")
             
             # Statistical Insights
             st.subheader("🔍 Insights Estatísticos")

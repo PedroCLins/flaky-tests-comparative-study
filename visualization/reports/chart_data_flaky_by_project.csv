@@ -1,6 +1,6 @@
 project,total_flaky
-commons-lang,3367.0
-commons-collections,27.0
+commons-lang,673.0
+commons-collections,6.0
 commons-codec,0.0
 black,0.0
 flask,0.0
