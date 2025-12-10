@@ -1,0 +1,2 @@
+project,test_name,total_runs,failures,failure_rate,is_flaky,severity,variance,std_dev,ci_lower,ci_upper,p_value
+httpie,tests/test_meta.py::test_meta_elapsed_time,9,1,0.1111111111111111,True,medium,0.09876543209876543,0.31426968052735443,0.019890887638544907,0.434999705576656,0.0

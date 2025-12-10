@@ -10,13 +10,14 @@ import os
 import json
 import glob
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
 from datetime import datetime
 from pathlib import Path
 import re
 from typing import Dict, List, Tuple
 import argparse
+
+# Import metrics module
+from metrics import FlakinessMetrics, TestMetrics, parse_pytest_runs_csv
 
 class FlakyTestAnalyzer:
     def __init__(self, results_dir: str):
@@ -24,6 +25,8 @@ class FlakyTestAnalyzer:
         self.projects = []
         self.tools = []
         self.data = []
+        self.test_metrics = {}  # project -> test_name -> TestMetrics
+        self.project_metrics = {}  # project -> aggregate metrics
         
     def scan_results(self) -> None:
         """Escaneia o diretório de resultados e coleta todos os dados."""
@@ -54,6 +57,60 @@ class FlakyTestAnalyzer:
                         self.data.append(run_data)
         
         print(f"✅ Encontrados {len(self.data)} execuções em {len(self.projects)} projetos usando {len(self.tools)} ferramentas")
+        
+        # Calculate metrics for all projects
+        print("📊 Calculando métricas de flakiness...")
+        self._calculate_all_metrics()
+    
+    def _calculate_all_metrics(self) -> None:
+        """Calculate flakiness metrics for all tests in all projects."""
+        for project_dir in self.results_dir.iterdir():
+            if not project_dir.is_dir():
+                continue
+            
+            project_name = project_dir.name
+            
+            # Look for pytest-rerun results (has runs.csv with per-test data)
+            pytest_dir = project_dir / "pytest-rerun"
+            if pytest_dir.exists():
+                self._calculate_pytest_metrics(project_name, pytest_dir)
+    
+    def _calculate_pytest_metrics(self, project_name: str, pytest_dir: Path) -> None:
+        """Calculate metrics for pytest results."""
+        # Find the most recent run directory
+        run_dirs = sorted(pytest_dir.glob("*/"), reverse=True)
+        if not run_dirs:
+            return
+        
+        run_dir = run_dirs[0]  # Most recent
+        runs_csv = run_dir / "runs.csv"
+        
+        if not runs_csv.exists():
+            return
+        
+        try:
+            # Parse CSV to get per-test failure data
+            test_failures = parse_pytest_runs_csv(str(runs_csv))
+            
+            if not test_failures:
+                return
+            
+            # Calculate metrics for each test
+            project_test_metrics = {}
+            for test_name, failure_list in test_failures.items():
+                metrics = FlakinessMetrics.calculate_test_metrics(test_name, failure_list)
+                project_test_metrics[test_name] = metrics
+            
+            self.test_metrics[project_name] = project_test_metrics
+            
+            # Calculate aggregate project metrics
+            metrics_list = list(project_test_metrics.values())
+            self.project_metrics[project_name] = FlakinessMetrics.calculate_project_metrics(metrics_list)
+            
+            print(f"  ✓ {project_name}: {len(project_test_metrics)} tests analyzed")
+            
+        except Exception as e:
+            print(f"  ⚠️ Erro ao calcular métricas para {project_name}: {e}")
     
     def _parse_run_results(self, project: str, tool: str, run_dir: Path) -> Dict:
         """Extrai dados de uma execução específica."""
@@ -96,11 +153,12 @@ class FlakyTestAnalyzer:
                 if failed_match:
                     run_data['failed_lines'] = int(failed_match.group(1))
             
-            # Parse log para detectar testes flaky
+            # Parse log para detectar testes flaky e total de testes
             if log_file.exists():
                 flaky_tests = self._extract_flaky_tests(log_file, tool)
                 run_data['flaky_tests'] = flaky_tests
                 run_data['total_flaky'] = len(flaky_tests)
+                run_data['total_tests'] = self._extract_total_tests(log_file, tool)
             
             # Parse metadata.json se existir
             if metadata_file.exists():
@@ -144,6 +202,52 @@ class FlakyTestAnalyzer:
             print(f"⚠️  Erro ao extrair testes flaky de {log_file}: {e}")
             
         return flaky_tests
+    
+    def _extract_total_tests(self, log_file: Path, tool: str) -> int:
+        """Extrai o número total de testes no projeto (não apenas os executados)."""
+        try:
+            with open(log_file, 'r', encoding='utf-8') as f:
+                lines = f.readlines()
+            
+            if tool == 'pytest-rerun':
+                # Pytest format at the end: "2 failed, 1017 passed, 5 skipped, 4 xfailed, 143 warnings in 125.07s"
+                # Look for the summary line (usually near the end)
+                for line in reversed(lines):
+                    # Match pytest summary that includes timing
+                    if re.search(r'in\s+[\d.]+s', line):
+                        total = 0
+                        # Extract all test counts from the summary line
+                        for match in re.finditer(r'(\d+)\s+(failed|passed|skipped|error|xfailed|xpassed)', line):
+                            total += int(match.group(1))
+                        if total > 0:
+                            return total
+                        
+            elif tool == 'nondex':
+                # Maven NonDex format: "[WARNING] Tests run: 18549, Failures: 0, Errors: 0, Skipped: 20"
+                # Look for the final summary (appears after "Results:")
+                found_results = False
+                for i in range(len(lines) - 1, -1, -1):
+                    line = lines[i]
+                    
+                    # Look for summary with WARNING/INFO prefix
+                    match = re.search(r'\[(WARNING|INFO)\]\s+Tests run:\s+(\d+)', line)
+                    if match:
+                        return int(match.group(2))
+                    
+                    # Also check for lines after "Results:"
+                    if 'Results:' in line:
+                        found_results = True
+                        # Check next few lines for the test count
+                        for j in range(i + 1, min(i + 10, len(lines))):
+                            match = re.search(r'Tests run:\s+(\d+)', lines[j])
+                            if match:
+                                return int(match.group(1))
+            
+            return None
+            
+        except Exception as e:
+            print(f"⚠️  Erro ao extrair total de testes de {log_file}: {e}")
+            return None
     
     def generate_summary_report(self) -> str:
         """Gera um relatório resumido dos resultados."""
@@ -201,66 +305,29 @@ class FlakyTestAnalyzer:
         return "\n".join(report)
     
     def generate_visualizations(self, output_dir: Path) -> None:
-        """Gera gráficos e visualizações."""
+        """Prepara dados para visualização (gráficos gerados via HTML/dashboard)."""
         if not self.data:
             print("⚠️  Nenhum dado para visualizar")
             return
             
         df = pd.DataFrame(self.data)
         
-        # Configura o estilo dos gráficos
-        plt.style.use('seaborn-v0_8')
-        sns.set_palette("husl")
-        
-        # 1. Gráfico de testes flaky por projeto
-        plt.figure(figsize=(12, 6))
+        # Exporta dados agregados para visualização
+        # 1. Testes flaky por projeto
         flaky_by_project = df.groupby('project')['total_flaky'].sum().sort_values(ascending=False)
-        
-        plt.subplot(1, 2, 1)
-        flaky_by_project.plot(kind='bar')
-        plt.title('Testes Flaky por Projeto')
-        plt.xlabel('Projeto')
-        plt.ylabel('Total de Testes Flaky')
-        plt.xticks(rotation=45)
-        plt.tight_layout()
+        flaky_by_project.to_csv(output_dir / 'chart_data_flaky_by_project.csv')
         
         # 2. Distribuição de erros por ferramenta
-        plt.subplot(1, 2, 2)
-        df.boxplot(column='error_lines', by='tool', ax=plt.gca())
-        plt.title('Distribuição de Erros por Ferramenta')
-        plt.xlabel('Ferramenta')
-        plt.ylabel('Linhas de Erro')
-        plt.suptitle('')  # Remove o título automático
-        
-        plt.tight_layout()
-        plt.savefig(output_dir / 'flaky_tests_analysis.png', dpi=300, bbox_inches='tight')
-        plt.close()
+        error_stats = df.groupby('tool')['error_lines'].describe()
+        error_stats.to_csv(output_dir / 'chart_data_errors_by_tool.csv')
         
         # 3. Timeline de execuções
         if len(df) > 1:
-            plt.figure(figsize=(14, 8))
-            
-            # Converte timestamp para datetime
-            df['datetime'] = pd.to_datetime(df['timestamp'], format='%Y-%m-%d_%H-%M-%S')
-            
-            # Gráfico de linha temporal
-            for project in df['project'].unique():
-                project_data = df[df['project'] == project].sort_values('datetime')
-                plt.plot(project_data['datetime'], project_data['total_flaky'], 
-                        marker='o', label=project, linewidth=2)
-            
-            plt.title('Evolução dos Testes Flaky ao Longo do Tempo')
-            plt.xlabel('Data/Hora')
-            plt.ylabel('Número de Testes Flaky')
-            plt.legend()
-            plt.xticks(rotation=45)
-            plt.grid(True, alpha=0.3)
-            plt.tight_layout()
-            
-            plt.savefig(output_dir / 'flaky_timeline.png', dpi=300, bbox_inches='tight')
-            plt.close()
+            df['datetime'] = pd.to_datetime(df['timestamp'], format='%Y-%m-%d_%H-%M-%S', errors='coerce')
+            timeline_data = df[['datetime', 'project', 'total_flaky']].sort_values('datetime')
+            timeline_data.to_csv(output_dir / 'chart_data_timeline.csv', index=False)
         
-        print(f"✅ Gráficos salvos em {output_dir}")
+        print(f"✅ Dados de visualização preparados em {output_dir}")
     
     def export_data(self, output_dir: Path) -> None:
         """Exporta os dados processados."""
@@ -280,19 +347,71 @@ class FlakyTestAnalyzer:
         summary_data = []
         for project in df['project'].unique():
             project_data = df[df['project'] == project]
-            summary_data.append({
+            base_summary = {
                 'project': project,
                 'total_runs': len(project_data),
                 'total_flaky_tests': project_data['total_flaky'].sum(),
                 'avg_errors': project_data['error_lines'].mean(),
                 'avg_warnings': project_data['warning_lines'].mean(),
                 'last_run': project_data['timestamp'].max()
-            })
+            }
+            
+            # Add metrics if available
+            if project in self.project_metrics:
+                pm = self.project_metrics[project]
+                base_summary.update({
+                    'total_tests_analyzed': pm['total_tests'],
+                    'flaky_tests_detected': pm['flaky_tests'],
+                    'flaky_percentage': pm['flaky_percentage'],
+                    'avg_failure_rate': pm['avg_failure_rate'],
+                    'median_failure_rate': pm['median_failure_rate'],
+                    'severity_high': pm['severity_distribution'].get('high', 0),
+                    'severity_medium': pm['severity_distribution'].get('medium', 0),
+                    'severity_low': pm['severity_distribution'].get('low', 0)
+                })
+            
+            summary_data.append(base_summary)
         
         summary_df = pd.DataFrame(summary_data)
         summary_df.to_csv(output_dir / 'project_summary.csv', index=False)
         
+        # Export detailed test metrics
+        self._export_test_metrics(output_dir)
+        
         print(f"✅ Dados exportados para {output_dir}")
+    
+    def _export_test_metrics(self, output_dir: Path) -> None:
+        """Export detailed per-test metrics to CSV."""
+        if not self.test_metrics:
+            return
+        
+        all_metrics = []
+        for project, tests in self.test_metrics.items():
+            for test_name, metrics in tests.items():
+                all_metrics.append({
+                    'project': project,
+                    'test_name': test_name,
+                    'total_runs': metrics.total_runs,
+                    'failures': metrics.failures,
+                    'failure_rate': metrics.failure_rate,
+                    'is_flaky': metrics.is_flaky,
+                    'severity': metrics.flakiness_severity,
+                    'variance': metrics.variance,
+                    'std_dev': metrics.std_dev,
+                    'ci_lower': metrics.confidence_interval_95[0],
+                    'ci_upper': metrics.confidence_interval_95[1],
+                    'p_value': metrics.p_value
+                })
+        
+        if all_metrics:
+            metrics_df = pd.DataFrame(all_metrics)
+            metrics_df.to_csv(output_dir / 'test_metrics_detailed.csv', index=False)
+            
+            # Export only flaky tests for easier analysis
+            flaky_df = metrics_df[metrics_df['is_flaky'] == True]
+            if not flaky_df.empty:
+                flaky_df.to_csv(output_dir / 'flaky_tests_metrics.csv', index=False)
+                print(f"  📊 Exportadas métricas detalhadas de {len(flaky_df)} testes flaky")
 
 def main():
     parser = argparse.ArgumentParser(description='Analisador de Resultados de Testes Flaky')
@@ -323,13 +442,13 @@ def main():
     with open(output_dir / 'summary_report.md', 'w', encoding='utf-8') as f:
         f.write(report)
     
-    # Gera visualizações
-    print("📊 Gerando gráficos...")
-    analyzer.generate_visualizations(output_dir)
-    
     # Exporta dados
     print("💾 Exportando dados...")
     analyzer.export_data(output_dir)
+    
+    # Prepara dados de visualização
+    print("📊 Preparando dados de visualização...")
+    analyzer.generate_visualizations(output_dir)
     
     print(f"\n✅ Análise completa! Resultados salvos em: {output_dir}")
     print(f"📖 Relatório principal: {output_dir / 'summary_report.md'}")

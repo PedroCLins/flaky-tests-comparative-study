@@ -4,9 +4,8 @@ Projeto da cadeira IF1009 - Testes e Validação de Software. O objetivo deste p
 
 ## 📋 Visão Geral
 
-Este projeto executa três ferramentas de detecção de testes flaky em projetos Java e Python:
+Este projeto executa ferramentas de detecção de testes flaky em projetos Java e Python:
 - **NonDex**: Detecta testes não-determinísticos em projetos Java (Maven/Gradle)
-- **iDFlakies**: Detecta testes flaky através de reordenação em projetos Java
 - **pytest-rerun**: Detecta testes flaky em projetos Python através de múltiplas execuções
 
 ## 🚀 Setup Inicial
@@ -89,8 +88,7 @@ make setup
 Isso irá:
 - Verificar instalação de Java e Maven
 - Criar um ambiente virtual Python (`.venv`)
-- Instalar pacotes pytest necessários
-- Clonar e configurar iDFlakies
+- Instalar pacotes pytest e visualização necessários
 
 ## 🏃 Executando os Testes
 
@@ -107,11 +105,6 @@ make all
 **NonDex (apenas projetos Java):**
 ```bash
 make nondex
-```
-
-**iDFlakies (apenas projetos Java):**
-```bash
-make idflakies
 ```
 
 **pytest-rerun (apenas projetos Python):**
@@ -150,13 +143,11 @@ Os resultados são salvos em `results/` organizados por projeto e ferramenta:
 ```
 results/
 ├── commons-lang/
-│   ├── nondex/
-│   │   └── 2025-12-08_11-30-15/
-│   │       ├── commit.txt
-│   │       ├── nondex.log
-│   │       └── metadata.json
-│   └── idflakies/
-│       └── ...
+│   └── nondex/
+│       └── 2025-12-08_11-30-15/
+│           ├── commit.txt
+│           ├── nondex.log
+│           └── metadata.json
 ├── mockito/
 │   └── ...
 ├── pandas/
@@ -183,10 +174,9 @@ results/
 ├── scripts/
 │   ├── setup_dependencies.sh  # Setup de dependências
 │   ├── run_nondex.sh         # Script NonDex
-│   ├── run_idflakies.sh      # Script iDFlakies
-│   └── run_py_flaky_detection.sh  # Script pytest
-├── tools/
-│   └── iDFlakies/            # Clone do iDFlakies (criado no setup)
+│   ├── run_py_flaky_detection.sh  # Script pytest
+│   └── run_visualization.sh  # Script de visualização
+├── tools/                     # (vazio - reservado para futuras ferramentas)
 └── results/                   # Resultados dos experimentos
 ```
 
@@ -196,10 +186,11 @@ results/
 |---------|-----------|
 | `make all` | Executa setup + todos os testes |
 | `make setup` | Instala dependências |
-| `make java` | Executa NonDex + iDFlakies |
+| `make java` | Executa NonDex |
 | `make nondex` | Executa apenas NonDex |
-| `make idflakies` | Executa apenas iDFlakies |
 | `make python` | Executa detecção pytest |
+| `make visualize` | Gera relatórios de análise |
+| `make dashboard` | Abre dashboard interativo |
 
 ## 🔧 Requisitos
 
@@ -211,7 +202,6 @@ results/
 ## 📚 Referências
 
 - [NonDex](https://github.com/TestingResearchIllinois/NonDex)
-- [iDFlakies](https://github.com/idflakies/iDFlakies)
 - [pytest-rerunfailures](https://github.com/pytest-dev/pytest-rerunfailures)
 
 ## 👥 Equipe

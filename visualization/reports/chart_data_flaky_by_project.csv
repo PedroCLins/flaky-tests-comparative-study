@@ -1,0 +1,7 @@
+project,total_flaky
+commons-lang,12.0
+black,0.0
+celery,0.0
+flask,0.0
+httpie,0.0
+httpx,0.0

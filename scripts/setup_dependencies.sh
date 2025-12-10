@@ -124,23 +124,33 @@ fi
 
 echo "[*] Installing Python test related packages..."
 pip install --upgrade pip
-pip install pytest pytest-rerunfailures pytest-randomly
+pip install pytest>=8.3.4 pytest-rerunfailures pytest-randomly
+
+echo "[*] Installing visualization and analysis packages..."
+pip install pandas streamlit scipy
 
 #############################
-# IDFLAKIES
+# VISUALIZATION SETUP
 #############################
-echo "[*] Checking iDFlakies clone..."
-IFL=./tools/iDFlakies
 
-if [ ! -d "$IFL" ]; then
-    echo "iDFlakies not found in tools/. Cloning repo..."
-    git clone https://github.com/iDFlakies/iDFlakies.git "$IFL"
-    cd "$IFL"
-    mvn install -DskipTests
-    cd - >/dev/null
-else
-    echo "iDFlakies already present."
-fi
+echo "[*] Setting up visualization directories..."
+mkdir -p ./visualization/reports
+mkdir -p ./visualization/exports
+mkdir -p ./visualization/templates
+
+echo "[*] Creating visualization activation script..."
+cat > ./visualization/activate.sh << 'EOF'
+#!/bin/bash
+# Script para ativar o ambiente de visualização
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
+source "$PROJECT_ROOT/.venv/bin/activate"
+echo "✅ Ambiente de visualização ativo!"
+echo "Para executar o dashboard: streamlit run visualization/dashboard.py"
+echo "Para gerar relatórios: python visualization/analyze_results.py --help"
+EOF
+
+chmod +x ./visualization/activate.sh
 
 echo "===================================="
 echo " Dependency setup complete!"

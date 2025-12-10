@@ -1,36 +1,60 @@
 # 📊 Relatório de Análise de Testes Flaky
 
-**Data de geração:** 08/12/2025 23:02:55
+**Data de geração:** 10/12/2025 00:03:28
 
 ## 🔍 Visão Geral
 
-- **Projetos analisados:** 2
-- **Ferramentas utilizadas:** nondex
-- **Total de execuções:** 12
-- **Período de análise:** 2025-12-08_22-10-13 - 2025-12-08_22-47-17
+- **Projetos analisados:** 6
+- **Ferramentas utilizadas:** nondex, pytest-rerun
+- **Total de execuções:** 11
+- **Período de análise:** 2025-12-09_23-20-08 - 2025-12-09_23-42-29
 
 ## 📋 Análise por Projeto
 
 ### commons-lang
 - Execuções: 4
-- Total de testes flaky detectados: 1063.0
-- Média de linhas de erro: 1169.2
+- Total de testes flaky detectados: 12.0
+- Média de linhas de erro: 0.0
 - **Top 5 testes flaky mais frequentes:**
-  - Basedir: 1 ocorrências
-  - org.apache.commons.lang3.BooleanUtilsTest#testXor_primitive_validInput_2items: 1 ocorrências
-  - org.apache.commons.lang3.BooleanUtilsTest#testOneHot_primitive_validInput_1item: 1 ocorrências
-  - org.apache.commons.lang3.BooleanUtilsTest#test_isFalse_Boolean: 1 ocorrências
-  - org.apache.commons.lang3.BooleanUtilsTest#testAnd_primitive_validInput_2items: 1 ocorrências
+  - Basedir: 4 ocorrências
+  - Parameter: 4 ocorrências
+  - Tests: 4 ocorrências
 
-### mockito
-- Execuções: 8
+### httpie
+- Execuções: 3
 - Total de testes flaky detectados: 0.0
-- Média de linhas de erro: 2.2
+- Média de linhas de erro: 0.0
+
+### black
+- Execuções: 1
+- Total de testes flaky detectados: 0.0
+- Média de linhas de erro: 0.0
+
+### flask
+- Execuções: 1
+- Total de testes flaky detectados: 0.0
+- Média de linhas de erro: 0.0
+
+### celery
+- Execuções: 1
+- Total de testes flaky detectados: 0.0
+- Média de linhas de erro: 0.0
+
+### httpx
+- Execuções: 1
+- Total de testes flaky detectados: 0.0
+- Média de linhas de erro: 0.0
 
 ## 🔧 Análise por Ferramenta
 
 ### nondex
-- Execuções: 12
-- Projetos testados: 2
-- Total de testes flaky: 1063.0
-- Média de erros por execução: 391.2
+- Execuções: 4
+- Projetos testados: 1
+- Total de testes flaky: 12.0
+- Média de erros por execução: 0.0
+
+### pytest-rerun
+- Execuções: 7
+- Projetos testados: 5
+- Total de testes flaky: 0.0
+- Média de erros por execução: 0.0

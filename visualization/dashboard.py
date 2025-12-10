@@ -8,9 +8,6 @@ de forma interativa usando Streamlit.
 
 import streamlit as st
 import pandas as pd
-import plotly.express as px
-import plotly.graph_objects as go
-from plotly.subplots import make_subplots
 import json
 import os
 from pathlib import Path
@@ -21,18 +18,18 @@ import sys
 sys.path.append(str(Path(__file__).parent))
 from analyze_results import FlakyTestAnalyzer
 
-def load_data(results_dir: str) -> pd.DataFrame:
+def load_data(results_dir: str) -> tuple:
     """Carrega e processa os dados."""
     analyzer = FlakyTestAnalyzer(results_dir)
     analyzer.scan_results()
     
     if not analyzer.data:
-        return pd.DataFrame()
+        return pd.DataFrame(), analyzer
     
     df = pd.DataFrame(analyzer.data)
     # Converte timestamp para datetime
     df['datetime'] = pd.to_datetime(df['timestamp'], format='%Y-%m-%d_%H-%M-%S', errors='coerce')
-    return df
+    return df, analyzer
 
 def main():
     st.set_page_config(
@@ -64,7 +61,7 @@ def main():
         return load_data(results_dir)
     
     try:
-        df = get_data(results_dir)
+        df, analyzer = get_data(results_dir)
         
         if df.empty:
             st.error(f"❌ Nenhum resultado encontrado em '{results_dir}'")
@@ -140,49 +137,209 @@ def main():
         
         with col1:
             # Gráfico de testes flaky por projeto
-            flaky_by_project = filtered_df.groupby('project')['total_flaky'].sum().reset_index()
-            fig_bar = px.bar(
-                flaky_by_project, 
-                x='project', 
-                y='total_flaky',
-                title="Testes Flaky por Projeto",
-                labels={'total_flaky': 'Número de Testes Flaky', 'project': 'Projeto'}
-            )
-            fig_bar.update_layout(xaxis_tickangle=-45)
-            st.plotly_chart(fig_bar, use_container_width=True)
+            st.subheader("Testes Flaky por Projeto")
+            flaky_by_project = filtered_df.groupby('project')['total_flaky'].sum().sort_values(ascending=False)
+            st.bar_chart(flaky_by_project)
         
         with col2:
-            # Distribuição de erros por ferramenta
-            fig_box = px.box(
-                filtered_df, 
-                x='tool', 
-                y='error_lines',
-                title="Distribuição de Erros por Ferramenta",
-                labels={'error_lines': 'Linhas de Erro', 'tool': 'Ferramenta'}
-            )
-            st.plotly_chart(fig_box, use_container_width=True)
+            # Média de erros por ferramenta
+            st.subheader("Média de Erros por Ferramenta")
+            error_by_tool = filtered_df.groupby('tool')['error_lines'].mean()
+            st.bar_chart(error_by_tool)
         
         # Timeline (se houver dados de tempo)
         if 'datetime' in filtered_df.columns and not filtered_df['datetime'].isna().all():
             st.subheader("⏰ Evolução Temporal")
             
-            timeline_data = filtered_df.sort_values('datetime')
-            fig_timeline = px.line(
-                timeline_data, 
-                x='datetime', 
-                y='total_flaky',
-                color='project',
-                title="Evolução dos Testes Flaky ao Longo do Tempo",
-                labels={'total_flaky': 'Testes Flaky', 'datetime': 'Data/Hora'}
-            )
-            st.plotly_chart(fig_timeline, use_container_width=True)
+            # Prepara dados para line chart
+            timeline_pivot = filtered_df.pivot_table(
+                index='datetime',
+                columns='project',
+                values='total_flaky',
+                aggfunc='sum'
+            ).fillna(0)
+            
+            st.line_chart(timeline_pivot)
+        
+        # ========================================
+        # METRICS SECTION - Advanced Analysis
+        # ========================================
+        if analyzer.test_metrics or analyzer.project_metrics:
+            st.header("📊 Métricas Avançadas de Flakiness")
+            st.markdown("""
+            Esta seção fornece análises estatísticas detalhadas sobre a flakiness dos testes,
+            incluindo taxas de falha, significância estatística e distribuição de severidade.
+            """)
+            
+            # Project-level metrics
+            if analyzer.project_metrics:
+                st.subheader("📈 Métricas por Projeto")
+                
+                # Build metrics dataframe
+                metrics_data = []
+                for project, metrics in analyzer.project_metrics.items():
+                    metrics_data.append({
+                        'Projeto': project,
+                        'Total de Testes': metrics['total_tests'],
+                        'Testes Flaky': metrics['flaky_tests'],
+                        'Taxa de Flakiness (%)': f"{metrics['flaky_percentage']:.2f}%",
+                        'Taxa Média de Falha': f"{metrics['avg_failure_rate']:.1%}",
+                        'Taxa Mediana de Falha': f"{metrics['median_failure_rate']:.1%}",
+                        'Severidade Alta': metrics['severity_distribution'].get('high', 0),
+                        'Severidade Média': metrics['severity_distribution'].get('medium', 0),
+                        'Severidade Baixa': metrics['severity_distribution'].get('low', 0)
+                    })
+                
+                if metrics_data:
+                    metrics_df = pd.DataFrame(metrics_data)
+                    st.dataframe(metrics_df, use_container_width=True)
+                    
+                    # Severity distribution chart
+                    st.subheader("🎯 Distribuição de Severidade de Flakiness")
+                    st.markdown("""
+                    **Severidade** indica o quão intermitente é o teste:
+                    - **Baixa**: 1-10% de taxa de falha (ocasional)
+                    - **Média**: 10-40% de taxa de falha (frequente)
+                    - **Alta**: 40-60% de taxa de falha (altamente instável)
+                    """)
+                    
+                    severity_data = []
+                    for project, metrics in analyzer.project_metrics.items():
+                        severity_dist = metrics['severity_distribution']
+                        severity_data.append({
+                            'Projeto': project,
+                            'Baixa': severity_dist.get('low', 0),
+                            'Média': severity_dist.get('medium', 0),
+                            'Alta': severity_dist.get('high', 0)
+                        })
+                    
+                    if severity_data:
+                        severity_df = pd.DataFrame(severity_data).set_index('Projeto')
+                        st.bar_chart(severity_df)
+            
+            # Test-level detailed metrics
+            if analyzer.test_metrics:
+                st.subheader("🔬 Análise Detalhada de Testes Flaky")
+                
+                # Collect all flaky tests across projects
+                all_flaky_metrics = []
+                for project, tests in analyzer.test_metrics.items():
+                    for test_name, metrics in tests.items():
+                        if metrics.is_flaky:
+                            all_flaky_metrics.append({
+                                'Projeto': project,
+                                'Teste': test_name[:80] + '...' if len(test_name) > 80 else test_name,
+                                'Taxa de Falha': f"{metrics.failure_rate:.1%}",
+                                'Severidade': metrics.flakiness_severity,
+                                'Execuções': metrics.total_runs,
+                                'Falhas': metrics.failures,
+                                'P-Value': f"{metrics.p_value:.4f}",
+                                'IC 95% Inferior': f"{metrics.confidence_interval_95[0]:.3f}",
+                                'IC 95% Superior': f"{metrics.confidence_interval_95[1]:.3f}"
+                            })
+                
+                if all_flaky_metrics:
+                    flaky_metrics_df = pd.DataFrame(all_flaky_metrics)
+                    
+                    # Tabs for different views
+                    tab1, tab2, tab3 = st.tabs(["📋 Todos os Testes", "⚠️ Alta Severidade", "📊 Estatísticas"])
+                    
+                    with tab1:
+                        st.markdown(f"**Total de testes flaky detectados: {len(all_flaky_metrics)}**")
+                        st.dataframe(
+                            flaky_metrics_df.sort_values('Taxa de Falha', ascending=False),
+                            use_container_width=True,
+                            height=400
+                        )
+                    
+                    with tab2:
+                        high_severity = [m for m in all_flaky_metrics if m['Severidade'] == 'high']
+                        if high_severity:
+                            st.markdown(f"**Testes com alta severidade: {len(high_severity)}**")
+                            st.warning("""
+                            ⚠️ Estes testes falham entre 40-60% das execuções, indicando instabilidade crítica.
+                            Requerem atenção imediata!
+                            """)
+                            high_severity_df = pd.DataFrame(high_severity)
+                            st.dataframe(high_severity_df, use_container_width=True)
+                        else:
+                            st.success("✅ Nenhum teste com alta severidade detectado!")
+                    
+                    with tab3:
+                        st.markdown("### Distribuição de Taxas de Falha")
+                        st.markdown("""
+                        Este gráfico mostra quantos testes caem em cada faixa de taxa de falha.
+                        Idealmente, queremos a maioria dos testes flaky na faixa baixa (< 10%).
+                        """)
+                        
+                        # Create histogram of failure rates
+                        failure_rates = [float(m['Taxa de Falha'].rstrip('%')) / 100 for m in all_flaky_metrics]
+                        import numpy as np
+                        
+                        bins = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
+                        hist, bin_edges = np.histogram(failure_rates, bins=bins)
+                        
+                        hist_df = pd.DataFrame({
+                            'Taxa de Falha': [f"{int(b*100)}-{int(bins[i+1]*100)}%" 
+                                            for i, b in enumerate(bins[:-1])],
+                            'Quantidade': hist
+                        }).set_index('Taxa de Falha')
+                        
+                        st.bar_chart(hist_df)
+                        
+                        # Summary statistics
+                        st.markdown("### Estatísticas Resumidas")
+                        col1, col2, col3, col4 = st.columns(4)
+                        with col1:
+                            st.metric("Taxa Média", f"{np.mean(failure_rates):.1%}")
+                        with col2:
+                            st.metric("Taxa Mediana", f"{np.median(failure_rates):.1%}")
+                        with col3:
+                            st.metric("Taxa Mínima", f"{np.min(failure_rates):.1%}")
+                        with col4:
+                            st.metric("Taxa Máxima", f"{np.max(failure_rates):.1%}")
+                    
+                else:
+                    st.info("ℹ️ Nenhum teste flaky detectado com significância estatística.")
+            
+            # Statistical Insights
+            st.subheader("🔍 Insights Estatísticos")
+            st.markdown("""
+            ### Como interpretar as métricas:
+            
+            **Taxa de Falha**: Proporção de execuções em que o teste falhou (0-100%)
+            - Valores próximos a 0% ou 100% indicam comportamento determinístico
+            - Valores entre 10-90% indicam verdadeira flakiness
+            
+            **P-Value**: Significância estatística (teste binomial)
+            - Valores < 0.05 indicam flakiness estatisticamente significativa
+            - Valores > 0.05 podem ser falhas aleatórias ou dados insuficientes
+            
+            **Intervalo de Confiança (95%)**: Faixa estimada da verdadeira taxa de falha
+            - Intervalos mais estreitos = maior certeza
+            - Intervalos mais largos = menos execuções ou maior variabilidade
+            
+            **Severidade**:
+            - **Baixa**: Falhas ocasionais (< 10%)
+            - **Média**: Falhas frequentes (10-40%)  
+            - **Alta**: Instabilidade crítica (40-60%)
+            - **Stable Fail**: Sempre falha (não é flaky, é um bug)
+            - **Stable Pass**: Sempre passa (determinístico)
+            """)
+        else:
+            st.info("""
+            ℹ️ **Métricas avançadas não disponíveis.**
+            
+            Execute testes com múltiplas rodadas usando `pytest-rerun` para gerar 
+            métricas estatísticas detalhadas de flakiness.
+            """)
         
         # Tabela detalhada
         st.header("📋 Dados Detalhados")
         
         # Colunas para exibir na tabela
         display_columns = [
-            'project', 'tool', 'timestamp', 'total_flaky', 
+            'project', 'tool', 'timestamp', 'total_tests', 'total_flaky', 
             'error_lines', 'warning_lines', 'failed_lines'
         ]
         
@@ -209,15 +366,14 @@ def main():
                 # Top testes flaky
                 flaky_counts = pd.Series(all_flaky_tests).value_counts().head(20)
                 
-                fig_flaky = px.bar(
-                    x=flaky_counts.values,
-                    y=flaky_counts.index,
-                    orientation='h',
-                    title="Top 20 Testes Flaky Mais Frequentes",
-                    labels={'x': 'Número de Ocorrências', 'y': 'Teste'}
-                )
-                fig_flaky.update_layout(height=600)
-                st.plotly_chart(fig_flaky, use_container_width=True)
+                st.subheader("Top 20 Testes Flaky Mais Frequentes")
+                # Cria DataFrame para melhor visualização
+                flaky_df = pd.DataFrame({
+                    'Teste': flaky_counts.index,
+                    'Ocorrências': flaky_counts.values
+                }).set_index('Teste')
+                
+                st.bar_chart(flaky_df, height=600)
                 
                 # Detalhes dos testes mais problemáticos
                 st.subheader("🔍 Testes Mais Problemáticos")

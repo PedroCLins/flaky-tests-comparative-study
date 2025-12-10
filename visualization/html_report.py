@@ -8,10 +8,7 @@ import json
 from pathlib import Path
 from datetime import datetime
 from typing import Dict, List
-import base64
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
 from analyze_results import FlakyTestAnalyzer
 
 class HTMLReportGenerator:
@@ -28,6 +25,7 @@ class HTMLReportGenerator:
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -361,42 +359,135 @@ class HTMLReportGenerator:
         '''
     
     def generate_charts_section(self, df: pd.DataFrame, output_dir: Path) -> str:
-        """Gera gráficos e os incorpora no HTML."""
-        charts_content = []
-        
-        # Gráfico 1: Testes flaky por projeto
-        plt.figure(figsize=(10, 6))
+        """Gera gráficos usando Chart.js (JavaScript)."""
+        # Prepara dados para Chart.js
         flaky_by_project = df.groupby('project')['total_flaky'].sum().sort_values(ascending=False)
         
-        ax = flaky_by_project.plot(kind='bar', color=['#667eea', '#764ba2', '#f093fb'])
-        plt.title('Testes Flaky Detectados por Projeto', fontsize=14, fontweight='bold')
-        plt.xlabel('Projeto')
-        plt.ylabel('Número de Testes Flaky')
-        plt.xticks(rotation=45)
-        plt.tight_layout()
+        projects_json = json.dumps(flaky_by_project.index.tolist())
+        values_json = json.dumps(flaky_by_project.values.tolist())
         
-        chart1_path = output_dir / 'chart_flaky_by_project.png'
-        plt.savefig(chart1_path, dpi=150, bbox_inches='tight')
-        plt.close()
+        # Dados para gráfico de erros por ferramenta
+        error_by_tool = df.groupby('tool')['error_lines'].mean().sort_values(ascending=False)
+        tools_json = json.dumps(error_by_tool.index.tolist())
+        errors_json = json.dumps(error_by_tool.values.tolist())
         
-        # Converte para base64 para incorporar no HTML
-        with open(chart1_path, 'rb') as f:
-            chart1_b64 = base64.b64encode(f.read()).decode()
-        
-        charts_content.append(f'''
+        return f'''
         <div class="section">
             <div class="section-header">
                 <h2>📊 Distribuição de Testes Flaky</h2>
             </div>
             <div class="section-content">
-                <div class="chart-container">
-                    <img src="data:image/png;base64,{chart1_b64}" alt="Gráfico de Testes Flaky por Projeto">
-                </div>
+                <canvas id="flakyChart" style="max-height: 400px;"></canvas>
             </div>
         </div>
-        ''')
         
-        return ''.join(charts_content)
+        <div class="section">
+            <div class="section-header">
+                <h2>📊 Média de Erros por Ferramenta</h2>
+            </div>
+            <div class="section-content">
+                <canvas id="errorChart" style="max-height: 400px;"></canvas>
+            </div>
+        </div>
+        
+        <script>
+        // Gráfico de testes flaky por projeto
+        const flakyCtx = document.getElementById('flakyChart').getContext('2d');
+        new Chart(flakyCtx, {{
+            type: 'bar',
+            data: {{
+                labels: {projects_json},
+                datasets: [{{
+                    label: 'Testes Flaky Detectados',
+                    data: {values_json},
+                    backgroundColor: ['#667eea', '#764ba2', '#f093fb', '#4facfe', '#00f2fe'],
+                    borderColor: '#667eea',
+                    borderWidth: 1
+                }}]
+            }},
+            options: {{
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {{
+                    legend: {{
+                        display: false
+                    }},
+                    title: {{
+                        display: true,
+                        text: 'Testes Flaky Detectados por Projeto',
+                        font: {{
+                            size: 16,
+                            weight: 'bold'
+                        }}
+                    }}
+                }},
+                scales: {{
+                    y: {{
+                        beginAtZero: true,
+                        title: {{
+                            display: true,
+                            text: 'Número de Testes Flaky'
+                        }}
+                    }},
+                    x: {{
+                        title: {{
+                            display: true,
+                            text: 'Projeto'
+                        }}
+                    }}
+                }}
+            }}
+        }});
+        
+        // Gráfico de erros por ferramenta
+        const errorCtx = document.getElementById('errorChart').getContext('2d');
+        new Chart(errorCtx, {{
+            type: 'bar',
+            data: {{
+                labels: {tools_json},
+                datasets: [{{
+                    label: 'Média de Linhas de Erro',
+                    data: {errors_json},
+                    backgroundColor: '#ffc107',
+                    borderColor: '#ff9800',
+                    borderWidth: 1
+                }}]
+            }},
+            options: {{
+                responsive: true,
+                maintainAspectRatio: true,
+                plugins: {{
+                    legend: {{
+                        display: false
+                    }},
+                    title: {{
+                        display: true,
+                        text: 'Média de Erros por Ferramenta',
+                        font: {{
+                            size: 16,
+                            weight: 'bold'
+                        }}
+                    }}
+                }},
+                scales: {{
+                    y: {{
+                        beginAtZero: true,
+                        title: {{
+                            display: true,
+                            text: 'Linhas de Erro'
+                        }}
+                    }},
+                    x: {{
+                        title: {{
+                            display: true,
+                            text: 'Ferramenta'
+                        }}
+                    }}
+                }}
+            }}
+        }});
+        </script>
+        '''
     
     def generate_full_report(self, results_dir: str, output_path: str) -> None:
         """Gera relatório HTML completo."""
