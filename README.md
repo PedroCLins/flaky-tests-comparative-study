@@ -3,7 +3,7 @@
 **Estudo Empírico Comparativo de Detecção de Testes Flaky em Projetos Open-Source**
 
 > Projeto da disciplina IF1009 - Testes e Validação de Software  
-> Centro de Informática - UFPE | 2025.1
+> Centro de Informática - UFPE | 2025.2
 
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
 [![Java](https://img.shields.io/badge/Java-8%2F11+-orange.svg)](https://www.java.com/)
@@ -23,8 +23,6 @@
 - [Equipe](#-equipe)
 
 ## 📋 Visão Geral
-
-## �📋 Visão Geral
 Este projeto conduz um **estudo empírico comparativo** sobre detecção de testes flaky em 8 projetos open-source, utilizando análise estatística rigorosa.
 
 ### 🎯 Objetivo
